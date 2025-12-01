@@ -32,6 +32,9 @@ export const metadata: Metadata = {
     title: "Dip Chakraborty",
     description: "Software Engineer | Content Creator | Researcher",
   },
+  icons: {
+    icon: "/dip-logo.svg",
+  },
   generator: "v0.app",
 }
 

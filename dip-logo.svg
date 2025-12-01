@@ -1,0 +1,28 @@
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+  <g fill="none" fill-rule="evenodd">
+    <!-- Background (optional, remove if you want only the glyph) -->
+    <!-- <rect x="16" y="16" width="224" height="224" rx="48" fill="#020617"/> -->
+
+    <!-- D -->
+    <path
+      d="M64 64h40c40 0 68 28 68 64s-28 64-68 64H64V64Z"
+      fill="currentColor"
+    />
+
+    <!-- I -->
+    <rect
+      x="148"
+      y="64"
+      width="16"
+      height="128"
+      rx="8"
+      fill="currentColor"
+    />
+
+    <!-- P -->
+    <path
+      d="M192 64h32c24 0 40 16 40 36s-16 36-40 36h-16v56h-16V64Z"
+      fill="currentColor"
+    />
+  </g>
+</svg>
