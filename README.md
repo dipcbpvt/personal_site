@@ -20,4 +20,4 @@ Lucide Icons
 
 next-themes for dark/light mode
 
-Vercel for deployment
+Vercel for deployment.
