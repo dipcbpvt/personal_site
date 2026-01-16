@@ -6,11 +6,11 @@ import { usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 const navItems = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
-  { href: "/career", label: "Career" },
   { href: "/contact", label: "Contact" },
 ]
 
@@ -53,14 +53,18 @@ export function Navigation() {
         )}
       >
         <div className="max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between">
-          <Link href="/" className="group">
-            <motion.span className="text-lg md:text-xl font-semibold tracking-tight" whileHover={{ scale: 1.02 }}>
-              <span className="text-primary">D</span>
-              <span className="text-foreground/90">ip</span>
-              <span className="text-primary ml-1">C</span>
-              <span className="text-foreground/90">hakraborty</span>
-            </motion.span>
-          </Link>
+          {/* Left side: Theme Toggle + Logo */}
+          <div className="flex items-center gap-3 md:gap-4">
+            <ThemeToggle />
+            <Link href="/" className="group">
+              <motion.span className="text-lg md:text-xl font-semibold tracking-tight" whileHover={{ scale: 1.02 }}>
+                <span className="text-primary">D</span>
+                <span className="text-foreground/90">ip</span>
+                <span className="text-primary ml-1">C</span>
+                <span className="text-foreground/90">hakraborty</span>
+              </motion.span>
+            </Link>
+          </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-1">
