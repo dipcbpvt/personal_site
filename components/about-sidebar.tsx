@@ -3,13 +3,14 @@
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { cn } from "@/lib/utils"
-import { User, Briefcase, Lightbulb, Zap, Heart, Sparkles } from "lucide-react"
+import { User, Briefcase, Lightbulb, Zap, Heart, Sparkles, Users } from "lucide-react"
 
 const sections = [
   { id: "intro", label: "About Myself", icon: User },
   { id: "experience", label: "Experience", icon: Briefcase },
-  { id: "capabilities", label: "Capabilities", icon: Lightbulb },
+  { id: "community", label: "Community Leadership", icon: Users },
   { id: "systems", label: "Systems", icon: Zap },
+  { id: "capabilities", label: "Capabilities", icon: Lightbulb },
   { id: "philosophy", label: "Philosophy & Values", icon: Heart },
   { id: "hobbies", label: "Passions", icon: Sparkles },
 ]

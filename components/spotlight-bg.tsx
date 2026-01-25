@@ -85,17 +85,6 @@ export function SpotlightBg() {
           ease: "easeInOut",
         }}
       />
-
-      <div
-        className="absolute inset-0 opacity-[0.02] dark:opacity-[0.02]"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(128,128,128,0.3) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(128,128,128,0.3) 1px, transparent 1px)
-          `,
-          backgroundSize: "100px 100px",
-        }}
-      />
     </div>
   )
 }

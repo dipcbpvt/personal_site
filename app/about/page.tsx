@@ -9,7 +9,9 @@ import { PageTransition } from "@/components/page-transition"
 import { SectionHeader } from "@/components/section-header"
 import { AboutSidebar } from "@/components/about-sidebar"
 import { ExperienceCarousel } from "@/components/experience-carousel"
-import { Heart, Briefcase, ExternalLink, Download, Zap, Cpu, Sparkles } from "lucide-react"
+import { CommunityCarousel } from "@/components/community-carousel"
+import { SystemsCarousel } from "@/components/systems-carousel"
+import { Heart, Briefcase, ExternalLink, Download, Zap, Cpu, Sparkles, Users } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
@@ -50,7 +52,7 @@ const experience = [
   {
     title: "Software Engineer",
     organization: "PreneurLab Digital",
-    period: "2022 — Present",
+    period: "2023 — Present",
     description:
       "Lead the design, development, and implementation of core software products. Delegate tasks and provide counsel on all aspects of projects. Supervise code assessment to ensure quality and accuracy. Work directly with clients on requirements, SRS documents, and project plans.",
     tags: ["Laravel", "React", "Node.js", "AWS", "Project Management"],
@@ -67,19 +69,104 @@ const experience = [
   },
 ]
 
+const communityLeadership = [
+  {
+    title: "President",
+    organization: "UIU Robotics",
+    period: "2020 – 2022",
+    subtitle:
+      "A progression from trainee to president, shaped by increasing responsibility, technical ownership, and trust earned across levels, developing judgment in collaboration, decision-making under pressure, and aligning technical ambition with organizational reality.",
+    description: [
+      "Led a multidisciplinary student organization focused on robotics, embedded systems, and applied AI",
+      "Initiated and scaled long-term projects aimed at structured skill development and hands-on engineering exposure",
+      "Coordinated national-level competitions, internal workshops, and peer-mentoring initiatives",
+    ],
+    type: "community" as const,
+  },
+  {
+    title: "Campus Lead",
+    organization: "Meta Developer Circle (UIU)",
+    period: "2020 – 2023",
+    subtitle:
+      "Led a campus-wide developer community by organizing conferences, hands-on sessions, and peer-led knowledge sharing around modern software practices, with direct exposure to evolving ecosystems such as React and PyTorch.",
+    description: [
+      "Organized F8 yearly conference, developer sessions, knowledge sharing meetups, and hands-on learning initiatives",
+      "Fostered a peer-driven developer community focused on modern software practices",
+    ],
+    type: "community" as const,
+  },
+  {
+    title: "Campus Trainer",
+    organization: "Arduino",
+    period: "2022",
+    subtitle:
+      "Delivered hands-on training on Arduino and embedded systems, guiding participants from theory to working prototypes with a strong focus on practical debugging, sensor integration, and system-level thinking.",
+    description: [
+      "Conducted practical training sessions on Arduino and embedded systems development",
+      "Guided participants through hands-on prototyping with focus on debugging and sensor integration",
+    ],
+    type: "community" as const,
+  },
+  {
+    title: "Executive Member",
+    organization: "Bangladesh Robotics Foundation",
+    period: "2024",
+    subtitle:
+      "Supported the planning and execution of robotics and STEM outreach programs, contributing to community engagement, coordination efforts, and the promotion of applied robotics education.",
+    description: [
+      "Contributed to robotics and STEM outreach program planning and execution",
+      "Supported community engagement and promotion of applied robotics education",
+    ],
+    type: "community" as const,
+  },
+]
+
 const systemsWorkedOn = [
-  "Automation pipelines",
-  "Payroll & finance workflows",
-  "Access control & identity management",
-  "Chatbots",
-  "Staff & capacity management systems",
-  "Multi-module enterprise platforms",
-  "Customer service dashboards",
-  "Operational analytics",
-  "IoT device interfaces",
-  "API orchestration layers",
-  "Support assistants",
-  "CRM modules",
+  {
+    title: "Automation Pipelines",
+    description:
+      "Designed event-driven automation pipelines to replace manual operational workflows, supporting high-volume internal operations. Reduced repetitive human actions by ~60–70%, shortened turnaround time across critical flows, and enabled teams to scale operations without proportional headcount growth.",
+  },
+  {
+    title: "Payroll & Finance Workflows",
+    description:
+      "Built RBAC-based payroll workflows for 20,000+ users, driven by attendance data with multi-level approvals, notifications, and audit-friendly controls. Improved payout accuracy, reduced payroll disputes, and made financial operations traceable, compliant, and safe to evolve at scale.",
+  },
+  {
+    title: "Access Control & Identity Management",
+    description:
+      "Designed a physical access control system using RFID-based devices for a corporate client with 2,000+ daily users. Centralized identity mapping and device synchronization reduced operational costs by ~40% and significantly lowered system-error-related support requests compared to legacy vendor solutions.",
+  },
+  {
+    title: "Customer Purchase & Support Assistant Platform",
+    description:
+      "Built conversational platforms for renowned telecom clients, serving 10,000+ users and handling millions of queries. Integrated payment gateways and RAG-based pipelines, achieving ~90% response accuracy and reducing human support effort by ~20% across customer purchase and support flows.",
+  },
+  {
+    title: "Staff & Capacity Management Systems",
+    description:
+      "Developed staff and capacity management systems used by 300+ daily users, enabling visibility into attendance, workload, and allocation. Improved planning accuracy, reduced last-minute scheduling conflicts, and supported more predictable operational decision-making.",
+  },
+  {
+    title: "Multi-Module Enterprise Platforms",
+    description:
+      "Worked on SaaS-based, multi-module enterprise platforms designed for long-term extensibility. Established clear module boundaries and shared primitives, enabling independent feature evolution while keeping the overall system stable, maintainable, and scalable.",
+  },
+  {
+    title: "IoT Device Interfaces",
+    description:
+      "Built backend interfaces for IoT devices handling asynchronous events, unreliable connectivity, and device state synchronization. Improved system resilience in real-world conditions and reduced manual intervention during device failures and recovery scenarios.",
+  },
+  {
+    title: "API Orchestration Layers",
+    description:
+      "Designed API orchestration layers coordinating workflows across internal services and third-party integrations. Simplified client logic, reduced duplicated business rules, and improved fault isolation and observability across multi-step operational flows.",
+  },
+  {
+    title: "Support Assistants",
+    description:
+      "Developed voice- and video-based support assistants using an agentic approach to guide users through complex systems. Reduced onboarding time, lowered dependency on human support, and improved user comprehension of workflows through guided, contextual interactions.",
+  },
 ]
 
 export default function AboutPage() {
@@ -117,7 +204,7 @@ export default function AboutPage() {
                     <div className="relative aspect-[21/9] md:aspect-[16/5] rounded-2xl overflow-hidden">
                       <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-primary/10 z-10" />
                       <Image
-                        src="dip_working.png"
+                        src="/dip_working.png"
                         alt="Dip Chakraborty at work"
                         fill
                         className="object-cover brightness-110"
@@ -138,10 +225,8 @@ export default function AboutPage() {
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                       <div>
                         <h3 className="text-xl font-semibold text-foreground mb-3">Dip Chakraborty</h3>
-                        <p className="text-muted-foreground leading-relaxed max-w-2xl">
-                          Innovative and deadline-driven Software Engineer with 3+ years of experience designing and
-                          developing user-centered software solutions. Specializing in API and Progressive Web App
-                          Development, adept in software design patterns with a focus on system-level architecture.
+                        <p className="text-muted-foreground leading-relaxed max-w-2xl text-justify">
+                          Software engineer with 4+ years of building things that actually work, even when everything around them keeps changing. Focused on designing solid systems and shipping reliable APIs and web platforms in messy, real-world environments where requirements are a moving target. Hands-on experience spans automation, robotics, IoT, and data-heavy backends. Lately, work has been focused at the intersection of AI, physical robots, and decentralized systems, where these ideas move beyond hype and become useful products for real people.
                         </p>
                       </div>
                       <div className="flex gap-3 flex-shrink-0">
@@ -178,6 +263,42 @@ export default function AboutPage() {
                   </motion.div>
                 </section>
 
+                {/* Community Leadership & Volunteering Section */}
+                <section id="community">
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    className="mb-20"
+                  >
+                    <div className="flex items-center gap-3 mb-8">
+                      <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                        <Users className="text-primary" size={20} />
+                      </div>
+                      <h2 className="text-2xl font-semibold text-foreground">Community Leadership & Volunteering</h2>
+                    </div>
+                    <CommunityCarousel items={communityLeadership} />
+                  </motion.div>
+                </section>
+
+                {/* Types of Systems Section */}
+                <section id="systems">
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    className="mb-16"
+                  >
+                    <div className="flex items-center gap-3 mb-8">
+                      <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                        <Zap className="text-primary" size={20} />
+                      </div>
+                      <h2 className="text-2xl font-semibold text-foreground">Types of Systems I've Worked On</h2>
+                    </div>
+                    <SystemsCarousel items={systemsWorkedOn} />
+                  </motion.div>
+                </section>
+
                 {/* Technical Product Engineering Capabilities */}
                 <section id="capabilities">
                   <motion.div
@@ -196,42 +317,14 @@ export default function AboutPage() {
                     </div>
                     <div className="space-y-4 text-muted-foreground leading-relaxed">
                       <p style={{ textAlign: "justify", textJustify: "inter-word" }}>
-                        Good engineering is not just about shipping software; it's about designing systems that preserve structure under pressure. My work operates at the intersection of product strategy, system architecture, and execution—translating ambiguous requirements into durable, scalable solutions. I focus on architectural clarity, simplicity of design, and predictable delivery, combining strategic thinking with hands-on engineering. Across automation platforms, access control systems, financial workflows, internal tooling, and high-volume operational systems, I've worked end-to-end: shaping direction, aligning teams, and ensuring systems remain reliable well beyond version one.
+                        I’m biased toward automation. I tend to automate anything repetitive, from backend workflows to everyday operational tools. I care about solving real problems, user's painpoints and getting products into the real world. Most of my work lives at the intersection of software, hardware, and operations, often before requirements are clean or fully agreed upon.
                       </p>
                       <p style={{ textAlign: "justify", textJustify: "inter-word" }}>
-                        My engineering practice centers on building technology that supports real operations. I've led and contributed to automation-heavy internal platforms, enterprise APIs, workflow orchestration systems, identity and access pipelines, chatbot and communication layers, and decision-making dashboards. These efforts required system modeling, cross-team coordination, and translating business intent into executable architecture. My role typically blends architectural guidance, direct implementation, and process structuring—aligning technical teams and non-technical stakeholders toward the same outcome: dependable systems, scalable design, and calm, high-quality execution.
+                        I’m good at turning ambiguity into structure: modeling real-world constraints, designing architectures that are feasible and durable, and planning execution so systems actually ship. I don’t obsess over tools, AI can handle plenty of them. But I do obsess over edge cases, failure modes, and whether a system will stay calm under pressure.
                       </p>
-                    </div>
-                  </motion.div>
-                </section>
-
-                {/* Types of Systems Section */}
-                <section id="systems">
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    className="mb-16"
-                  >
-                    <div className="flex items-center gap-3 mb-8">
-                      <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                        <Zap className="text-primary" size={20} />
-                      </div>
-                      <h2 className="text-2xl font-semibold text-foreground">Types of Systems I've Worked On</h2>
-                    </div>
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                      {systemsWorkedOn.map((system, index) => (
-                        <motion.div
-                          key={system}
-                          initial={{ opacity: 0, y: 10 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: index * 0.05 }}
-                          className="glass rounded-lg p-4 border border-primary/10 hover:bg-primary/5 transition-all"
-                        >
-                          <p className="text-sm text-foreground font-medium">{system}</p>
-                        </motion.div>
-                      ))}
+                      <p style={{ textAlign: "justify", textJustify: "inter-word" }}>
+                        I’ve worked across automation platforms, robotic navigation and aerospace-adjacent systems, physical access control and identity pipelines, workflow orchestration, and internal operational tooling. I usually operate as a product-minded engineer: shaping direction early, building core systems hands-on, and using clear documentation, visual thinking, and straightforward explanations to align people so what ships keeps working beyond version one.
+                      </p>
                     </div>
                   </motion.div>
                 </section>
@@ -276,7 +369,7 @@ export default function AboutPage() {
                         className="glass rounded-2xl p-6"
                       >
                         <h4 className="text-lg font-semibold text-foreground mb-2">{item.title}</h4>
-                        <p className="text-sm text-muted-foreground leading-relaxed">{item.text}</p>
+                        <p className="text-sm text-muted-foreground leading-relaxed text-justify">{item.text}</p>
                       </motion.div>
                     ))}
                   </div>
@@ -301,7 +394,7 @@ export default function AboutPage() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="mb-8 text-muted-foreground leading-relaxed"
+                    className="mb-8 text-muted-foreground leading-relaxed text-justify"
                   >
                     One day, I dream of stepping into filmmaking as a director. Stories have always fascinated
                     me—whether it's the narrative arc of a great war drama or the rhythm of classical music. Creating
@@ -319,7 +412,7 @@ export default function AboutPage() {
                       >
                         <div className="text-2xl mb-4">{passion.icon}</div>
                         <h4 className="font-semibold text-foreground mb-1">{passion.title}</h4>
-                        <p className="text-sm text-muted-foreground">{passion.description}</p>
+                        <p className="text-sm text-muted-foreground text-justify">{passion.description}</p>
                       </motion.div>
                     ))}
                   </div>

@@ -2,15 +2,19 @@
 
 import { useState, useEffect, useCallback } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { ThemeToggle } from "@/components/theme-toggle"
+import { useTheme } from "next-themes"
 
 const navItems = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
+  { href: "https://dev.dipchakraborty.com", label: "Works", external: true },
+  { href: "https://blogs.dipchakraborty.com", label: "Blogs", external: true },
   { href: "/contact", label: "Contact" },
 ]
 
@@ -18,6 +22,13 @@ export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const pathname = usePathname()
+  const { resolvedTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  // Ensure component is mounted before showing theme-specific logo
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   // Optimized scroll handler with useCallback and debounced scroll detection
   const handleScroll = useCallback(() => {
@@ -56,13 +67,29 @@ export function Navigation() {
           {/* Left side: Theme Toggle + Logo */}
           <div className="flex items-center gap-3 md:gap-4">
             <ThemeToggle />
-            <Link href="/" className="group">
-              <motion.span className="text-lg md:text-xl font-semibold tracking-tight" whileHover={{ scale: 1.02 }}>
-                <span className="text-primary">D</span>
-                <span className="text-foreground/90">ip</span>
-                <span className="text-primary ml-1">C</span>
-                <span className="text-foreground/90">hakraborty</span>
-              </motion.span>
+            <Link href="/" className="group flex items-center">
+              {mounted ? (
+                <motion.div
+                  className="relative h-10 md:h-12 w-auto"
+                  style={{ width: 'auto', minWidth: '180px' }}
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                >
+                  <Image
+                    src={resolvedTheme === 'dark' ? '/dc-logo-dark-v3.png' : '/dc-logo-transperant.png'}
+                    alt="Dip Chakraborty"
+                    width={240}
+                    height={20}
+                    className={cn(
+                      "object-contain object-left",
+                      resolvedTheme === 'dark' ? "mix-blend-screen" : "mix-blend-multiply"
+                    )}
+                    priority
+                  />
+                </motion.div>
+              ) : (
+                <div className="h-10 md:h-12 w-48 bg-transparent" />
+              )}
             </Link>
           </div>
 
@@ -73,6 +100,7 @@ export function Navigation() {
                 key={item.href}
                 href={item.href}
                 className="relative px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                {...(item.external && { target: "_blank", rel: "noopener noreferrer" })}
               >
                 {pathname === item.href && (
                   <motion.div
@@ -127,6 +155,7 @@ export function Navigation() {
                       "text-3xl font-light transition-colors",
                       pathname === item.href ? "text-primary" : "text-muted-foreground hover:text-foreground",
                     )}
+                    {...(item.external && { target: "_blank", rel: "noopener noreferrer" })}
                   >
                     {item.label}
                   </Link>

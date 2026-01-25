@@ -129,12 +129,36 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
+    /* Prevent horizontal scroll on mobile */
+    overflow-x: hidden;
+    /* Better text rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
+
   ::selection {
     background: rgba(59, 130, 246, 0.3);
     color: inherit;
+  }
+
+  /* Improve touch targets for mobile - minimum 44x44px */
+  button,
+  a,
+  input,
+  select,
+  textarea {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Better focus visibility for accessibility */
+  *:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
   }
 }
 
@@ -168,6 +192,19 @@
 /* Smooth scroll */
 html {
   scroll-behavior: smooth;
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* Glass effect - refined for better theme support */
@@ -204,14 +241,11 @@ html {
 }
 
 .spotlight {
-  background: radial-gradient(
-    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(59, 130, 246, 0.06),
-    transparent 40%
-  );
+  /* Disabled mouse tracking light effect to be consistent with robot cursor */
+  background: transparent;
 }
 
-/* Grain texture overlay */
+/* Grain texture overlay - optimized for performance */
 .grain::before {
   content: "";
   position: fixed;
@@ -223,6 +257,8 @@ html {
   opacity: 0.03;
   pointer-events: none;
   z-index: 1000;
+  /* Use will-change sparingly for performance */
+  will-change: opacity;
 }
 
 .dark .grain::before {
@@ -246,10 +282,12 @@ html {
 }
 
 @keyframes colorFlash {
+
   0%,
   100% {
     opacity: 0.1;
   }
+
   50% {
     opacity: 0.3;
   }
@@ -261,10 +299,31 @@ html {
 
 /* Responsive typography & spacing adjustments */
 @media (max-width: 640px) {
+
   h1,
   h2,
   h3 {
     @apply text-balance;
+  }
+
+  /* Improve readability on mobile */
+  body {
+    font-size: 16px;
+    /* Prevent zoom on iOS */
+  }
+
+  /* Better spacing for mobile */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 }
 
@@ -274,6 +333,7 @@ html {
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -282,4 +342,33 @@ html {
 
 .fade-in {
   animation: fadeIn 0.5s ease-out;
+}
+
+/* Performance: Use GPU acceleration for animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Optimize images for performance */
+img {
+  max-width: 100%;
+  height: auto;
+  /* Prevent layout shift */
+  aspect-ratio: attr(width) / attr(height);
+}
+
+/* Better mobile navigation */
+@media (max-width: 768px) {
+  nav {
+    /* Ensure nav is touch-friendly */
+    -webkit-tap-highlight-color: transparent;
+  }
 }
