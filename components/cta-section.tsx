@@ -23,7 +23,7 @@ export function CTASection() {
   const [isHovering, setIsHovering] = useState(false)
 
   return (
-    <section ref={containerRef} className="relative py-12 px-6 md:py-16">
+    <section ref={containerRef} className="relative py-8 sm:py-12 md:py-16 px-4 sm:px-6">
       <div className="max-w-4xl mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -31,18 +31,18 @@ export function CTASection() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light mb-4 sm:mb-6">
             <span className="text-muted-foreground">Work</span>{" "}
             <span className="text-primary font-medium">together</span>
             <span className="text-muted-foreground">?</span>
           </h2>
-          <p className="text-lg md:text-xl text-primary font-medium mb-8">Let's connect and create impact together.</p>
+          <p className="text-base sm:text-lg md:text-xl text-primary font-medium mb-6 sm:mb-8 px-4">Let's connect and create impact together.</p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4">
             <Button
               asChild
               size="lg"
-              className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-8 w-full sm:w-auto"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-6 sm:px-8 w-full sm:w-auto min-h-[48px]"
             >
               <Link href="/contact">
                 <Mail className="mr-2 h-4 w-4" />
@@ -53,7 +53,7 @@ export function CTASection() {
               asChild
               variant="outline"
               size="lg"
-              className="rounded-full px-8 border-primary/30 hover:bg-primary/10 hover:border-primary bg-transparent w-full sm:w-auto"
+              className="rounded-full px-6 sm:px-8 border-primary/30 hover:bg-primary/10 hover:border-primary bg-transparent w-full sm:w-auto min-h-[48px]"
             >
               <Link href="https://dev.dipchakraborty.com" target="_blank">
                 View Portfolio
@@ -66,7 +66,7 @@ export function CTASection() {
         <motion.div
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
-          className="mt-12 flex flex-wrap items-center justify-center gap-3 min-h-24"
+          className="mt-8 sm:mt-12 flex flex-wrap items-center justify-center gap-2 sm:gap-3 min-h-20 sm:min-h-24"
         >
           {floatingKeywords.map((keyword, i) => (
             <motion.div
@@ -75,10 +75,10 @@ export function CTASection() {
               animate={
                 isInView || isHovering
                   ? {
-                      opacity: 1,
-                      scale: 1,
-                      y: 0,
-                    }
+                    opacity: 1,
+                    scale: 1,
+                    y: 0,
+                  }
                   : { opacity: 0, scale: 0.8, y: 10 }
               }
               transition={{
@@ -86,7 +86,7 @@ export function CTASection() {
                 duration: 0.4,
                 ease: "easeOut",
               }}
-              className="px-3 py-1.5 rounded-full bg-gradient-to-r from-primary/20 to-blue-500/20 border border-primary/30 text-xs font-medium text-foreground/70 backdrop-blur-sm whitespace-nowrap"
+              className="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-gradient-to-r from-primary/20 to-blue-500/20 border border-primary/30 text-xs sm:text-sm font-medium text-foreground/70 backdrop-blur-sm whitespace-nowrap"
             >
               {keyword.text}
             </motion.div>

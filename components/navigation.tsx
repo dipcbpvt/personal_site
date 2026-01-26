@@ -11,10 +11,8 @@ import { ThemeToggle } from "@/components/theme-toggle"
 import { useTheme } from "next-themes"
 
 const navItems = [
-  { href: "/", label: "Home" },
+  { href: "/experience", label: "Experience" },
   { href: "/about", label: "About" },
-  { href: "https://dev.dipchakraborty.com", label: "Works", external: true },
-  { href: "https://blogs.dipchakraborty.com", label: "Blogs", external: true },
   { href: "/contact", label: "Contact" },
 ]
 
@@ -60,18 +58,18 @@ export function Navigation() {
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-          isScrolled ? "py-3 md:py-4 glass" : "py-4 md:py-6",
+          isScrolled ? "py-2 sm:py-3 md:py-4 glass" : "py-3 sm:py-4 md:py-6",
         )}
       >
-        <div className="max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 flex items-center justify-between">
           {/* Left side: Theme Toggle + Logo */}
-          <div className="flex items-center gap-3 md:gap-4">
+          <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
             <ThemeToggle />
             <Link href="/" className="group flex items-center">
               {mounted ? (
                 <motion.div
-                  className="relative h-10 md:h-12 w-auto"
-                  style={{ width: 'auto', minWidth: '180px' }}
+                  className="relative h-8 sm:h-10 md:h-12 w-auto"
+                  style={{ width: 'auto', minWidth: '140px' }}
                   whileHover={{ scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 >
@@ -81,14 +79,14 @@ export function Navigation() {
                     width={240}
                     height={20}
                     className={cn(
-                      "object-contain object-left",
+                      "object-contain object-left h-full w-auto",
                       resolvedTheme === 'dark' ? "mix-blend-screen" : "mix-blend-multiply"
                     )}
                     priority
                   />
                 </motion.div>
               ) : (
-                <div className="h-10 md:h-12 w-48 bg-transparent" />
+                <div className="h-8 sm:h-10 md:h-12 w-36 sm:w-40 md:w-48 bg-transparent" />
               )}
             </Link>
           </div>
@@ -99,7 +97,7 @@ export function Navigation() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="relative px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                className="relative px-3 lg:px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
                 {...(item.external && { target: "_blank", rel: "noopener noreferrer" })}
               >
                 {pathname === item.href && (
@@ -117,7 +115,7 @@ export function Navigation() {
           {/* Mobile Menu Toggle */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 text-foreground"
+            className="md:hidden p-2 text-foreground hover:bg-primary/10 rounded-lg transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -139,7 +137,7 @@ export function Navigation() {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 50, opacity: 0 }}
               transition={{ delay: 0.1 }}
-              className="flex flex-col items-center justify-center h-full gap-8"
+              className="flex flex-col items-center justify-center h-full gap-6 sm:gap-8 px-4"
             >
               {navItems.map((item, index) => (
                 <motion.div
@@ -152,7 +150,7 @@ export function Navigation() {
                     href={item.href}
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={cn(
-                      "text-3xl font-light transition-colors",
+                      "text-2xl sm:text-3xl font-light transition-colors min-h-[44px] flex items-center",
                       pathname === item.href ? "text-primary" : "text-muted-foreground hover:text-foreground",
                     )}
                     {...(item.external && { target: "_blank", rel: "noopener noreferrer" })}

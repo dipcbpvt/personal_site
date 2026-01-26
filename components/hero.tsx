@@ -52,42 +52,42 @@ export function Hero() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen flex flex-col justify-between py-12 md:py-16 pt-16 md:pt-20"
+      className="relative min-h-screen flex flex-col justify-between py-8 sm:py-12 md:py-16 pt-20 sm:pt-24 md:pt-28"
     >
-      <div className="max-w-7xl mx-auto px-4 md:px-6 w-full flex-1 flex items-center">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-20 items-center w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 w-full flex-1 flex items-center">
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center w-full">
           {/* Content */}
           <motion.div style={{ y, opacity }} className="order-2 lg:order-1">
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold tracking-tight mb-4 whitespace-nowrap"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mb-4 sm:mb-6"
             >
-              <span className="text-foreground">Dip</span>
-              <span className="text-primary ml-2">Chakraborty</span>
+              <span className="text-foreground block sm:inline">Dip</span>
+              <span className="text-primary block sm:inline sm:ml-2 md:ml-3">Chakraborty</span>
             </motion.h1>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.15 }}
-              className="flex flex-wrap gap-3 mb-4"
+              className="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6"
             >
               {[
-                { icon: <Target className="w-4 h-4" />, text: "Collaborate" },
-                { icon: <Sparkles className="w-4 h-4" />, text: "Create" },
-                { icon: <Zap className="w-4 h-4" />, text: "Innovate" },
+                { icon: <Target className="w-3 h-3 sm:w-4 sm:h-4" />, text: "Collaborate" },
+                { icon: <Sparkles className="w-3 h-3 sm:w-4 sm:h-4" />, text: "Create" },
+                { icon: <Zap className="w-3 h-3 sm:w-4 sm:h-4" />, text: "Innovate" },
               ].map((keyword, index) => (
                 <motion.div
                   key={keyword.text}
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.25 + index * 0.08 }}
-                  className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium"
+                  className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs sm:text-sm font-medium"
                 >
                   {keyword.icon}
-                  {keyword.text}
+                  <span className="whitespace-nowrap">{keyword.text}</span>
                 </motion.div>
               ))}
             </motion.div>
@@ -96,7 +96,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-xl mb-6 leading-relaxed"
+              className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground max-w-xl mb-4 sm:mb-6 leading-relaxed"
             >
               Technical Product Engineer crafting digital experiences at the intersection of{" "}
               <span className="text-primary font-medium">design</span>,{" "}
@@ -108,14 +108,14 @@ export function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.25 }}
-              className="mb-6 p-4 rounded-xl bg-primary/5 border border-primary/10"
+              className="mb-4 sm:mb-6 p-3 sm:p-4 rounded-xl bg-primary/5 border border-primary/10"
             >
-              <p className="text-sm text-muted-foreground leading-relaxed">
+              <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
                 <span className="text-foreground font-medium">Product Strategy</span> • System Design •{" "}
                 <span className="text-foreground font-medium">Engineering Leadership</span> • AI & Automation
               </p>
             </motion.div>
-{/* 
+            {/* 
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -135,29 +135,29 @@ export function Hero() {
             style={{ opacity }}
             className="order-1 lg:order-2 relative"
           >
-            <div className="relative aspect-[3/4] max-w-sm md:max-w-md mx-auto lg:ml-auto">
+            <div className="relative aspect-[3/4] max-w-[280px] sm:max-w-xs md:max-w-sm lg:max-w-md mx-auto lg:ml-auto">
               {/* Hologram-style background effect */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-primary/40 via-blue-400/30 to-primary/30 rounded-3xl blur-3xl"
+                className="absolute inset-0 bg-gradient-to-br from-primary/40 via-blue-400/30 to-primary/30 rounded-2xl sm:rounded-3xl blur-2xl sm:blur-3xl"
                 animate={isImageHovered ? { opacity: [0.6, 1, 0.6], scale: [1, 1.08, 1] } : {}}
                 transition={{ duration: 0.8, repeat: isImageHovered ? Number.POSITIVE_INFINITY : 0 }}
               />
 
               <div
-                className="relative h-full rounded-3xl overflow-hidden glass p-1"
+                className="relative h-full rounded-2xl sm:rounded-3xl overflow-hidden glass p-1"
                 onMouseEnter={() => setIsImageHovered(true)}
                 onMouseLeave={() => setIsImageHovered(false)}
               >
-                <div className="relative h-full rounded-2xl overflow-hidden w-full">
+                <div className="relative h-full rounded-xl sm:rounded-2xl overflow-hidden w-full">
                   {!mounted ? (
-                    <div className="relative h-full w-full rounded-2xl bg-muted/10" />
+                    <div className="relative h-full w-full rounded-xl sm:rounded-2xl bg-muted/10" />
                   ) : (
                     <Image
                       src={portraitSrc}
                       alt="Dip Chakraborty"
                       fill
                       priority
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      sizes="(max-width: 640px) 280px, (max-width: 768px) 384px, (max-width: 1024px) 448px, 512px"
                       className="object-cover contrast-100 transition-all duration-500"
                     />
                   )}
@@ -173,7 +173,7 @@ export function Hero() {
                 </div>
               </div>
 
-              {/* === BADGES (balanced outside positioning) === */}
+              {/* === BADGES (responsive positioning) === */}
 
               {/* 1. Design-Driven */}
               <motion.div
@@ -181,16 +181,16 @@ export function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.5 }}
                 whileHover={{ scale: 1.05, x: 3 }}
-                className="absolute -left-15 top-[18%]
-                          rounded-lg px-3 py-1.5
+                className="absolute -left-2 sm:-left-4 md:-left-8 lg:-left-12 xl:-left-15 top-[15%] sm:top-[18%]
+                          rounded-md sm:rounded-lg px-2 sm:px-3 py-1 sm:py-1.5
                           bg-white/10 backdrop-blur-xl border border-white/20
                           shadow-md hover:shadow-lg
                           transition-all duration-300 w-max"
               >
-                <p className="text-[10px] text-muted-foreground leading-none">
+                <p className="text-[8px] sm:text-[9px] md:text-[10px] text-muted-foreground leading-none">
                   Design-Driven
                 </p>
-                <p className="text-[11px] font-semibold text-foreground">
+                <p className="text-[9px] sm:text-[10px] md:text-[11px] font-semibold text-foreground">
                   Precision & Craft
                 </p>
               </motion.div>
@@ -201,16 +201,16 @@ export function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.5 }}
                 whileHover={{ scale: 1.05, x: 3 }}
-                className="absolute -left-15 top-[42%]
-                          rounded-lg px-3 py-1.5
+                className="absolute -left-2 sm:-left-4 md:-left-8 lg:-left-12 xl:-left-15 top-[40%] sm:top-[42%]
+                          rounded-md sm:rounded-lg px-2 sm:px-3 py-1 sm:py-1.5
                           bg-white/10 backdrop-blur-xl border border-white/20
                           shadow-md hover:shadow-lg
                           transition-all duration-300 w-max"
               >
-                <p className="text-[10px] text-muted-foreground leading-none">
+                <p className="text-[8px] sm:text-[9px] md:text-[10px] text-muted-foreground leading-none">
                   Solution-First
                 </p>
-                <p className="text-[11px] font-semibold text-foreground">
+                <p className="text-[9px] sm:text-[10px] md:text-[11px] font-semibold text-foreground">
                   Learn • Build • Ship
                 </p>
               </motion.div>
@@ -221,16 +221,16 @@ export function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6, duration: 0.5 }}
                 whileHover={{ scale: 1.05, x: -3 }}
-                className="absolute -right-20 top-[30%]
-                          rounded-lg px-3 py-1.5
+                className="absolute -right-2 sm:-right-4 md:-right-8 lg:-right-12 xl:-right-20 top-[28%] sm:top-[30%]
+                          rounded-md sm:rounded-lg px-2 sm:px-3 py-1 sm:py-1.5
                           bg-white/10 backdrop-blur-xl border border-white/20
                           shadow-md hover:shadow-lg
                           transition-all duration-300 w-max"
               >
-                <p className="text-[10px] text-muted-foreground leading-none">
+                <p className="text-[8px] sm:text-[9px] md:text-[10px] text-muted-foreground leading-none">
                   Latency Enjoyer
                 </p>
-                <p className="text-[11px] font-semibold text-foreground">
+                <p className="text-[9px] sm:text-[10px] md:text-[11px] font-semibold text-foreground">
                   Optimizing Everything
                 </p>
               </motion.div>
@@ -241,16 +241,16 @@ export function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7, duration: 0.5 }}
                 whileHover={{ scale: 1.05, y: -2 }}
-                className="absolute left-1/2 -translate-x-1/2 bottom-[-3%]
-                          rounded-lg px-3 py-1.5
+                className="absolute left-1/2 -translate-x-1/2 -bottom-2 sm:-bottom-3 md:bottom-[-3%]
+                          rounded-md sm:rounded-lg px-2 sm:px-3 py-1 sm:py-1.5
                           bg-white/10 backdrop-blur-xl border border-white/20
                           shadow-md hover:shadow-lg
                           transition-all duration-300 w-max"
               >
-                <p className="text-[10px] text-muted-foreground leading-none">
+                <p className="text-[8px] sm:text-[9px] md:text-[10px] text-muted-foreground leading-none">
                   Experience
                 </p>
-                <p className="text-[11px] font-semibold text-foreground">
+                <p className="text-[9px] sm:text-[10px] md:text-[11px] font-semibold text-foreground">
                   3+ Years
                 </p>
               </motion.div>
@@ -266,14 +266,14 @@ export function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2 }}
-        className="flex justify-center mt-6"
+        className="flex justify-center mt-4 sm:mt-6 mb-4"
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY }}
-          className="w-6 h-10 rounded-full border border-muted-foreground/30 flex items-start justify-center p-2"
+          className="w-5 h-8 sm:w-6 sm:h-10 rounded-full border border-muted-foreground/30 flex items-start justify-center p-1.5 sm:p-2"
         >
-          <motion.div className="w-1 h-2 bg-primary rounded-full" />
+          <motion.div className="w-1 h-1.5 sm:h-2 bg-primary rounded-full" />
         </motion.div>
       </motion.div>
     </section>

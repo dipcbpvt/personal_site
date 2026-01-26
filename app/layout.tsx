@@ -4,6 +4,7 @@ import { Inter, JetBrains_Mono } from "next/font/google"
 import "./globals.css"
 import { Preloader } from "@/components/preloader"
 import { ThemeProvider } from "@/components/theme-provider"
+import { CustomCursor } from "@/components/custom-cursor"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -100,6 +101,8 @@ export const viewport: Viewport = {
   themeColor: "#3b82f6",
   width: "device-width",
   initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
   colorScheme: "light dark",
 }
 
@@ -146,6 +149,7 @@ export default function RootLayout({
       </head>
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <CustomCursor />
           <div className="grain" />
           <Preloader />
           {children}
