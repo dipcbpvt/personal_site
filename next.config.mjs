@@ -131,33 +131,9 @@ const nextConfig = {
     pagesBufferLength: 5,
   },
 
-  // Webpack optimization for better code splitting
-  webpack: (config, { isServer }) => {
-    config.optimization = {
-      ...config.optimization,
-      splitChunks: {
-        chunks: 'all',
-        cacheGroups: {
-          default: false,
-          vendors: false,
-          // Vendor chunk
-          vendor: {
-            filename: 'chunks/vendor.[contenthash].js',
-            test: /node_modules/,
-            priority: 10,
-            reuseExistingChunk: true,
-            enforce: true,
-          },
-          // Common chunk
-          common: {
-            minChunks: 2,
-            priority: 5,
-            reuseExistingChunk: true,
-          },
-        },
-      },
-    }
-    return config
+  // Use Turbopack for Next.js 16 (faster builds)
+  turbopack: {
+    resolveAlias: {},
   },
 }
 
