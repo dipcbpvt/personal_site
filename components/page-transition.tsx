@@ -23,15 +23,15 @@ const containerVariants = {
 const itemVariants = {
   hidden: {
     opacity: 0,
-    y: 25,
-    scale: 0.95,
+    y: 40,
+    scale: 0.9,
   },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
     transition: {
-      duration: 0.85,
+      duration: 0.7,
       ease: [0.34, 1.56, 0.64, 1],
     },
   },
@@ -65,11 +65,11 @@ export function PageTransition({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30, scale: 0.98 }}
+      initial={{ opacity: 0, y: 50, scale: 0.85 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, y: -30, scale: 0.95 }}
+      exit={{ opacity: 0, y: -50, scale: 0.9 }}
       transition={{
-        duration: 0.8,
+        duration: 0.7,
         ease: [0.34, 1.56, 0.64, 1],
         delay,
       }}
