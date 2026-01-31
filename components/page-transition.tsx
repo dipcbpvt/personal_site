@@ -14,8 +14,8 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.15,
+      staggerChildren: 0.08,
+      delayChildren: 0.1,
     },
   },
 }
@@ -23,16 +23,14 @@ const containerVariants = {
 const itemVariants = {
   hidden: {
     opacity: 0,
-    y: 40,
-    scale: 0.9,
+    y: 20,
   },
   visible: {
     opacity: 1,
     y: 0,
-    scale: 1,
     transition: {
-      duration: 0.7,
-      ease: [0.34, 1.56, 0.64, 1],
+      duration: 0.5,
+      ease: 'easeOut',
     },
   },
 }
@@ -65,12 +63,12 @@ export function PageTransition({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50, scale: 0.85 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, y: -50, scale: 0.9 }}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
       transition={{
-        duration: 0.7,
-        ease: [0.34, 1.56, 0.64, 1],
+        duration: 0.5,
+        ease: 'easeOut',
         delay,
       }}
       viewport={{ once: true, margin: '-100px' }}
