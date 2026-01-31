@@ -169,8 +169,8 @@ export default function ExperiencePage() {
                                 {/* About Summary */}
                                 <section id="intro">
                                     <motion.div
-                                        initial={{ opacity: 0, y: 20 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
+                                        initial={{ opacity: 0, x: -60 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
                                         viewport={{ once: true }}
                                         className="relative mb-8"
                                     >
@@ -192,8 +192,8 @@ export default function ExperiencePage() {
                                     </motion.div>
 
                                     <motion.div
-                                        initial={{ opacity: 0, y: 30 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
+                                        initial={{ opacity: 0, x: -60 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
                                         viewport={{ once: true }}
                                         transition={{ delay: 0.2 }}
                                         className="glass rounded-2xl p-8 mb-16"
@@ -224,8 +224,8 @@ export default function ExperiencePage() {
                                 {/* Professional Experience Section */}
                                 <section id="experience">
                                     <motion.div
-                                        initial={{ opacity: 0 }}
-                                        whileInView={{ opacity: 1 }}
+                                        initial={{ opacity: 0, x: -60 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
                                         viewport={{ once: true }}
                                         className="mb-20"
                                     >
@@ -242,8 +242,8 @@ export default function ExperiencePage() {
                                 {/* Community Leadership & Volunteering Section */}
                                 <section id="community">
                                     <motion.div
-                                        initial={{ opacity: 0 }}
-                                        whileInView={{ opacity: 1 }}
+                                        initial={{ opacity: 0, x: -60 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
                                         viewport={{ once: true }}
                                         className="mb-20"
                                     >
@@ -260,8 +260,8 @@ export default function ExperiencePage() {
                                 {/* Types of Systems Section */}
                                 <section id="systems">
                                     <motion.div
-                                        initial={{ opacity: 0 }}
-                                        whileInView={{ opacity: 1 }}
+                                        initial={{ opacity: 0, x: -60 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
                                         viewport={{ once: true }}
                                         className="mb-16"
                                     >

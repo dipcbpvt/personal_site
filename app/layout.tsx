@@ -3,17 +3,12 @@ import type { Metadata, Viewport } from "next"
 import { Inter, JetBrains_Mono } from "next/font/google"
 import dynamic from "next/dynamic"
 import "./globals.css"
+import CustomCursorLoader from "@/components/custom-cursor-loader"
 import { ThemeProvider } from "@/components/theme-provider"
 
 // Lazy load preloader - shown on initial load then hidden
 const Preloader = dynamic(() => import("@/components/preloader").then(mod => ({ default: mod.Preloader })), {
   ssr: true,
-})
-
-// Lazy load custom cursor - not critical for LCP
-const CustomCursor = dynamic(() => import("@/components/custom-cursor").then(mod => ({ default: mod.CustomCursor })), {
-  ssr: false,
-  loading: () => null,
 })
 
 const inter = Inter({
@@ -172,7 +167,7 @@ export default function RootLayout({
         {/* Skip to main content link for accessibility */}
         <a href="#main-content" className="sr-skip-link">Skip to main content</a>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <CustomCursor />
+          <CustomCursorLoader />
           <div className="grain" />
           <Preloader />
           <main id="main-content">

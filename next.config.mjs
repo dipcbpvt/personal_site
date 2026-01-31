@@ -25,9 +25,6 @@ const nextConfig = {
 
   // Aggressive compression with Brotli/Gzip
   compress: true,
-
-  // Performance optimizations - SWC minify enabled
-  swcMinify: true,
   
   // Optimize for production builds - tree shake unused code
   reactStrictMode: true,

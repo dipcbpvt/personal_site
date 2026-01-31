@@ -69,8 +69,8 @@ export default function AboutPage() {
               <section id="intro">
                 {/* Summary Card */}
                 <motion.div
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, x: -60 }}
+                  whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.2 }}
                   className="glass rounded-2xl p-8 mb-16"
@@ -104,8 +104,8 @@ export default function AboutPage() {
               {/* Technical Product Engineering Capabilities */}
               <section id="capabilities">
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, x: -60 }}
+                  whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   className="glass rounded-2xl p-8 mb-16"
                 >
@@ -134,8 +134,8 @@ export default function AboutPage() {
               {/* Philosophy Section */}
               <section id="philosophy">
                 <motion.h3
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, x: -60 }}
+                  whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   className="text-2xl font-semibold text-foreground mb-12 flex items-center gap-3"
                 >
@@ -164,8 +164,8 @@ export default function AboutPage() {
                   ].map((item, index) => (
                     <motion.div
                       key={item.title}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
+                      initial={{ opacity: 0, x: -50 }}
+                      whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: index * 0.1 }}
                       className="glass rounded-2xl p-6"
@@ -180,8 +180,8 @@ export default function AboutPage() {
               {/* Passions Section */}
               <section id="hobbies">
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, x: -60 }}
+                  whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   className="flex items-center gap-3 mb-8"
                 >
@@ -193,8 +193,8 @@ export default function AboutPage() {
                   </h3>
                 </motion.div>
                 <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, x: -60 }}
+                  whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   className="mb-8 text-muted-foreground leading-relaxed text-justify"
                 >
@@ -206,8 +206,8 @@ export default function AboutPage() {
                   {passions.map((passion, index) => (
                     <motion.div
                       key={passion.title}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
+                      initial={{ opacity: 0, x: -60 }}
+                      whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: index * 0.1 }}
                       className="group glass rounded-2xl p-6 hover:bg-primary/5 hover:border-primary/20 transition-all"

@@ -1,32 +1,12 @@
 "use client"
 
 import { motion, useScroll, useTransform } from "framer-motion"
-import { useRef, useState, useMemo } from "react"
+import { useRef, useState, useMemo, useEffect } from "react"
 import Image from "next/image"
 import { SocialBar } from "./social-bar"
 import { FloatingLinks } from "./floating-links"
 import { Target, Sparkles, Zap } from "lucide-react"
 import { useTheme } from "next-themes";
-import { useEffect } from "react";
-
-const floatingTerms = useMemo(() => [
-  { text: "Full-Stack", delay: 0, x: 120, y: -80 },
-  { text: "DevOps", delay: 0.2, x: -100, y: -60 },
-  { text: "AI & Automation", delay: 0.4, x: 140, y: 40 },
-  { text: "System Design", delay: 0.6, x: -120, y: 100 },
-  { text: "IoT/Robotics", delay: 0.8, x: 80, y: -120 },
-  { text: "FastAPI", delay: 1, x: -80, y: 80 },
-  { text: "Next.js", delay: 1.2, x: 100, y: 120 },
-  { text: "Vue.js", delay: 1.4, x: -140, y: -40 },
-  { text: "Laravel", delay: 1.6, x: 60, y: -100 },
-  { text: "Python", delay: 1.8, x: -60, y: 60 },
-  { text: "Docker", delay: 2, x: 130, y: 70 },
-  { text: "Kubernetes", delay: 2.2, x: -110, y: -80 },
-  { text: "Redis", delay: 2.4, x: 90, y: 90 },
-  { text: "API Design", delay: 2.6, x: -90, y: 30 },
-  { text: "n8n", delay: 2.8, x: 110, y: -50 },
-  { text: "Zapier", delay: 3, x: -130, y: 110 },
-], [])
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null)
