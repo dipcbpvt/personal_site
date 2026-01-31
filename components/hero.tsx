@@ -65,9 +65,9 @@ export function Hero() {
               className="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6"
             >
               {[
-                { icon: <Target className="w-3 h-3 sm:w-4 sm:h-4" />, text: "Collaborate" },
-                { icon: <Sparkles className="w-3 h-3 sm:w-4 sm:h-4" />, text: "Create" },
-                { icon: <Zap className="w-3 h-3 sm:w-4 sm:h-4" />, text: "Innovate" },
+                { icon: <Target className="text-primary w-3 h-3 sm:w-4 sm:h-4" />, text: "Collaborate" },
+                { icon: <Sparkles className="text-primary w-3 h-3 sm:w-4 sm:h-4" />, text: "Create" },
+                { icon: <Zap className="text-primary w-3 h-3 sm:w-4 sm:h-4" />, text: "Innovate" },
               ].map((keyword, index) => (
                 <motion.div
                   key={keyword.text}
@@ -79,7 +79,7 @@ export function Hero() {
                     ease: [0.34, 1.56, 0.64, 1],
                   }}
                   whileHover={{ scale: 1.05, y: -2 }}
-                  className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs sm:text-sm font-medium cursor-interactive transition-all duration-200"
+                  className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-primary/10 border border-primary/20 text-foreground text-xs sm:text-sm font-medium cursor-interactive transition-all duration-200"
                 >
                   {keyword.icon}
                   <span className="whitespace-nowrap">{keyword.text}</span>

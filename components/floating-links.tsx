@@ -49,7 +49,7 @@ export function FloatingLinks() {
                 className="text-muted-foreground group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all"
               />
             </div>
-            <h3 className="text-lg font-semibold text-foreground mb-1">{link.label}</h3>
+            <h2 className="text-lg font-semibold text-foreground mb-1">{link.label}</h2>
             <p className="text-sm text-muted-foreground">{link.description}</p>
           </Link>
         </motion.div>
