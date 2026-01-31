@@ -78,6 +78,7 @@ function NavigationInner() {
                     alt="Dip Chakraborty"
                     width={240}
                     height={20}
+                    sizes="240px"
                     className={cn(
                       "object-contain object-left h-full w-auto",
                       resolvedTheme === 'dark' ? "mix-blend-screen" : "mix-blend-multiply"

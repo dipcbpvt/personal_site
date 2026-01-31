@@ -3,15 +3,38 @@
 import { motion, AnimatePresence } from "framer-motion"
 import { useEffect, useState } from "react"
 
+const HERO_SOURCES = ["/dip.png", "/dip2.webp"]
+
 export function Preloader() {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false)
-    }, 200)
+    let isMounted = true
+    let loaded = 0
+    const listeners: Array<() => void> = []
 
-    return () => clearTimeout(timer)
+    HERO_SOURCES.forEach((src) => {
+      const img = new Image()
+      const onLoad = () => {
+        loaded += 1
+        if (loaded === HERO_SOURCES.length && isMounted) {
+          setIsLoading(false)
+        }
+      }
+      const onError = () => onLoad()
+      img.onload = onLoad
+      img.onerror = onError
+      img.src = src
+      listeners.push(() => {
+        img.onload = null
+        img.onerror = null
+      })
+    })
+
+    return () => {
+      isMounted = false
+      listeners.forEach((dispose) => dispose())
+    }
   }, [])
 
   return (

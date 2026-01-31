@@ -153,15 +153,15 @@ export default function RootLayout({
         />
         {/* Preload critical hero images for LCP optimization */}
         <link rel="preload" as="image" href="/dip.png" type="image/png" />
-        <link rel="preload" as="image" href="/dip2.png" type="image/png" />
+        <link rel="preload" as="image" href="/dip2.webp" type="image/webp" />
         {/* Prefetch next page to improve navigation performance */}
         <link rel="prefetch" href="/experience" />
         <link rel="prefetch" href="/about" />
         <link rel="prefetch" href="/contact" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+        <meta
+          name="description"
+          content="Dip Chakraborty is a Technical Product Engineer crafting digital experiences at the intersection of design, technology, and strategy."
+        />
       </head>
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         {/* Skip to main content link for accessibility */}

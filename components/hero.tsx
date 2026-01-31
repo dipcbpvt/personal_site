@@ -26,10 +26,10 @@ export function Hero() {
   }, []);
 
   // Memoize portrait source to prevent unnecessary re-renders
-  const portraitSrc = useMemo(() => 
-    resolvedTheme === "light" ? "/dip.png" : "/dip2.png",
-    [resolvedTheme]
-  );
+  const portraitSrc = useMemo(
+    () => (resolvedTheme === "light" ? "/dip.png" : "/dip2.webp"),
+    [resolvedTheme],
+  )
 
 
 
@@ -155,9 +155,11 @@ export function Hero() {
                       priority
                       quality={85}
                       sizes="(max-width: 640px) 280px, (max-width: 768px) 384px, (max-width: 1024px) 448px, 512px"
-                      className="object-cover contrast-100 transition-all duration-500"
+                    className="object-cover contrast-100 transition-all duration-500"
                       loading="eager"
                       decoding="async"
+                      priority
+                      fetchPriority="high"
                     />
                   )}
 

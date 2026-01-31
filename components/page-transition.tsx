@@ -48,9 +48,8 @@ export function PageTransition({
       <motion.div
         variants={containerVariants}
         initial="hidden"
-        whileInView="visible"
+        animate="visible"
         exit="hidden"
-        viewport={{ once: true, margin: '-100px' }}
       >
         {childrenArray.map((child, i) => (
           <motion.div key={i} variants={itemVariants}>
@@ -63,15 +62,14 @@ export function PageTransition({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
+      initial="hidden"
+      animate="visible"
+      exit="hidden"
       transition={{
         duration: 0.5,
         ease: 'easeOut',
         delay,
       }}
-      viewport={{ once: true, margin: '-100px' }}
     >
       {children}
     </motion.div>
