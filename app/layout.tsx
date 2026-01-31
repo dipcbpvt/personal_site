@@ -1,19 +1,31 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { Inter, JetBrains_Mono } from "next/font/google"
+import dynamic from "next/dynamic"
 import "./globals.css"
-import { Preloader } from "@/components/preloader"
 import { ThemeProvider } from "@/components/theme-provider"
-import { CustomCursor } from "@/components/custom-cursor"
+
+// Lazy load preloader - shown on initial load then hidden
+const Preloader = dynamic(() => import("@/components/preloader").then(mod => ({ default: mod.Preloader })), {
+  ssr: true,
+})
+
+// Lazy load custom cursor - not critical for LCP
+const CustomCursor = dynamic(() => import("@/components/custom-cursor").then(mod => ({ default: mod.CustomCursor })), {
+  ssr: false,
+  loading: () => null,
+})
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap", // Prevent FOUT with font-display: swap
 })
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
+  display: "swap",
 })
 
 export const metadata: Metadata = {
@@ -104,7 +116,6 @@ export const viewport: Viewport = {
   maximumScale: 5,
   userScalable: true,
   colorScheme: "light dark",
-  // Optimize for mobile
   viewportFit: "cover",
 }
 
@@ -143,18 +154,30 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+          suppressHydrationWarning
         />
+        {/* Preload critical hero images for LCP optimization */}
+        <link rel="preload" as="image" href="/dip.png" type="image/png" />
+        <link rel="preload" as="image" href="/dip2.png" type="image/png" />
+        {/* Prefetch next page to improve navigation performance */}
+        <link rel="prefetch" href="/experience" />
+        <link rel="prefetch" href="/about" />
+        <link rel="prefetch" href="/contact" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
       </head>
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
+        {/* Skip to main content link for accessibility */}
+        <a href="#main-content" className="sr-skip-link">Skip to main content</a>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <CustomCursor />
           <div className="grain" />
           <Preloader />
-          {children}
+          <main id="main-content">
+            {children}
+          </main>
         </ThemeProvider>
       </body>
     </html>

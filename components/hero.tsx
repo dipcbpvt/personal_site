@@ -1,7 +1,7 @@
 "use client"
 
 import { motion, useScroll, useTransform } from "framer-motion"
-import { useRef, useState } from "react"
+import { useRef, useState, useMemo } from "react"
 import Image from "next/image"
 import { SocialBar } from "./social-bar"
 import { FloatingLinks } from "./floating-links"
@@ -9,7 +9,7 @@ import { Target, Sparkles, Zap } from "lucide-react"
 import { useTheme } from "next-themes";
 import { useEffect } from "react";
 
-const floatingTerms = [
+const floatingTerms = useMemo(() => [
   { text: "Full-Stack", delay: 0, x: 120, y: -80 },
   { text: "DevOps", delay: 0.2, x: -100, y: -60 },
   { text: "AI & Automation", delay: 0.4, x: 140, y: 40 },
@@ -26,7 +26,7 @@ const floatingTerms = [
   { text: "API Design", delay: 2.6, x: -90, y: 30 },
   { text: "n8n", delay: 2.8, x: 110, y: -50 },
   { text: "Zapier", delay: 3, x: -130, y: 110 },
-]
+], [])
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -45,7 +45,11 @@ export function Hero() {
     setMounted(true);
   }, []);
 
-  const portraitSrc = resolvedTheme === "light" ? "/dip.png" : "/dip2.png";
+  // Memoize portrait source to prevent unnecessary re-renders
+  const portraitSrc = useMemo(() => 
+    resolvedTheme === "light" ? "/dip.png" : "/dip2.png",
+    [resolvedTheme]
+  );
 
 
 
@@ -166,11 +170,14 @@ export function Hero() {
                   ) : (
                     <Image
                       src={portraitSrc}
-                      alt="Dip Chakraborty"
+                      alt="Dip Chakraborty - Technical Product Engineer"
                       fill
                       priority
+                      quality={85}
                       sizes="(max-width: 640px) 280px, (max-width: 768px) 384px, (max-width: 1024px) 448px, 512px"
                       className="object-cover contrast-100 transition-all duration-500"
+                      loading="eager"
+                      decoding="async"
                     />
                   )}
 

@@ -4,12 +4,12 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
 
-  // Enable image optimization for better performance
+  // Enable aggressive image optimization for better performance
   images: {
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    minimumCacheTTL: 60,
+    minimumCacheTTL: 31536000, // 1 year for immutable images
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
@@ -19,16 +19,24 @@ const nextConfig = {
         hostname: '**',
       },
     ],
+    // Optimize image sizes during build
+    unoptimized: false,
   },
 
-  // Compression for faster loading
+  // Aggressive compression with Brotli/Gzip
   compress: true,
 
-  // Performance optimizations
+  // Performance optimizations - SWC minify enabled
   swcMinify: true,
+  
+  // Optimize for production builds - tree shake unused code
+  reactStrictMode: true,
 
   // Production optimizations
   productionBrowserSourceMaps: false,
+  
+  // Static optimization for better performance
+  staticPageGenerationTimeout: 120,
 
   // Security and performance headers
   async headers() {
@@ -72,13 +80,17 @@ const nextConfig = {
           },
         ],
       },
-      // Cache static assets
+      // Cache static assets - aggressive caching for versioned assets
       {
         source: '/(.*).(jpg|jpeg|png|gif|ico|svg|webp|avif)',
         headers: [
           {
             key: 'Cache-Control',
             value: 'public, max-age=31536000, immutable',
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
           },
         ],
       },
@@ -89,14 +101,63 @@ const nextConfig = {
             key: 'Cache-Control',
             value: 'public, max-age=31536000, immutable',
           },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff',
+          },
+        ],
+      },
+      // HTML pages - shorter cache with validation
+      {
+        source: '/:path((?!.*\\..*|.*[.]html$).*)*$',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800',
+          },
         ],
       },
     ]
   },
 
-  // Optimize bundle
+  // Optimize bundle - tree shake unused code
   experimental: {
     optimizePackageImports: ['lucide-react', 'framer-motion', '@radix-ui/react-icons'],
+  },
+
+  // Enable HTTP/2 push for critical resources
+  onDemandEntries: {
+    maxInactiveAge: 60 * 60 * 1000,
+    pagesBufferLength: 5,
+  },
+
+  // Webpack optimization for better code splitting
+  webpack: (config, { isServer }) => {
+    config.optimization = {
+      ...config.optimization,
+      splitChunks: {
+        chunks: 'all',
+        cacheGroups: {
+          default: false,
+          vendors: false,
+          // Vendor chunk
+          vendor: {
+            filename: 'chunks/vendor.[contenthash].js',
+            test: /node_modules/,
+            priority: 10,
+            reuseExistingChunk: true,
+            enforce: true,
+          },
+          // Common chunk
+          common: {
+            minChunks: 2,
+            priority: 5,
+            reuseExistingChunk: true,
+          },
+        },
+      },
+    }
+    return config
   },
 }
 

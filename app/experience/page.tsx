@@ -1,12 +1,18 @@
 "use client"
 
+import dynamic from "next/dynamic"
 import { motion } from "framer-motion"
 import { useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Navigation } from "@/components/navigation"
-import { SpotlightBg } from "@/components/spotlight-bg"
 import { PageTransition } from "@/components/page-transition"
+
+// Lazy load spotlight background
+const SpotlightBg = dynamic(() => import("@/components/spotlight-bg").then(mod => ({ default: mod.SpotlightBg })), {
+  ssr: false,
+  loading: () => null,
+})
 import { SectionHeader } from "@/components/section-header"
 import { ExperienceCarousel } from "@/components/experience-carousel"
 import { CommunityCarousel } from "@/components/community-carousel"
@@ -172,9 +178,13 @@ export default function ExperiencePage() {
                                             <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-primary/10 z-10" />
                                             <Image
                                                 src="/dip_working.png"
-                                                alt="Dip Chakraborty at work"
+                                                alt="Dip Chakraborty at work - Software Engineer"
                                                 fill
+                                                priority={false}
+                                                quality={80}
+                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 80vw"
                                                 className="object-cover brightness-110"
+                                                loading="lazy"
                                             />
                                         </div>
                                         {/* Offset decorative element */}

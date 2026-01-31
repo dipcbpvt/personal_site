@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useMemo } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
@@ -16,7 +16,7 @@ const navItems = [
   { href: "/contact", label: "Contact" },
 ]
 
-export function Navigation() {
+function NavigationInner() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const pathname = usePathname()
@@ -177,3 +177,5 @@ export function Navigation() {
     </>
   )
 }
+
+export const Navigation = NavigationInner
