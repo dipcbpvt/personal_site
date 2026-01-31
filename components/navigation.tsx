@@ -94,21 +94,22 @@ export function Navigation() {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-1">
             {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="relative px-3 lg:px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                {...(item.external && { target: "_blank", rel: "noopener noreferrer" })}
-              >
-                {pathname === item.href && (
-                  <motion.div
-                    layoutId="nav-indicator"
-                    className="absolute inset-0 bg-primary/10 rounded-lg"
-                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                  />
-                )}
-                <span className={cn("relative z-10", pathname === item.href && "text-primary")}>{item.label}</span>
-              </Link>
+              <motion.div key={item.href} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
+                <Link
+                  href={item.href}
+                  className="relative px-3 lg:px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors cursor-interactive"
+                  {...(item.external && { target: "_blank", rel: "noopener noreferrer" })}
+                >
+                  {pathname === item.href && (
+                    <motion.div
+                      layoutId="nav-indicator"
+                      className="absolute inset-0 bg-primary/10 rounded-lg"
+                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                    />
+                  )}
+                  <span className={cn("relative z-10 transition-colors duration-200", pathname === item.href && "text-primary font-medium")}>{item.label}</span>
+                </Link>
+              </motion.div>
             ))}
           </nav>
 
@@ -130,28 +131,38 @@ export function Navigation() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
             className="fixed inset-0 z-40 bg-background/95 backdrop-blur-xl md:hidden"
           >
             <motion.nav
-              initial={{ y: 50, opacity: 0 }}
+              initial={{ y: 60, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              exit={{ y: 50, opacity: 0 }}
-              transition={{ delay: 0.1 }}
-              className="flex flex-col items-center justify-center h-full gap-6 sm:gap-8 px-4"
+              exit={{ y: 60, opacity: 0 }}
+              transition={{ delay: 0.08, duration: 0.4, ease: [0.34, 1.56, 0.64, 1] }}
+              className="flex flex-col items-center justify-center h-full gap-6 sm:gap-8 px-4 pt-16"
             >
               {navItems.map((item, index) => (
                 <motion.div
                   key={item.href}
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.1 + index * 0.05 }}
+                  initial={{ y: 30, opacity: 0, scale: 0.95 }}
+                  animate={{ y: 0, opacity: 1, scale: 1 }}
+                  exit={{ y: 30, opacity: 0, scale: 0.95 }}
+                  transition={{
+                    delay: 0.08 + index * 0.08,
+                    duration: 0.5,
+                    ease: [0.34, 1.56, 0.64, 1],
+                  }}
+                  whileHover={{ x: 8 }}
+                  whileTap={{ scale: 0.98 }}
                 >
                   <Link
                     href={item.href}
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={cn(
-                      "text-2xl sm:text-3xl font-light transition-colors min-h-[44px] flex items-center",
-                      pathname === item.href ? "text-primary" : "text-muted-foreground hover:text-foreground",
+                      "text-2xl sm:text-3xl font-light transition-colors min-h-[44px] flex items-center cursor-interactive",
+                      pathname === item.href
+                        ? 'text-primary font-medium'
+                        : 'text-muted-foreground hover:text-foreground',
                     )}
                     {...(item.external && { target: "_blank", rel: "noopener noreferrer" })}
                   >

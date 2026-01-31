@@ -104,6 +104,8 @@ export const viewport: Viewport = {
   maximumScale: 5,
   userScalable: true,
   colorScheme: "light dark",
+  // Optimize for mobile
+  viewportFit: "cover",
 }
 
 export default function RootLayout({

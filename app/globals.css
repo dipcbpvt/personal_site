@@ -196,6 +196,39 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Smooth section transitions */
+section {
+  scroll-margin-top: 80px;
+}
+
+/* Enable GPU acceleration for smoother animations */
+* {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Optimized transitions for all elements */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  * {
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 200ms;
+  }
+
+  /* Faster transitions for buttons and interactive elements */
+  button,
+  a,
+  input,
+  select,
+  textarea {
+    transition-duration: 150ms;
+  }
+}
+
 /* Respect user's motion preferences */
 @media (prefers-reduced-motion: reduce) {
 
@@ -419,6 +452,9 @@ img {
   height: auto;
   /* Prevent layout shift */
   aspect-ratio: attr(width) / attr(height);
+  /* Enable GPU acceleration for images */
+  transform: translateZ(0);
+  will-change: auto;
 }
 
 /* Better mobile navigation */
@@ -426,5 +462,33 @@ img {
   nav {
     /* Ensure nav is touch-friendly */
     -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Smooth section animations */
+section {
+  will-change: opacity, transform;
+  position: relative;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* GPU acceleration for animations */
+.animate-gpu,
+[data-animate="true"] {
+  transform: translate3d(0, 0, 0);
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+}
+
+/* Optimized scroll snap behavior */
+@supports (scroll-snap-type: y mandatory) {
+  html {
+    scroll-snap-type: y proximity;
+  }
+
+  section {
+    scroll-snap-align: start;
+    scroll-snap-stop: auto;
   }
 }

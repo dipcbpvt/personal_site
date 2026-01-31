@@ -85,7 +85,7 @@ function FloatingShape({ position, geometry, color, speed }: any) {
   )
 }
 
-// Color-shifting particles with glow
+// Enhanced color-shifting particles with multiple layers
 function GlowingParticles() {
   const particlesRef = useRef<any>(null)
   const { theme, systemTheme } = useTheme()
@@ -96,6 +96,7 @@ function GlowingParticles() {
     if (particlesRef.current) {
       particlesRef.current.rotation.y = state.clock.elapsedTime * 0.08
       particlesRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.15) * 0.2
+      particlesRef.current.rotation.z = Math.cos(state.clock.elapsedTime * 0.1) * 0.15
 
       // Color transition effect
       const material = particlesRef.current.material
@@ -106,7 +107,7 @@ function GlowingParticles() {
     }
   })
 
-  const particleCount = 1500
+  const particleCount = 2500
   const positions = new Float32Array(particleCount * 3)
   const sizes = new Float32Array(particleCount)
 
@@ -119,7 +120,7 @@ function GlowingParticles() {
     positions[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta)
     positions[i * 3 + 2] = radius * Math.cos(phi)
 
-    sizes[i] = Math.random() * 0.1 + 0.05
+    sizes[i] = Math.random() * 0.12 + 0.03
   }
 
   return (
@@ -139,14 +140,126 @@ function GlowingParticles() {
         />
       </bufferGeometry>
       <pointsMaterial
-        size={0.08}
+        size={0.1}
         transparent
-        opacity={0.8}
+        opacity={0.85}
         sizeAttenuation
         blending={2}
         depthWrite={false}
       />
     </points>
+  )
+}
+
+// Secondary particle layer for depth
+function SecondaryParticles() {
+  const particlesRef = useRef<any>(null)
+  const { theme, systemTheme } = useTheme()
+  const currentTheme = theme === 'system' ? systemTheme : theme
+  const isDark = currentTheme === 'dark'
+
+  useFrame((state) => {
+    if (particlesRef.current) {
+      particlesRef.current.rotation.y = state.clock.elapsedTime * -0.05
+      particlesRef.current.rotation.x = Math.cos(state.clock.elapsedTime * 0.1) * 0.15
+    }
+  })
+
+  const particleCount = 1200
+  const positions = new Float32Array(particleCount * 3)
+  const sizes = new Float32Array(particleCount)
+
+  for (let i = 0; i < particleCount; i++) {
+    const radius = 25
+    const theta = Math.random() * Math.PI * 2
+    const phi = Math.acos(2 * Math.random() - 1)
+
+    positions[i * 3] = radius * Math.sin(phi) * Math.cos(theta)
+    positions[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta)
+    positions[i * 3 + 2] = radius * Math.cos(phi)
+
+    sizes[i] = Math.random() * 0.08 + 0.02
+  }
+
+  return (
+    <points ref={particlesRef}>
+      <bufferGeometry>
+        <bufferAttribute
+          attach="attributes-position"
+          count={particleCount}
+          array={positions}
+          itemSize={3}
+        />
+        <bufferAttribute
+          attach="attributes-size"
+          count={particleCount}
+          array={sizes}
+          itemSize={1}
+        />
+      </bufferGeometry>
+      <pointsMaterial
+        size={0.06}
+        transparent
+        opacity={0.4}
+        sizeAttenuation
+        blending={2}
+        depthWrite={false}
+        color={isDark ? '#8b5cf6' : '#a78bfa'}
+      />
+    </points>
+  )
+}
+
+// Animated floating box atoms
+function FloatingAtoms() {
+  const groupRef = useRef<any>(null)
+  const { theme, systemTheme } = useTheme()
+  const currentTheme = theme === 'system' ? systemTheme : theme
+  const isDark = currentTheme === 'dark'
+
+  const atoms = useMemo(() => {
+    return Array.from({ length: 8 }, (_, i) => ({
+      id: i,
+      position: [
+        (Math.random() - 0.5) * 20,
+        (Math.random() - 0.5) * 20,
+        (Math.random() - 0.5) * 20,
+      ] as [number, number, number],
+      speed: Math.random() * 0.3 + 0.1,
+    }))
+  }, [])
+
+  useFrame((state) => {
+    if (groupRef.current) {
+      atoms.forEach((atom, i) => {
+        const mesh = groupRef.current.children[i]
+        if (mesh) {
+          mesh.position.x = atom.position[0] + Math.sin(state.clock.elapsedTime * atom.speed + i) * 3
+          mesh.position.y = atom.position[1] + Math.cos(state.clock.elapsedTime * atom.speed * 0.7 + i) * 3
+          mesh.position.z = atom.position[2] + Math.sin(state.clock.elapsedTime * atom.speed * 0.5 + i) * 2
+          mesh.rotation.x += 0.003
+          mesh.rotation.y += 0.005
+        }
+      })
+    }
+  })
+
+  return (
+    <group ref={groupRef}>
+      {atoms.map((atom, i) => (
+        <mesh key={atom.id} position={atom.position}>
+          <boxGeometry args={[0.4, 0.4, 0.4]} />
+          <meshStandardMaterial
+            color={i % 2 === 0 ? (isDark ? '#06b6d4' : '#22d3ee') : (isDark ? '#3b82f6' : '#60a5fa')}
+            emissive={i % 2 === 0 ? (isDark ? '#06b6d4' : '#22d3ee') : (isDark ? '#3b82f6' : '#60a5fa')}
+            emissiveIntensity={0.3}
+            wireframe={false}
+            transparent
+            opacity={0.6}
+          />
+        </mesh>
+      ))}
+    </group>
   )
 }
 
@@ -266,7 +379,13 @@ function Scene({ isMobile = false }: { isMobile?: boolean }) {
       ))}
 
       {/* Color-shifting particles - only on desktop for performance */}
-      {!isMobile && <GlowingParticles />}
+      {!isMobile && (
+        <>
+          <GlowingParticles />
+          <SecondaryParticles />
+          <FloatingAtoms />
+        </>
+      )}
     </>
   )
 }
@@ -309,13 +428,17 @@ export function AnimatedBackground() {
             ? 'radial-gradient(ellipse at center, oklch(0.12 0.03 240) 0%, oklch(0.06 0.02 250) 100%)'
             : 'radial-gradient(ellipse at center, oklch(0.96 0.02 85) 0%, oklch(0.92 0.03 80) 100%)',
         }}
-        dpr={isMobile ? [1, 1.5] : [1, 2]} // Lower DPR on mobile for better performance
-        performance={{ min: 0.5 }} // Allow performance degradation if needed
+        dpr={isMobile ? [1, 1.2] : [1, 1.5]} // Optimized DPR for better mobile performance
+        performance={{ min: 0.5, max: 1 }} // Allow performance degradation if needed
         gl={{
           antialias: !isMobile,
           alpha: false,
-          powerPreference: 'high-performance'
+          powerPreference: 'high-performance',
+          preserveDrawingBuffer: false,
+          stencil: false,
+          depth: true,
         }}
+        frameloop={mounted ? 'always' : 'demand'}
       >
         <Scene isMobile={isMobile} />
       </Canvas>

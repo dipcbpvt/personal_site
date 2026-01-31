@@ -57,11 +57,17 @@ export function Hero() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 w-full flex-1 flex items-center">
         <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center w-full">
           {/* Content */}
-          <motion.div style={{ y, opacity }} className="order-2 lg:order-1">
+          <motion.div
+            style={{ y, opacity }}
+            className="order-2 lg:order-1"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+          >
             <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
+              initial={{ opacity: 0, y: 40, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.1, ease: [0.34, 1.56, 0.64, 1] }}
               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mb-4 sm:mb-6"
             >
               <span className="text-foreground block sm:inline">Dip</span>
@@ -69,9 +75,9 @@ export function Hero() {
             </motion.h1>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.15 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
               className="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6"
             >
               {[
@@ -81,10 +87,15 @@ export function Hero() {
               ].map((keyword, index) => (
                 <motion.div
                   key={keyword.text}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.25 + index * 0.08 }}
-                  className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs sm:text-sm font-medium"
+                  initial={{ opacity: 0, y: 12, scale: 0.92 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  transition={{
+                    delay: 0.25 + index * 0.1,
+                    duration: 0.5,
+                    ease: [0.34, 1.56, 0.64, 1],
+                  }}
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs sm:text-sm font-medium cursor-interactive transition-all duration-200"
                 >
                   {keyword.icon}
                   <span className="whitespace-nowrap">{keyword.text}</span>
@@ -93,9 +104,9 @@ export function Hero() {
             </motion.div>
 
             <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              initial={{ opacity: 0, y: 30, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.7, delay: 0.3, ease: [0.34, 1.56, 0.64, 1] }}
               className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground max-w-xl mb-4 sm:mb-6 leading-relaxed"
             >
               Technical Product Engineer crafting digital experiences at the intersection of{" "}
@@ -105,10 +116,11 @@ export function Hero() {
             </motion.p>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.25 }}
-              className="mb-4 sm:mb-6 p-3 sm:p-4 rounded-xl bg-primary/5 border border-primary/10"
+              initial={{ opacity: 0, y: 25, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.7, delay: 0.4, ease: [0.34, 1.56, 0.64, 1] }}
+              whileHover={{ y: -2, boxShadow: '0 8px 16px rgba(59, 130, 246, 0.1)' }}
+              className="mb-4 sm:mb-6 p-3 sm:p-4 rounded-xl bg-primary/5 border border-primary/10 transition-all duration-300 cursor-interactive"
             >
               <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
                 <span className="text-foreground font-medium">Product Strategy</span> • System Design •{" "}
