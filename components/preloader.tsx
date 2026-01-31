@@ -19,8 +19,8 @@ export function Preloader() {
       {isLoading && (
         <motion.div
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
+          exit={{ opacity: 0, scale: 0.98 }}
+          transition={{ duration: 0.6, ease: [0.34, 1.56, 0.64, 1] }}
           className="fixed inset-0 z-[9999] flex items-center justify-center bg-background"
         >
           {/* Animated background flashes */}
