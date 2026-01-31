@@ -107,7 +107,8 @@ function GlowingParticles() {
     }
   })
 
-  const particleCount = 2500
+  // Reduced particle count for better performance
+  const particleCount = 1500
   const positions = new Float32Array(particleCount * 3)
   const sizes = new Float32Array(particleCount)
 
@@ -165,7 +166,8 @@ function SecondaryParticles() {
     }
   })
 
-  const particleCount = 1200
+  // Reduced secondary particle count
+  const particleCount = 700
   const positions = new Float32Array(particleCount * 3)
   const sizes = new Float32Array(particleCount)
 
@@ -363,7 +365,7 @@ function Scene({ isMobile = false }: { isMobile?: boolean }) {
       <Stars
         radius={100}
         depth={50}
-        count={isMobile ? 2000 : 5000}
+        count={isMobile ? 1200 : 3000}
         factor={4}
         saturation={0}
         fade

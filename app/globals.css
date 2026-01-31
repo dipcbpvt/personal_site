@@ -162,6 +162,32 @@
     outline: 2px solid var(--ring);
     outline-offset: 2px;
   }
+
+  /* Ensure sufficient color contrast for text overlays */
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--foreground);
+  }
+
+  p, span, a {
+    color: inherit;
+    /* Ensure minimum contrast ratio of 4.5:1 for accessibility */
+  }
+
+  /* Skip link for keyboard navigation */
+  .sr-skip-link {
+    position: absolute;
+    left: -9999px;
+    z-index: 999;
+  }
+
+  .sr-skip-link:focus {
+    left: 50%;
+    top: 0;
+    background: var(--primary);
+    color: var(--primary-foreground);
+    padding: 0.5rem 1rem;
+    transform: translateX(-50%);
+  }
 }
 
 /* Custom scrollbar - theme aware */
@@ -207,24 +233,20 @@ section {
   backface-visibility: hidden;
 }
 
-/* Optimized transitions for all elements */
+/* Optimized transitions for all elements - only when motion preference is no-preference */
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
   }
 
-  * {
-    transition-property: background-color, border-color, color, fill, stroke;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 200ms;
-  }
-
-  /* Faster transitions for buttons and interactive elements */
+  /* Reduce to essential transitions for better performance */
   button,
   a,
   input,
   select,
   textarea {
+    transition-property: background-color, border-color, color;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 150ms;
   }
 }

@@ -1,9 +1,15 @@
 "use client"
 
+import dynamic from "next/dynamic"
 import { motion } from "framer-motion"
 import { Navigation } from "@/components/navigation"
-import { SpotlightBg } from "@/components/spotlight-bg"
 import { PageTransition } from "@/components/page-transition"
+
+// Lazy load spotlight background
+const SpotlightBg = dynamic(() => import("@/components/spotlight-bg").then(mod => ({ default: mod.SpotlightBg })), {
+  ssr: false,
+  loading: () => null,
+})
 import { SectionHeader } from "@/components/section-header"
 import { ContactInfoCard } from "@/components/contact-info-card"
 import { ContactSchedulingCard } from "@/components/contact-scheduling-card"
