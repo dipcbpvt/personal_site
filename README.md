@@ -1,6 +1,6 @@
 Dip Chakraborty — Personal Website
 .
-A personal website  designed to showcase my work, writing, engineering philosophy, and ways to get in touch..
+A personal website  designed to showcase my work, writing, engineering philosophy, and ways to get in touch...
 
 Tech Stack
 
