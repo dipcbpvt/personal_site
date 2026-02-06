@@ -13,27 +13,38 @@ export function Preloader() {
     let loaded = 0
     const listeners: Array<() => void> = []
 
-    HERO_SOURCES.forEach((src) => {
-      const img = new Image()
-      const onLoad = () => {
-        loaded += 1
-        if (loaded === HERO_SOURCES.length && isMounted) {
-          setIsLoading(false)
-        }
-      }
-      const onError = () => onLoad()
-      img.onload = onLoad
-      img.onerror = onError
-      img.src = src
-      listeners.push(() => {
-        img.onload = null
-        img.onerror = null
+    // Ensure preloader stays for at least 400ms for visual consistency
+    const minTimePromise = new Promise(resolve => setTimeout(resolve, 400));
+
+    // Safety timeout to hide preloader even if images fail to load
+    const safetyTimeout = setTimeout(() => {
+      if (isMounted) setIsLoading(false);
+    }, 2000);
+
+    const imagePromises = HERO_SOURCES.map((src) => {
+      return new Promise<void>((resolve) => {
+        const img = new Image()
+        img.onload = () => resolve()
+        img.onerror = () => resolve()
+        img.src = src
+        listeners.push(() => {
+          img.onload = null
+          img.onerror = null
+        })
       })
+    })
+
+    Promise.all([...imagePromises, minTimePromise]).then(() => {
+      if (isMounted) {
+        setIsLoading(false)
+        clearTimeout(safetyTimeout)
+      }
     })
 
     return () => {
       isMounted = false
       listeners.forEach((dispose) => dispose())
+      clearTimeout(safetyTimeout)
     }
   }, [])
 
@@ -42,25 +53,26 @@ export function Preloader() {
       {isLoading && (
         <motion.div
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0, scale: 0.98 }}
-          transition={{ duration: 0.6, ease: [0.34, 1.56, 0.64, 1] }}
+          exit={{ opacity: 0, scale: 0.95 }}
+          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           className="fixed inset-0 z-[9999] flex items-center justify-center bg-background"
+          suppressHydrationWarning
         >
           {/* Animated background flashes */}
           <div className="absolute inset-0 overflow-hidden">
             <motion.div
               className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-primary/10 blur-3xl"
               animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.1, 0.3, 0.1],
+                scale: [1, 1.15, 1],
+                opacity: [0.1, 0.2, 0.1],
               }}
               transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
             />
             <motion.div
               className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-blue-400/10 blur-3xl"
               animate={{
-                scale: [1.2, 1, 1.2],
-                opacity: [0.15, 0.25, 0.15],
+                scale: [1.15, 1, 1.15],
+                opacity: [0.15, 0.2, 0.15],
               }}
               transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, delay: 0.5 }}
             />

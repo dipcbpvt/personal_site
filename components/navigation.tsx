@@ -10,18 +10,17 @@ import { cn } from "@/lib/utils"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { useTheme } from "next-themes"
 
-const navItems = [
-  { href: "/experience", label: "Experience" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
-]
-
 function NavigationInner() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const pathname = usePathname()
   const { resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
+
+  // Only "About" remains in the main navigation as Contact is now on the home page
+  const navItems = useMemo(() => [
+    { href: "/about", label: "About" },
+  ], [])
 
   // Ensure component is mounted before showing theme-specific logo
   useEffect(() => {
@@ -99,7 +98,6 @@ function NavigationInner() {
                 <Link
                   href={item.href}
                   className="relative px-3 lg:px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors cursor-interactive"
-                  {...(item.external && { target: "_blank", rel: "noopener noreferrer" })}
                 >
                   {pathname === item.href && (
                     <motion.div
@@ -165,7 +163,6 @@ function NavigationInner() {
                         ? 'text-primary font-medium'
                         : 'text-muted-foreground hover:text-foreground',
                     )}
-                    {...(item.external && { target: "_blank", rel: "noopener noreferrer" })}
                   >
                     {item.label}
                   </Link>

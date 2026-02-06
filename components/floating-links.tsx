@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import Link from "next/link"
-import { ArrowUpRight, Briefcase, Rss, Users } from "lucide-react"
+import { ArrowUpRight, Briefcase, Rss } from "lucide-react"
 
 const links = [
   {
@@ -17,18 +17,11 @@ const links = [
     description: "Read my thoughts & articles",
     icon: <Rss size={24} />,
   },
-  {
-    href: "/contact",
-    label: "Connect",
-    description: "Get in touch with me",
-    icon: <Users size={24} />,
-    internal: true,
-  },
 ]
 
 export function FloatingLinks() {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
       {links.map((link, index) => (
         <motion.div
           key={link.label}
@@ -38,8 +31,8 @@ export function FloatingLinks() {
         >
           <Link
             href={link.href}
-            target={link.internal ? undefined : "_blank"}
-            rel={link.internal ? undefined : "noopener noreferrer"}
+            target="_blank"
+            rel="noopener noreferrer"
             className="group block p-6 glass rounded-2xl hover:bg-primary/5 hover:border-primary/20 transition-all duration-300"
           >
             <div className="flex items-start justify-between mb-4">

@@ -65,8 +65,29 @@ export default function AboutPage() {
             />
 
             <div className="space-y-24">
-              {/* Banner Image - Removed */}
               <section id="intro">
+                <motion.div
+                  initial={{ opacity: 0, x: -60 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  className="relative mb-8"
+                >
+                  <div className="relative aspect-[21/9] md:aspect-[16/5] rounded-2xl overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-primary/10 z-10" />
+                    <Image
+                      src="/dip_working.png"
+                      alt="Dip Chakraborty at work - Software Engineer"
+                      fill
+                      priority={false}
+                      quality={80}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 80vw"
+                      className="object-cover brightness-110"
+                      loading="lazy"
+                    />
+                  </div>
+                  {/* Offset decorative element */}
+                  <div className="absolute -bottom-6 -right-6 w-32 h-32 glass rounded-xl -z-10" />
+                </motion.div>
                 {/* Summary Card */}
                 <motion.div
                   initial={{ opacity: 0, x: -60 }}

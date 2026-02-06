@@ -23,7 +23,7 @@ const containerVariants = {
 const itemVariants = {
   hidden: {
     opacity: 0,
-    y: 20,
+    y: 30,
   },
   visible: {
     opacity: 1,
@@ -40,16 +40,26 @@ export function PageTransition({
   delay = 0,
   staggerChildren = false,
 }: PageTransitionProps) {
+  const [hasAppeared, setHasAppeared] = React.useState(false)
   const childrenArray = React.Children.toArray(children)
   const shouldStagger = staggerChildren && childrenArray.length > 1
+
+  React.useEffect(() => {
+    // Small delay to ensure smooth transition after preloader
+    const timer = setTimeout(() => {
+      setHasAppeared(true)
+    }, 50)
+    return () => clearTimeout(timer)
+  }, [])
 
   if (shouldStagger) {
     return (
       <motion.div
         variants={containerVariants}
         initial="hidden"
-        animate="visible"
+        animate={hasAppeared ? "visible" : "hidden"}
         exit="hidden"
+        suppressHydrationWarning
       >
         {childrenArray.map((child, i) => (
           <motion.div key={i} variants={itemVariants}>
@@ -62,14 +72,16 @@ export function PageTransition({
 
   return (
     <motion.div
+      variants={itemVariants}
       initial="hidden"
-      animate="visible"
+      animate={hasAppeared ? "visible" : "hidden"}
       exit="hidden"
       transition={{
         duration: 0.5,
         ease: 'easeOut',
         delay,
       }}
+      suppressHydrationWarning
     >
       {children}
     </motion.div>

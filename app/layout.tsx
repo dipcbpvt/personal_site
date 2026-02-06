@@ -6,10 +6,6 @@ import "./globals.css"
 import CustomCursorLoader from "@/components/custom-cursor-loader"
 import { ThemeProvider } from "@/components/theme-provider"
 
-// Lazy load preloader - shown on initial load then hidden
-const Preloader = dynamic(() => import("@/components/preloader").then(mod => ({ default: mod.Preloader })), {
-  ssr: true,
-})
 
 const inter = Inter({
   subsets: ["latin"],
@@ -155,9 +151,9 @@ export default function RootLayout({
         <link rel="preload" as="image" href="/dip.png" type="image/png" />
         <link rel="preload" as="image" href="/dip2.webp" type="image/webp" />
         {/* Prefetch next page to improve navigation performance */}
-        <link rel="prefetch" href="/experience" />
+
         <link rel="prefetch" href="/about" />
-        <link rel="prefetch" href="/contact" />
+
         <meta
           name="description"
           content="Dip Chakraborty is a Technical Product Engineer crafting digital experiences at the intersection of design, technology, and strategy."
@@ -169,7 +165,6 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <CustomCursorLoader />
           <div className="grain" />
-          <Preloader />
           <main id="main-content">
             {children}
           </main>
