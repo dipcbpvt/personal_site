@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     template: "%s | Dip Chakraborty"
   },
   description:
-    "Dip Chakraborty is a Software Engineer, Content Creator, and Researcher from Bangladesh. Passionate about web technology, AI, and building innovative solutions. Explore my portfolio, projects, and technical insights.",
+    "Software engineer working at the intersection of automation, AI, and infrastructure. Building systems that work, scale, and stay calm under pressure.",
   keywords: [
     "dip chakraborty",
     "software engineer",
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     url: "https://dipchakraborty.com",
     siteName: "Dip Chakraborty",
     title: "Dip Chakraborty | Software Engineer & Tech Enthusiast",
-    description: "Software Engineer | Content Creator | Researcher. Building innovative solutions with web technology and AI.",
+    description: "Building systems that work, scale, and stay calm under pressure. Automation, AI, infrastructure.",
     images: [
       {
         url: "/og-image.png",
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Dip Chakraborty | Software Engineer & Tech Enthusiast",
-    description: "Software Engineer | Content Creator | Researcher",
+    description: "Software engineer. Systems, automation, AI.",
     images: ["/og-image.png"],
     creator: "@dipchakraborty",
   },
@@ -152,7 +152,7 @@ export default function RootLayout({
         <link rel="preload" as="image" href="/dip2.webp" type="image/webp" />
         {/* Prefetch next page to improve navigation performance */}
 
-        <link rel="prefetch" href="/about" />
+        <link rel="prefetch" href="/journey" />
 
         <meta
           name="description"

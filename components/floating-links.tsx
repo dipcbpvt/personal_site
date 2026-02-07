@@ -7,14 +7,14 @@ import { ArrowUpRight, Briefcase, Rss } from "lucide-react"
 const links = [
   {
     href: "https://dev.dipchakraborty.com",
-    label: "Works",
-    description: "View my portfolio & projects",
+    label: "Dev",
+    description: "Projects, systems, and things I've built",
     icon: <Briefcase size={24} />,
   },
   {
     href: "https://blogs.dipchakraborty.com",
-    label: "Blogs",
-    description: "Read my thoughts & articles",
+    label: "Writings",
+    description: "Thoughts, lessons, and explorations",
     icon: <Rss size={24} />,
   },
 ]

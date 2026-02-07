@@ -3,10 +3,40 @@
 import { motion, useScroll, useTransform } from "framer-motion"
 import { useRef, useState, useMemo, useEffect } from "react"
 import Image from "next/image"
-import { SocialBar } from "./social-bar"
-import { FloatingLinks } from "./floating-links"
-import { Target, Sparkles, Zap } from "lucide-react"
-import { useTheme } from "next-themes";
+import Link from "next/link"
+import { Code2, Palette, BookOpen, Sparkles } from "lucide-react"
+import { useTheme } from "next-themes"
+
+const chapters = [
+  {
+    icon: Code2,
+    title: "Building Systems",
+    subtitle: "Income & Impact",
+    description: "Software development isn't just what I do—it's how I solve problems that matter. From automation platforms to AI systems, I build things that work, scale, and last.",
+    color: "from-blue-500/20 to-cyan-500/20"
+  },
+  {
+    icon: Palette,
+    title: "Arts & Culture",
+    subtitle: "Emotional Grounding",
+    description: "Music, film, and storytelling keep me human. They remind me that technology serves people, not the other way around. Creativity fuels empathy.",
+    color: "from-purple-500/20 to-pink-500/20"
+  },
+  {
+    icon: BookOpen,
+    title: "Writing & Teaching",
+    subtitle: "Learning Out Loud",
+    description: "I write to learn. I teach to clarify. Sharing knowledge isn't just generous—it's how I sharpen my own thinking and build community.",
+    color: "from-amber-500/20 to-orange-500/20"
+  },
+  {
+    icon: Sparkles,
+    title: "Creating Content",
+    subtitle: "Curiosity & Play",
+    description: "Experiments, side projects, explorations. Not everything needs a business case. Some things exist because they're interesting, and that's enough.",
+    color: "from-green-500/20 to-emerald-500/20"
+  }
+]
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -18,125 +48,94 @@ export function Hero() {
 
   const y = useTransform(scrollYProgress, [0, 1], [0, 200])
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0])
-  const { resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const { resolvedTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    setMounted(true)
+  }, [])
 
-  // Memoize portrait source to prevent unnecessary re-renders
   const portraitSrc = useMemo(
     () => (resolvedTheme === "light" ? "/dip.png" : "/dip2.webp"),
     [resolvedTheme],
   )
-
-
 
   return (
     <section
       ref={containerRef}
       className="relative min-h-screen flex flex-col justify-between py-8 sm:py-12 md:py-16 pt-20 sm:pt-24 md:pt-28"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 w-full flex-1 flex items-center">
-        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 w-full flex-1">
+        {/* Hero Introduction */}
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center w-full mb-24 sm:mb-32 md:mb-40">
           {/* Content */}
           <motion.div
-            style={{ y, opacity }}
+            style={mounted ? { y, opacity } : {}}
             className="order-2 lg:order-1"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
+            suppressHydrationWarning
           >
-            <motion.h1
-              initial={{ opacity: 0, y: 40, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.1, ease: [0.34, 1.56, 0.64, 1] }}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mb-4 sm:mb-6"
+            <motion.div
+              initial={false}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="mb-4"
+              suppressHydrationWarning
             >
-              <span className="text-foreground block sm:inline">Dip</span>
+              <span className="text-sm sm:text-base text-muted-foreground font-medium tracking-wide">
+                Welcome to my corner of the internet
+              </span>
+            </motion.div>
+
+            <motion.h1
+              initial={false}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.34, 1.56, 0.64, 1] }}
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight mb-4 sm:mb-6"
+              suppressHydrationWarning
+            >
+              <span className="text-foreground block sm:inline">I'm Dip</span>
               <span className="text-primary block sm:inline sm:ml-2 md:ml-3">Chakraborty</span>
             </motion.h1>
 
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6"
+              initial={false}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
+              className="space-y-4 sm:space-y-6 mb-8 sm:mb-10"
+              suppressHydrationWarning
             >
-              {[
-                { icon: <Target className="text-primary w-3 h-3 sm:w-4 sm:h-4" />, text: "Collaborate" },
-                { icon: <Sparkles className="text-primary w-3 h-3 sm:w-4 sm:h-4" />, text: "Create" },
-                { icon: <Zap className="text-primary w-3 h-3 sm:w-4 sm:h-4" />, text: "Innovate" },
-              ].map((keyword, index) => (
-                <motion.div
-                  key={keyword.text}
-                  initial={{ opacity: 0, y: 12, scale: 0.92 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{
-                    delay: 0.25 + index * 0.1,
-                    duration: 0.5,
-                    ease: [0.34, 1.56, 0.64, 1],
-                  }}
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-primary/10 border border-primary/20 text-foreground text-xs sm:text-sm font-medium cursor-interactive transition-all duration-200"
-                >
-                  {keyword.icon}
-                  <span className="whitespace-nowrap">{keyword.text}</span>
-                </motion.div>
-              ))}
-            </motion.div>
-
-            <motion.p
-              initial={{ opacity: 0, y: 30, scale: 0.98 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.7, delay: 0.3, ease: [0.34, 1.56, 0.64, 1] }}
-              className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground max-w-xl mb-4 sm:mb-6 leading-relaxed"
-            >
-              Technical Product Engineer crafting digital experiences at the intersection of{" "}
-              <span className="text-primary font-medium">design</span>,{" "}
-              <span className="text-primary font-medium">technology</span>, and{" "}
-              <span className="text-primary font-medium">strategy</span>.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 25, scale: 0.96 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.7, delay: 0.4, ease: [0.34, 1.56, 0.64, 1] }}
-              whileHover={{ y: -2, boxShadow: '0 8px 16px rgba(59, 130, 246, 0.1)' }}
-              className="mb-4 sm:mb-6 p-3 sm:p-4 rounded-xl bg-primary/5 border border-primary/10 transition-all duration-300 cursor-interactive"
-            >
-              <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                <span className="text-foreground font-medium">Product Strategy</span> • System Design •{" "}
-                <span className="text-foreground font-medium">Engineering Leadership</span> • AI & Automation
+              <p className="text-base sm:text-lg md:text-xl text-foreground/90 leading-relaxed max-w-2xl">
+                I love to build stuff that solves real problems. I write to learn and teach. Actually I create because curiosity demands it!
               </p>
             </motion.div>
-            {/* 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
-              <SocialBar />
-            </motion.div> */}
 
-            <FloatingLinks />
+            <motion.div
+              initial={false}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              suppressHydrationWarning
+            >
+              {/* <Link
+                href="/journey"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors cursor-interactive"
+              >
+                Read My Journey
+                <span className="text-lg">→</span>
+              </Link> */}
+            </motion.div>
           </motion.div>
 
-          {/* Portrait with floating capability terms */}
+          {/* Portrait */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1.5, scale: 1 }}
-            transition={{ duration: 1.8, delay: 0.5 }}
-            style={{ opacity }}
+            style={mounted ? { opacity } : { opacity: 1 }}
             className="order-1 lg:order-2 relative"
+            suppressHydrationWarning
           >
             <div className="relative aspect-[3/4] max-w-[280px] sm:max-w-xs md:max-w-sm lg:max-w-md mx-auto lg:ml-auto">
-              {/* Hologram-style background effect */}
               <motion.div
                 className="absolute inset-0 bg-gradient-to-br from-primary/40 via-blue-400/30 to-primary/30 rounded-2xl sm:rounded-3xl blur-2xl sm:blur-3xl"
                 animate={isImageHovered ? { opacity: [0.6, 1, 0.6], scale: [1, 1.08, 1] } : {}}
-                transition={{ duration: 0.8, repeat: isImageHovered ? Number.POSITIVE_INFINITY : 0 }}
+                transition={{ duration: 0.8, repeat: isImageHovered ? Infinity : 0 }}
               />
 
               <div
@@ -150,15 +149,14 @@ export function Hero() {
                   ) : (
                     <Image
                       src={portraitSrc}
-                      alt="Dip Chakraborty - Technical Product Engineer"
+                      alt="Dip Chakraborty"
                       fill
                       priority
                       quality={85}
                       sizes="(max-width: 640px) 280px, (max-width: 768px) 384px, (max-width: 1024px) 448px, 512px"
-                    className="object-cover contrast-100 transition-all duration-500"
+                      className="object-cover contrast-100 transition-all duration-500"
                       loading="eager"
                       decoding="async"
-                      priority
                       fetchPriority="high"
                     />
                   )}
@@ -173,92 +171,42 @@ export function Hero() {
                   />
                 </div>
               </div>
-
-              {/* === BADGES (responsive positioning) === */}
-
-              {/* 1. Design-Driven */}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.5 }}
-                whileHover={{ scale: 1.05, x: 3 }}
-                className="absolute -left-2 sm:-left-4 md:-left-8 lg:-left-12 xl:-left-15 top-[15%] sm:top-[18%]
-                          rounded-md sm:rounded-lg px-2 sm:px-3 py-1 sm:py-1.5
-                          bg-white/10 backdrop-blur-xl border border-white/20
-                          shadow-md hover:shadow-lg
-                          transition-all duration-300 w-max"
-              >
-                <p className="text-[8px] sm:text-[9px] md:text-[10px] text-muted-foreground leading-none">
-                  Design-Driven
-                </p>
-                <p className="text-[9px] sm:text-[10px] md:text-[11px] font-semibold text-foreground">
-                  Precision & Craft
-                </p>
-              </motion.div>
-
-              {/* 2. Solution First */}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.5 }}
-                whileHover={{ scale: 1.05, x: 3 }}
-                className="absolute -left-2 sm:-left-4 md:-left-8 lg:-left-12 xl:-left-15 top-[40%] sm:top-[42%]
-                          rounded-md sm:rounded-lg px-2 sm:px-3 py-1 sm:py-1.5
-                          bg-white/10 backdrop-blur-xl border border-white/20
-                          shadow-md hover:shadow-lg
-                          transition-all duration-300 w-max"
-              >
-                <p className="text-[8px] sm:text-[9px] md:text-[10px] text-muted-foreground leading-none">
-                  Solution-First
-                </p>
-                <p className="text-[9px] sm:text-[10px] md:text-[11px] font-semibold text-foreground">
-                  Learn • Build • Ship
-                </p>
-              </motion.div>
-
-              {/* 3. Latency Enjoyer */}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6, duration: 0.5 }}
-                whileHover={{ scale: 1.05, x: -3 }}
-                className="absolute -right-2 sm:-right-4 md:-right-8 lg:-right-12 xl:-right-20 top-[28%] sm:top-[30%]
-                          rounded-md sm:rounded-lg px-2 sm:px-3 py-1 sm:py-1.5
-                          bg-white/10 backdrop-blur-xl border border-white/20
-                          shadow-md hover:shadow-lg
-                          transition-all duration-300 w-max"
-              >
-                <p className="text-[8px] sm:text-[9px] md:text-[10px] text-muted-foreground leading-none">
-                  Latency Enjoyer
-                </p>
-                <p className="text-[9px] sm:text-[10px] md:text-[11px] font-semibold text-foreground">
-                  Optimizing Everything
-                </p>
-              </motion.div>
-
-              {/* 4. Experience */}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.7, duration: 0.5 }}
-                whileHover={{ scale: 1.05, y: -2 }}
-                className="absolute left-1/2 -translate-x-1/2 -bottom-2 sm:-bottom-3 md:bottom-[-3%]
-                          rounded-md sm:rounded-lg px-2 sm:px-3 py-1 sm:py-1.5
-                          bg-white/10 backdrop-blur-xl border border-white/20
-                          shadow-md hover:shadow-lg
-                          transition-all duration-300 w-max"
-              >
-                <p className="text-[8px] sm:text-[9px] md:text-[10px] text-muted-foreground leading-none">
-                  Experience
-                </p>
-                <p className="text-[9px] sm:text-[10px] md:text-[11px] font-semibold text-foreground">
-                  3+ Years
-                </p>
-              </motion.div>
-
-
             </div>
           </motion.div>
+        </div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-24 sm:mb-32">
+          {chapters.map((chapter, index) => (
+            <motion.div
+              key={chapter.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className="group"
+            >
+              <div className="relative overflow-hidden rounded-2xl p-6 sm:p-8 glass hover:bg-primary/5 transition-all duration-500">
+                <div className={`absolute inset-0 bg-gradient-to-br ${chapter.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+
+                <div className="relative z-10 space-y-4">
+                  <chapter.icon size={32} className="text-primary/60 group-hover:text-primary transition-colors duration-300" />
+
+                  <div>
+                    <p className="text-xs uppercase tracking-wider text-muted-foreground/60 mb-1">
+                      {chapter.subtitle}
+                    </p>
+                    <h3 className="text-lg sm:text-xl font-bold text-foreground">
+                      {chapter.title}
+                    </h3>
+                  </div>
+
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {chapter.description}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
 
@@ -266,15 +214,15 @@ export function Hero() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
-        className="flex justify-center mt-4 sm:mt-6 mb-4"
+        transition={{ delay: 1.5 }}
+        className="flex justify-center mt-12 mb-4"
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY }}
-          className="w-5 h-8 sm:w-6 sm:h-10 rounded-full border border-muted-foreground/30 flex items-start justify-center p-1.5 sm:p-2"
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          className="w-5 h-8 sm:w-6 sm:h-10 rounded-full border border-muted-foreground/20 flex items-start justify-center p-1.5 sm:p-2"
         >
-          <motion.div className="w-1 h-1.5 sm:h-2 bg-primary rounded-full" />
+          <motion.div className="w-1 h-1.5 sm:h-2 bg-primary/60 rounded-full" />
         </motion.div>
       </motion.div>
     </section>

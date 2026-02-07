@@ -17,9 +17,10 @@ function NavigationInner() {
   const { resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
-  // Only "About" remains in the main navigation as Contact is now on the home page
   const navItems = useMemo(() => [
-    { href: "/about", label: "About" },
+    { href: "https://dev.dipchakraborty.com", label: "Dev", external: true },
+    { href: "https://blogs.dipchakraborty.com", label: "Writings", external: true },
+    { href: "/journey", label: "Journey", external: false },
   ], [])
 
   // Ensure component is mounted before showing theme-specific logo
@@ -95,19 +96,30 @@ function NavigationInner() {
           <nav className="hidden md:flex items-center gap-1">
             {navItems.map((item) => (
               <motion.div key={item.href} whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
-                <Link
-                  href={item.href}
-                  className="relative px-3 lg:px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors cursor-interactive"
-                >
-                  {pathname === item.href && (
-                    <motion.div
-                      layoutId="nav-indicator"
-                      className="absolute inset-0 bg-primary/10 rounded-lg"
-                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                    />
-                  )}
-                  <span className={cn("relative z-10 transition-colors duration-200", pathname === item.href && "text-primary font-medium")}>{item.label}</span>
-                </Link>
+                {item.external ? (
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="relative px-3 lg:px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors cursor-interactive"
+                  >
+                    <span className="relative z-10 transition-colors duration-200">{item.label}</span>
+                  </a>
+                ) : (
+                  <Link
+                    href={item.href}
+                    className="relative px-3 lg:px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors cursor-interactive"
+                  >
+                    {pathname === item.href && (
+                      <motion.div
+                        layoutId="nav-indicator"
+                        className="absolute inset-0 bg-primary/10 rounded-lg"
+                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                      />
+                    )}
+                    <span className={cn("relative z-10 transition-colors duration-200", pathname === item.href && "text-primary font-medium")}>{item.label}</span>
+                  </Link>
+                )}
               </motion.div>
             ))}
           </nav>
@@ -154,18 +166,30 @@ function NavigationInner() {
                   whileHover={{ x: 8 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <Link
-                    href={item.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className={cn(
-                      "text-2xl sm:text-3xl font-light transition-colors min-h-[44px] flex items-center cursor-interactive",
-                      pathname === item.href
-                        ? 'text-primary font-medium'
-                        : 'text-muted-foreground hover:text-foreground',
-                    )}
-                  >
-                    {item.label}
-                  </Link>
+                  {item.external ? (
+                    <a
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="text-2xl sm:text-3xl font-light transition-colors min-h-[44px] flex items-center cursor-interactive text-muted-foreground hover:text-foreground"
+                    >
+                      {item.label}
+                    </a>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className={cn(
+                        "text-2xl sm:text-3xl font-light transition-colors min-h-[44px] flex items-center cursor-interactive",
+                        pathname === item.href
+                          ? 'text-primary font-medium'
+                          : 'text-muted-foreground hover:text-foreground',
+                      )}
+                    >
+                      {item.label}
+                    </Link>
+                  )}
                 </motion.div>
               ))}
             </motion.nav>
