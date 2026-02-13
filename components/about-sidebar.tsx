@@ -3,16 +3,11 @@
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { cn } from "@/lib/utils"
-import { User, Briefcase, Lightbulb, Zap, Heart, Sparkles, Users } from "lucide-react"
 
 const sections = [
-  { id: "intro", label: "About Myself", icon: User },
-  { id: "experience", label: "Experience", icon: Briefcase },
-  { id: "community", label: "Community Leadership", icon: Users },
-  { id: "systems", label: "Systems", icon: Zap },
-  { id: "capabilities", label: "Capabilities", icon: Lightbulb },
-  { id: "philosophy", label: "Philosophy & Values", icon: Heart },
-  { id: "hobbies", label: "Passions", icon: Sparkles },
+  { id: "intro", label: "About Myself" },
+  { id: "philosophy", label: "Philosophy & Values" },
+  { id: "hobbies", label: "Passions" },
 ]
 
 export function AboutSidebar() {
@@ -20,40 +15,21 @@ export function AboutSidebar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Use a smaller offset from the top to detect which section is in view
-      const scrollPosition = window.scrollY + 150
-      const windowHeight = window.innerHeight
-      const documentHeight = document.documentElement.scrollHeight
+      const scrollPosition = window.scrollY + 200
 
-      // Check if we're near the bottom of the page (within 100px)
-      const isNearBottom = windowHeight + window.scrollY >= documentHeight - 100
-
-      // If near bottom, highlight the last section
-      if (isNearBottom) {
-        setActiveSection(sections[sections.length - 1].id)
-        return
-      }
-
-      // Find the section that's currently most visible
-      let currentSection = sections[0].id
-
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const element = document.getElementById(sections[i].id)
+      for (const section of sections) {
+        const element = document.getElementById(section.id)
         if (element) {
-          const { offsetTop } = element
-          // Check if we've scrolled past this section's top
-          if (scrollPosition >= offsetTop) {
-            currentSection = sections[i].id
+          const { offsetTop, offsetHeight } = element
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(section.id)
             break
           }
         }
       }
-
-      setActiveSection(currentSection)
     }
 
-    handleScroll() // Call once on mount
-    window.addEventListener("scroll", handleScroll, { passive: true })
+    window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
@@ -73,33 +49,29 @@ export function AboutSidebar() {
 
   return (
     <nav className="sticky top-32 space-y-2">
-      {sections.map((section, index) => {
-        const Icon = section.icon
-        return (
-          <motion.button
-            key={section.id}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: index * 0.1 }}
-            onClick={() => scrollToSection(section.id)}
+      {sections.map((section, index) => (
+        <motion.button
+          key={section.id}
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: index * 0.1 }}
+          onClick={() => scrollToSection(section.id)}
+          className={cn(
+            "flex items-center gap-3 w-full text-left py-2 px-4 rounded-lg transition-all",
+            activeSection === section.id
+              ? "text-primary bg-primary/10"
+              : "text-muted-foreground hover:text-foreground hover:bg-secondary/50",
+          )}
+        >
+          <span
             className={cn(
-              "flex items-center gap-3 w-full text-left py-2 px-4 rounded-lg transition-all",
-              activeSection === section.id
-                ? "text-primary bg-primary/10"
-                : "text-muted-foreground hover:text-foreground hover:bg-secondary/50",
+              "w-8 h-px transition-all",
+              activeSection === section.id ? "bg-primary w-12" : "bg-muted-foreground/30",
             )}
-          >
-            <Icon
-              size={16}
-              className={cn(
-                "transition-all flex-shrink-0",
-                activeSection === section.id ? "text-primary" : "text-muted-foreground/50",
-              )}
-            />
-            <span className="text-sm font-medium">{section.label}</span>
-          </motion.button>
-        )
-      })}
+          />
+          <span className="text-sm font-medium">{section.label}</span>
+        </motion.button>
+      ))}
     </nav>
   )
 }

@@ -7,24 +7,17 @@ export function SpotlightBg() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    let ticking = false
     const handleMouseMove = (e: MouseEvent) => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          if (containerRef.current) {
-            const rect = containerRef.current.getBoundingClientRect()
-            const x = ((e.clientX - rect.left) / rect.width) * 100
-            const y = ((e.clientY - rect.top) / rect.height) * 100
-            containerRef.current.style.setProperty("--mouse-x", `${x}%`)
-            containerRef.current.style.setProperty("--mouse-y", `${y}%`)
-          }
-          ticking = false
-        })
-        ticking = true
+      if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect()
+        const x = ((e.clientX - rect.left) / rect.width) * 100
+        const y = ((e.clientY - rect.top) / rect.height) * 100
+        containerRef.current.style.setProperty("--mouse-x", `${x}%`)
+        containerRef.current.style.setProperty("--mouse-y", `${y}%`)
       }
     }
 
-    window.addEventListener("mousemove", handleMouseMove, { passive: true })
+    window.addEventListener("mousemove", handleMouseMove)
     return () => window.removeEventListener("mousemove", handleMouseMove)
   }, [])
 
@@ -90,6 +83,17 @@ export function SpotlightBg() {
           duration: 6,
           repeat: Number.POSITIVE_INFINITY,
           ease: "easeInOut",
+        }}
+      />
+
+      <div
+        className="absolute inset-0 opacity-[0.02] dark:opacity-[0.02]"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(128,128,128,0.3) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(128,128,128,0.3) 1px, transparent 1px)
+          `,
+          backgroundSize: "100px 100px",
         }}
       />
     </div>

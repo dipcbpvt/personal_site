@@ -1,186 +1,96 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { Mail, MessageCircle, Linkedin, Github, Youtube, Send } from "lucide-react"
+import { motion, useInView } from "framer-motion"
+import { useRef, useState } from "react"
+import { ArrowUpRight, Mail } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
-const socialLinks = [
-  {
-    icon: <Linkedin size={18} />,
-    label: "LinkedIn",
-    href: "https://linkedin.com/in/dipcb05",
-  },
-  {
-    icon: <Github size={18} />,
-    label: "GitHub",
-    href: "https://github.com/dipcb05",
-  },
-  {
-    icon: <Youtube size={18} />,
-    label: "YouTube",
-    href: "https://youtube.com/@dipcb05",
-  },
-  {
-    icon: <Send size={18} />,
-    label: "Telegram",
-    href: "https://t.me/dipcb05",
-  },
+const floatingKeywords = [
+  { text: "Engineering", delay: 0 },
+  { text: "Product", delay: 0.3 },
+  { text: "Design", delay: 0.6 },
+  { text: "Innovation", delay: 0.9 },
+  { text: "Strategy", delay: 1.2 },
+  { text: "AI & Automation", delay: 1.5 },
+  { text: "System Design", delay: 1.8 },
+  { text: "Leadership", delay: 2.1 },
 ]
 
 export function CTASection() {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const isInView = useInView(containerRef, { once: false, margin: "-100px" })
+  const [isHovering, setIsHovering] = useState(false)
+
   return (
-    <section className="relative py-16 sm:py-24 px-4 sm:px-6">
-      <div className="max-w-3xl mx-auto">
+    <section ref={containerRef} className="relative py-12 px-6 md:py-16">
+      <div className="max-w-4xl mx-auto text-center">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: [0.34, 1.56, 0.64, 1] }}
-          className="space-y-12"
+          transition={{ duration: 0.6 }}
         >
-          {/* Contact Info - Enhanced */}
-          <div className="grid sm:grid-cols-2 gap-6 max-w-xl mx-auto">
-            {[
-              {
-                icon: Mail,
-                label: "Email",
-                value: "connect@dipchakraborty.com",
-                href: "mailto:connect@dipchakraborty.com"
-              },
-              {
-                icon: MessageCircle,
-                label: "WhatsApp",
-                value: "+8801714261787",
-                href: "https://wa.me/+8801714261787",
-                external: true
-              }
-            ].map((contact, index) => (
-              <motion.a
-                key={contact.label}
-                href={contact.href}
-                {...(contact.external && { target: "_blank", rel: "noopener noreferrer" })}
-                className="group p-6 glass rounded-xl transition-all duration-300 relative overflow-hidden"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{
-                  duration: 0.6,
-                  delay: index * 0.1,
-                  ease: [0.34, 1.56, 0.64, 1]
-                }}
-                whileHover={{
-                  y: -4,
-                  boxShadow: "0 12px 24px rgba(0, 0, 0, 0.08)"
-                }}
-              >
-                {/* Hover gradient background */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-br from-primary/5 to-primary/10"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileHover={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.3 }}
-                />
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light mb-6">
+            <span className="text-muted-foreground">Work</span>{" "}
+            <span className="text-primary font-medium">together</span>
+            <span className="text-muted-foreground">?</span>
+          </h2>
+          <p className="text-lg md:text-xl text-primary font-medium mb-8">Let's connect and create impact together.</p>
 
-                {/* Shimmer effect */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent"
-                  initial={{ x: "-100%" }}
-                  whileHover={{ x: "200%" }}
-                  transition={{ duration: 1.2, ease: "easeInOut" }}
-                />
-
-                <div className="relative z-10">
-                  <div className="flex items-center gap-3 mb-2">
-                    <motion.div
-                      whileHover={{ rotate: 360, scale: 1.2 }}
-                      transition={{ duration: 0.6, ease: "easeInOut" }}
-                    >
-                      <contact.icon size={20} className="text-primary/60 group-hover:text-primary transition-colors" />
-                    </motion.div>
-                    <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors">
-                      {contact.label}
-                    </span>
-                  </div>
-                  <motion.p
-                    className="text-sm text-foreground group-hover:text-primary transition-colors"
-                    whileHover={{ x: 4 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  >
-                    {contact.value}
-                  </motion.p>
-                </div>
-
-                {/* Border glow */}
-                <motion.div
-                  className="absolute inset-0 rounded-xl border border-primary/0 group-hover:border-primary/20"
-                  initial={{ opacity: 0 }}
-                  whileHover={{ opacity: 1 }}
-                  transition={{ duration: 0.3 }}
-                />
-              </motion.a>
-            ))}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Button
+              asChild
+              size="lg"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-8 w-full sm:w-auto"
+            >
+              <Link href="/contact">
+                <Mail className="mr-2 h-4 w-4" />
+                Get in Touch
+              </Link>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="rounded-full px-8 border-primary/30 hover:bg-primary/10 hover:border-primary bg-transparent w-full sm:w-auto"
+            >
+              <Link href="https://dev.dipchakraborty.com" target="_blank">
+                View Portfolio
+                <ArrowUpRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
           </div>
+        </motion.div>
 
-          {/* Social Links - Enhanced */}
-          <motion.div
-            className="flex flex-wrap items-center justify-center gap-3"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            {socialLinks.map((link, index) => (
-              <motion.a
-                key={link.label}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center gap-2 px-4 py-2 glass rounded-lg transition-all duration-300 relative overflow-hidden"
-                title={link.label}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{
-                  duration: 0.4,
-                  delay: 0.4 + index * 0.05,
-                  ease: [0.34, 1.56, 0.64, 1]
-                }}
-                whileHover={{
-                  scale: 1.05,
-                  y: -2,
-                  boxShadow: "0 8px 16px rgba(0, 0, 0, 0.08)"
-                }}
-              >
-                {/* Hover background */}
-                <motion.div
-                  className="absolute inset-0 bg-primary/5"
-                  initial={{ opacity: 0 }}
-                  whileHover={{ opacity: 1 }}
-                  transition={{ duration: 0.2 }}
-                />
-
-                {/* Shimmer */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent"
-                  initial={{ x: "-100%" }}
-                  whileHover={{ x: "200%" }}
-                  transition={{ duration: 0.8, ease: "easeInOut" }}
-                />
-
-                <div className="relative z-10 flex items-center gap-2">
-                  <motion.span
-                    className="text-muted-foreground/60 group-hover:text-primary transition-colors"
-                    whileHover={{ rotate: 360 }}
-                    transition={{ duration: 0.5 }}
-                  >
-                    {link.icon}
-                  </motion.span>
-                  <span className="text-xs text-muted-foreground group-hover:text-primary transition-colors">
-                    {link.label}
-                  </span>
-                </div>
-              </motion.a>
-            ))}
-          </motion.div>
+        <motion.div
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
+          className="mt-12 flex flex-wrap items-center justify-center gap-3 min-h-24"
+        >
+          {floatingKeywords.map((keyword, i) => (
+            <motion.div
+              key={keyword.text}
+              initial={{ opacity: 0, scale: 0.8, y: 10 }}
+              animate={
+                isInView || isHovering
+                  ? {
+                      opacity: 1,
+                      scale: 1,
+                      y: 0,
+                    }
+                  : { opacity: 0, scale: 0.8, y: 10 }
+              }
+              transition={{
+                delay: keyword.delay,
+                duration: 0.4,
+                ease: "easeOut",
+              }}
+              className="px-3 py-1.5 rounded-full bg-gradient-to-r from-primary/20 to-blue-500/20 border border-primary/30 text-xs font-medium text-foreground/70 backdrop-blur-sm whitespace-nowrap"
+            >
+              {keyword.text}
+            </motion.div>
+          ))}
         </motion.div>
       </div>
     </section>

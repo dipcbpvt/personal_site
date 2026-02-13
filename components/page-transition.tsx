@@ -1,87 +1,16 @@
-'use client'
+"use client"
 
-import React from 'react'
-import { motion } from 'framer-motion'
+import type React from "react"
 
-interface PageTransitionProps {
-  children: React.ReactNode
-  delay?: number
-  staggerChildren?: boolean
-}
+import { motion } from "framer-motion"
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.1,
-    },
-  },
-}
-
-const itemVariants = {
-  hidden: {
-    opacity: 0,
-    y: 30,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: 'easeOut',
-    },
-  },
-}
-
-export function PageTransition({
-  children,
-  delay = 0,
-  staggerChildren = false,
-}: PageTransitionProps) {
-  const [hasAppeared, setHasAppeared] = React.useState(false)
-  const childrenArray = React.Children.toArray(children)
-  const shouldStagger = staggerChildren && childrenArray.length > 1
-
-  React.useEffect(() => {
-    // Small delay to ensure smooth transition after preloader
-    const timer = setTimeout(() => {
-      setHasAppeared(true)
-    }, 50)
-    return () => clearTimeout(timer)
-  }, [])
-
-  if (shouldStagger) {
-    return (
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate={hasAppeared ? "visible" : "hidden"}
-        exit="hidden"
-        suppressHydrationWarning
-      >
-        {childrenArray.map((child, i) => (
-          <motion.div key={i} variants={itemVariants}>
-            {child}
-          </motion.div>
-        ))}
-      </motion.div>
-    )
-  }
-
+export function PageTransition({ children }: { children: React.ReactNode }) {
   return (
     <motion.div
-      variants={itemVariants}
-      initial="hidden"
-      animate={hasAppeared ? "visible" : "hidden"}
-      exit="hidden"
-      transition={{
-        duration: 0.5,
-        ease: 'easeOut',
-        delay,
-      }}
-      suppressHydrationWarning
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
     </motion.div>

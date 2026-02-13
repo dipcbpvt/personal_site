@@ -7,10 +7,9 @@ interface ExperienceItem {
   title: string
   organization: string
   period: string
-  description: string | string[]
-  subtitle?: string
+  description: string
   tags?: string[]
-  type: "work" | "education" | "community"
+  type: "work" | "education"
 }
 
 interface ExperienceCarouselProps {
@@ -43,25 +42,7 @@ export function ExperienceCarousel({ items }: ExperienceCarouselProps) {
               </span>
               <h3 className="text-lg font-semibold text-foreground mb-1">{item.title}</h3>
               <p className="text-primary/80 font-medium mb-3">{item.organization}</p>
-
-              {/* Subtitle if present */}
-              {item.subtitle && (
-                <p className="text-muted-foreground text-sm leading-relaxed mb-4 italic">
-                  {item.subtitle}
-                </p>
-              )}
-
-              {/* Description - either string or bullet list */}
-              {typeof item.description === "string" ? (
-                <p className="text-muted-foreground text-sm leading-relaxed mb-4 flex-grow">{item.description}</p>
-              ) : (
-                <ul className="text-muted-foreground text-sm leading-relaxed mb-4 flex-grow space-y-2 list-disc list-inside">
-                  {item.description.map((point, idx) => (
-                    <li key={idx}>{point}</li>
-                  ))}
-                </ul>
-              )}
-
+              <p className="text-muted-foreground text-sm leading-relaxed mb-4 flex-grow">{item.description}</p>
               {item.tags && (
                 <div className="flex flex-wrap gap-2">
                   {item.tags.map((tag) => (

@@ -1,26 +1,29 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-    title: "About",
-    description: "Learn more about Dip Chakraborty - Software Engineer with 3+ years of experience in designing and developing user-centered software solutions. Explore professional experience, technical capabilities, and community leadership.",
+    title: "The Story of Mine | Dip Chakraborty",
+    description: "From Iron Man dreams to building real systems—a journey blending technology, creativity, and human connection. Explore the story of a software engineer passionate about robotics, automation, and meaningful innovation.",
     keywords: [
-        "about dip chakraborty",
-        "software engineer profile",
-        "professional experience",
-        "technical capabilities",
-        "community leadership",
-        "bangladesh software engineer",
+        "dip chakraborty story",
+        "software engineer journey",
+        "robotics passion",
+        "automation engineer",
+        "mars rover team",
+        "product engineering",
+        "bangladesh tech",
+        "AI and robotics",
+        "systems thinking",
     ],
     openGraph: {
-        title: "About Dip Chakraborty",
-        description: "Software Engineer with 3+ years of experience in designing and developing user-centered software solutions.",
+        title: "The Story of Mine | Dip Chakraborty",
+        description: "A narrative journey from curiosity to creation—blending software engineering, robotics, and real-world problem solving.",
         type: "profile",
         url: "https://dipchakraborty.com/about",
     },
     twitter: {
         card: "summary_large_image",
-        title: "About Dip Chakraborty",
-        description: "Software Engineer with 3+ years of experience in designing and developing user-centered software solutions.",
+        title: "The Story of Mine | Dip Chakraborty",
+        description: "From Iron Man dreams to building real systems—a journey of technology and creativity.",
     },
     alternates: {
         canonical: "https://dipchakraborty.com/about",

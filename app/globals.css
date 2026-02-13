@@ -3,26 +3,26 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Light theme (soft white with light blue tint) - default */
+/* Light theme (creamy) - default */
 :root {
-  --background: oklch(0.98 0.008 250);
-  --foreground: oklch(0.18 0.02 250);
-  --card: oklch(0.96 0.006 250);
-  --card-foreground: oklch(0.18 0.02 250);
-  --popover: oklch(0.97 0.007 250);
-  --popover-foreground: oklch(0.18 0.02 250);
+  --background: oklch(0.97 0.01 85);
+  --foreground: oklch(0.2 0.02 250);
+  --card: oklch(0.95 0.01 85);
+  --card-foreground: oklch(0.2 0.02 250);
+  --popover: oklch(0.96 0.01 85);
+  --popover-foreground: oklch(0.2 0.02 250);
   --primary: oklch(0.55 0.2 250);
   --primary-foreground: oklch(0.98 0 0);
-  --secondary: oklch(0.93 0.008 250);
+  --secondary: oklch(0.92 0.01 85);
   --secondary-foreground: oklch(0.3 0.02 250);
-  --muted: oklch(0.92 0.006 250);
+  --muted: oklch(0.9 0.01 85);
   --muted-foreground: oklch(0.45 0.02 250);
   --accent: oklch(0.55 0.2 250);
   --accent-foreground: oklch(0.98 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: oklch(0.88 0.006 250);
-  --input: oklch(0.94 0.007 250);
+  --border: oklch(0.85 0.01 85);
+  --input: oklch(0.92 0.01 85);
   --ring: oklch(0.55 0.2 250);
   --chart-1: oklch(0.55 0.2 250);
   --chart-2: oklch(0.6 0.118 184.704);
@@ -30,50 +30,50 @@
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
   --radius: 0.75rem;
-  --sidebar: oklch(0.97 0.007 250);
-  --sidebar-foreground: oklch(0.18 0.02 250);
+  --sidebar: oklch(0.96 0.01 85);
+  --sidebar-foreground: oklch(0.2 0.02 250);
   --sidebar-primary: oklch(0.55 0.2 250);
   --sidebar-primary-foreground: oklch(0.98 0 0);
-  --sidebar-accent: oklch(0.93 0.008 250);
-  --sidebar-accent-foreground: oklch(0.18 0.02 250);
-  --sidebar-border: oklch(0.88 0.006 250);
+  --sidebar-accent: oklch(0.92 0.01 85);
+  --sidebar-accent-foreground: oklch(0.2 0.02 250);
+  --sidebar-border: oklch(0.85 0.01 85);
   --sidebar-ring: oklch(0.55 0.2 250);
 }
 
-/* Dark theme - deep blue background */
+/* Dark theme - deep blue-tinted soft black */
 .dark {
-  --background: oklch(0.065 0.025 240);
-  --foreground: oklch(0.96 0.008 240);
-  --card: oklch(0.11 0.018 240);
-  --card-foreground: oklch(0.96 0.008 240);
-  --popover: oklch(0.09 0.018 240);
-  --popover-foreground: oklch(0.96 0.008 240);
-  --primary: oklch(0.72 0.2 240);
+  --background: oklch(0.08 0.02 240);
+  --foreground: oklch(0.95 0.01 240);
+  --card: oklch(0.12 0.015 240);
+  --card-foreground: oklch(0.95 0.01 240);
+  --popover: oklch(0.1 0.015 240);
+  --popover-foreground: oklch(0.95 0.01 240);
+  --primary: oklch(0.7 0.2 240);
   --primary-foreground: oklch(0.98 0 0);
-  --secondary: oklch(0.16 0.015 240);
-  --secondary-foreground: oklch(0.92 0 0);
-  --muted: oklch(0.22 0.012 240);
-  --muted-foreground: oklch(0.62 0.008 240);
-  --accent: oklch(0.72 0.2 240);
+  --secondary: oklch(0.18 0.01 240);
+  --secondary-foreground: oklch(0.9 0 0);
+  --muted: oklch(0.2 0.01 240);
+  --muted-foreground: oklch(0.6 0.01 240);
+  --accent: oklch(0.7 0.2 240);
   --accent-foreground: oklch(0.98 0 0);
   --destructive: oklch(0.396 0.141 25.723);
   --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.22 0.018 240);
-  --input: oklch(0.14 0.018 240);
-  --ring: oklch(0.72 0.2 240);
-  --chart-1: oklch(0.72 0.2 240);
+  --border: oklch(0.25 0.015 240);
+  --input: oklch(0.18 0.015 240);
+  --ring: oklch(0.7 0.2 240);
+  --chart-1: oklch(0.7 0.2 240);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.09 0.018 240);
-  --sidebar-foreground: oklch(0.96 0.008 240);
-  --sidebar-primary: oklch(0.72 0.2 240);
+  --sidebar: oklch(0.1 0.015 240);
+  --sidebar-foreground: oklch(0.95 0.01 240);
+  --sidebar-primary: oklch(0.7 0.2 240);
   --sidebar-primary-foreground: oklch(0.98 0 0);
-  --sidebar-accent: oklch(0.16 0.018 240);
-  --sidebar-accent-foreground: oklch(0.96 0.008 240);
-  --sidebar-border: oklch(0.22 0.018 240);
-  --sidebar-ring: oklch(0.72 0.2 240);
+  --sidebar-accent: oklch(0.18 0.015 240);
+  --sidebar-accent-foreground: oklch(0.95 0.01 240);
+  --sidebar-border: oklch(0.25 0.015 240);
+  --sidebar-ring: oklch(0.7 0.2 240);
 }
 
 @theme inline {
@@ -129,62 +129,12 @@
   * {
     @apply border-border outline-ring/50;
   }
-
   body {
     @apply bg-background text-foreground;
-    /* Prevent horizontal scroll on mobile */
-    overflow-x: hidden;
-    /* Better text rendering */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
   }
-
   ::selection {
     background: rgba(59, 130, 246, 0.3);
     color: inherit;
-  }
-
-  /* Improve touch targets for mobile - minimum 44x44px */
-  button,
-  a,
-  input,
-  select,
-  textarea {
-    min-height: 44px;
-    min-width: 44px;
-  }
-
-  /* Better focus visibility for accessibility */
-  *:focus-visible {
-    outline: 2px solid var(--ring);
-    outline-offset: 2px;
-  }
-
-  /* Ensure sufficient color contrast for text overlays */
-  h1, h2, h3, h4, h5, h6 {
-    color: var(--foreground);
-  }
-
-  p, span, a {
-    color: inherit;
-    /* Ensure minimum contrast ratio of 4.5:1 for accessibility */
-  }
-
-  /* Skip link for keyboard navigation */
-  .sr-skip-link {
-    position: absolute;
-    left: -9999px;
-    z-index: 999;
-  }
-
-  .sr-skip-link:focus {
-    left: 50%;
-    top: 0;
-    background: var(--primary);
-    color: var(--primary-foreground);
-    padding: 0.5rem 1rem;
-    transform: translateX(-50%);
   }
 }
 
@@ -218,48 +168,6 @@
 /* Smooth scroll */
 html {
   scroll-behavior: smooth;
-}
-
-/* Smooth section transitions */
-section {
-  scroll-margin-top: 80px;
-}
-
-/* Enable GPU acceleration for smoother animations */
-* {
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-
-/* Optimized transitions for all elements - only when motion preference is no-preference */
-@media (prefers-reduced-motion: no-preference) {
-  html {
-    scroll-behavior: smooth;
-  }
-
-  /* Reduce to essential transitions for better performance */
-  button,
-  a,
-  input,
-  select,
-  textarea {
-    transition-property: background-color, border-color, color;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 150ms;
-  }
-}
-
-/* Respect user's motion preferences */
-@media (prefers-reduced-motion: reduce) {
-
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
 }
 
 /* Glass effect - refined for better theme support */
@@ -296,11 +204,14 @@ section {
 }
 
 .spotlight {
-  /* Disabled mouse tracking light effect to be consistent with robot cursor */
-  background: transparent;
+  background: radial-gradient(
+    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(59, 130, 246, 0.06),
+    transparent 40%
+  );
 }
 
-/* Grain texture overlay - optimized for performance */
+/* Grain texture overlay */
 .grain::before {
   content: "";
   position: fixed;
@@ -312,8 +223,6 @@ section {
   opacity: 0.03;
   pointer-events: none;
   z-index: 1000;
-  /* Use will-change sparingly for performance */
-  will-change: opacity;
 }
 
 .dark .grain::before {
@@ -337,12 +246,10 @@ section {
 }
 
 @keyframes colorFlash {
-
   0%,
   100% {
     opacity: 0.1;
   }
-
   50% {
     opacity: 0.3;
   }
@@ -354,85 +261,10 @@ section {
 
 /* Responsive typography & spacing adjustments */
 @media (max-width: 640px) {
-
   h1,
   h2,
   h3 {
     @apply text-balance;
-  }
-
-  /* Improve readability on mobile */
-  body {
-    font-size: 16px;
-    /* Prevent zoom on iOS */
-    line-height: 1.6;
-  }
-
-  /* Better spacing for mobile */
-  .container {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-
-  /* Ensure proper spacing for sections */
-  section {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-}
-
-/* Tablet optimizations */
-@media (min-width: 641px) and (max-width: 1024px) {
-  .container {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-
-  section {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-}
-
-/* Large screen optimizations */
-@media (min-width: 1025px) {
-  .container {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-}
-
-/* Landscape mobile optimizations */
-@media (max-width: 896px) and (orientation: landscape) {
-
-  /* Reduce vertical spacing in landscape */
-  section {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-  }
-
-  /* Adjust hero section for landscape */
-  .min-h-screen {
-    min-height: auto;
-  }
-}
-
-/* Small mobile devices (iPhone SE, etc.) */
-@media (max-width: 375px) {
-  body {
-    font-size: 14px;
-  }
-
-  h1 {
-    font-size: 1.75rem;
-  }
-
-  h2 {
-    font-size: 1.5rem;
-  }
-
-  h3 {
-    font-size: 1.25rem;
   }
 }
 
@@ -442,7 +274,6 @@ section {
     opacity: 0;
     transform: translateY(10px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -451,64 +282,4 @@ section {
 
 .fade-in {
   animation: fadeIn 0.5s ease-out;
-}
-
-/* Performance: Use GPU acceleration for animations */
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translate3d(0, 20px, 0);
-  }
-
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-/* Optimize images for performance */
-img {
-  max-width: 100%;
-  height: auto;
-  /* Prevent layout shift */
-  aspect-ratio: attr(width) / attr(height);
-  /* Enable GPU acceleration for images */
-  transform: translateZ(0);
-  will-change: auto;
-}
-
-/* Better mobile navigation */
-@media (max-width: 768px) {
-  nav {
-    /* Ensure nav is touch-friendly */
-    -webkit-tap-highlight-color: transparent;
-  }
-}
-
-/* Smooth section animations */
-section {
-  will-change: opacity, transform;
-  position: relative;
-  transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* GPU acceleration for animations */
-.animate-gpu,
-[data-animate="true"] {
-  transform: translate3d(0, 0, 0);
-  -webkit-perspective: 1000px;
-  perspective: 1000px;
-}
-
-/* Optimized scroll snap behavior */
-@supports (scroll-snap-type: y mandatory) {
-  html {
-    scroll-snap-type: y proximity;
-  }
-
-  section {
-    scroll-snap-align: start;
-    scroll-snap-stop: auto;
-  }
 }

@@ -1,19 +1,14 @@
 "use client"
 
-import dynamic from "next/dynamic"
 import { motion } from "framer-motion"
 import { useRef } from "react"
 import Image from "next/image"
 import { Navigation } from "@/components/navigation"
+import { SpotlightBg } from "@/components/spotlight-bg"
 import { PageTransition } from "@/components/page-transition"
-
-// Lazy load spotlight background
-const SpotlightBg = dynamic(() => import("@/components/spotlight-bg").then(mod => ({ default: mod.SpotlightBg })), {
-  ssr: false,
-  loading: () => null,
-})
 import { SectionHeader } from "@/components/section-header"
-import { Heart, Cpu, Sparkles } from "lucide-react"
+import { AboutSidebar } from "@/components/about-sidebar"
+import { Heart } from "lucide-react"
 
 const passions = [
   {
@@ -61,189 +56,143 @@ export default function AboutPage() {
             <SectionHeader
               label="About"
               title="The Story So Far"
-            // description="Technical leader passionate about building innovative products and fostering engineering excellence."
+              description="Technical leader passionate about building innovative products and fostering engineering excellence."
             />
 
-            <div className="space-y-24">
-              <section id="intro">
-                <motion.div
-                  initial={{ opacity: 0, x: -60 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  className="relative mb-8"
-                >
-                  <div className="relative aspect-[21/9] md:aspect-[16/5] rounded-2xl overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-primary/10 z-10" />
-                    <Image
-                      src="/dip_working.png"
-                      alt="Dip Chakraborty at work - Software Engineer"
-                      fill
-                      priority={false}
-                      quality={80}
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 80vw"
-                      className="object-cover brightness-110"
-                      loading="lazy"
-                    />
-                  </div>
-                  {/* Offset decorative element */}
-                  <div className="absolute -bottom-6 -right-6 w-32 h-32 glass rounded-xl -z-10" />
-                </motion.div>
-                {/* Summary Card */}
-                <motion.div
-                  initial={{ opacity: 0, x: -60 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.2 }}
-                  className="glass rounded-2xl p-8 mb-16"
-                >
-                  {/* <h3 className="text-xl font-semibold text-foreground mb-3">Dip Chakraborty</h3> */}
-                  <p className="text-muted-foreground leading-relaxed text-justify">
-                    Growing up in a home filled with song, where my family practiced music together and I happily joined in, I was always a bit of a dreamer. As a kid, I was obsessed with sports, chasing every game and match I could find. But movies? They hit differently. They made me pause, reflect, and see life from fresh angles.
-                    <br />
-                    Science fascinated me, though not in the classic “become a doctor or engineer” way. Through SSC and HSC in the science group, I chased curiosity more than a fixed career path-what made things work, what hidden magic lay in the world around us?
-                    <br /><br />
-                    Then came Iron Man!
-                    <br /><br />
-                    Watching Tony Stark on screen changed everything. His wit, his relentless problem solving, that sleek suit powered by ingenuity… but most of all, JARVIS. The idea of building my own intelligent companion one that understood me, anticipated needs, and turned ideas into reality, lit a fire. I wanted to create something like that. Not just a tool, but a partner. Tony wasn’t only a hero, he was a builder, an inventor who turned problems into solutions people would actually want. That mindset stuck.
-                    <br /><br />
-                    At around 12th grade, I dipped my toes into programming as a hobby. My first lines of Python printed a simple welcome message that felt like magic on the screen. From there, I experimented trying to automate a basic water meter with robotics ideas, tinkering with whatever small project excited me.
-                    <br /><br />
-                    Over time, I started seeing software differently, not as cold code, but as art. Like painting or music, programming lets you connect deeply with people. The more creative you are in solving real human needs, the more beautiful and valuable the result becomes.
-                    <br />
-                    I approach every challenge with the same lens: What problem does this solve? Why would someone choose this solution? I think of systems the way I think of life - interconnected, evolving, full of potential.
-                    <br /><br />
-                    Alongside code, I stay hungry for history, art, sports, and stories. I love turning what I learn into lessons for others - whether teaching, writing, or simply sharing ideas that spark something in someone else.
-                    Today, I’m still that curious kid who got hooked on a movie, but now I channel it into building meaningful things.
-                    <br /><br />
-                    If you’re reading this, maybe we share that same spark. I’d love to connect, collaborate, or just chat about ideas.
-                    Thanks for taking the time to read my story.
-                    Let’s create something great together.
-                  </p>
-                </motion.div>
-              </section>
+            <div className="grid lg:grid-cols-[200px_1fr] gap-12">
+              {/* Sticky Sidebar */}
+              <div className="hidden lg:block">
+                <AboutSidebar />
+              </div>
 
-              {/* Technical Product Engineering Capabilities */}
-              <section id="capabilities">
-                <motion.div
-                  initial={{ opacity: 0, x: -60 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  className="glass rounded-2xl p-8 mb-16"
-                >
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                      <Cpu className="text-primary" size={20} />
+              {/* Main Content */}
+              <div className="space-y-24">
+                {/* Introduction Section */}
+                <section id="intro">
+                  <motion.div className="relative mb-8">
+                    <div className="relative aspect-[21/9] rounded-2xl overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-primary/10 z-10" />
+                      <Image
+                        src="dip_working.png"
+                        alt="Dip Chakraborty at work"
+                        fill
+                        className="object-cover brightness-110"
+                      />
                     </div>
-                    <h3 className="text-2xl font-semibold text-foreground">
-                      Technical Product Engineering Capabilities
-                    </h3>
-                  </div>
-                  <div className="space-y-4 text-muted-foreground leading-relaxed">
-                    <p style={{ textAlign: "justify", textJustify: "inter-word" }}>
-                      I’m biased toward automation. I tend to automate anything repetitive, from backend workflows to everyday operational tools. I care about solving real problems, user's painpoints and getting products into the real world. Most of my work lives at the intersection of software, hardware, and operations, often before requirements are clean or fully agreed upon.
-                    </p>
-                    <p style={{ textAlign: "justify", textJustify: "inter-word" }}>
-                      I’m good at turning ambiguity into structure: modeling real-world constraints, designing architectures that are feasible and durable, and planning execution so systems actually ship. I don’t obsess over tools, AI can handle plenty of them. But I do obsess over edge cases, failure modes, and whether a system will stay calm under pressure.
-                    </p>
-                    <p style={{ textAlign: "justify", textJustify: "inter-word" }}>
-                      I’ve worked across automation platforms, robotic navigation and aerospace-adjacent systems, physical access control and identity pipelines, workflow orchestration, and internal operational tooling. I usually operate as a product-minded engineer: shaping direction early, building core systems hands-on, and using clear documentation, visual thinking, and straightforward explanations to align people so what ships keeps working beyond version one.
-                    </p>
-                  </div>
-                </motion.div>
-              </section>
+                    {/* Offset decorative element */}
+                    <div className="absolute -bottom-6 -right-6 w-32 h-32 glass rounded-xl -z-10" />
+                  </motion.div>
 
-              {/* Philosophy Section */}
-              <section id="philosophy">
-                <motion.h3
-                  initial={{ opacity: 0, x: -60 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  className="text-2xl font-semibold text-foreground mb-12 flex items-center gap-3"
-                >
-                  <Heart className="text-primary" size={24} />
-                  Philosophy & Values
-                </motion.h3>
-
-                <div className="grid md:grid-cols-2 gap-6">
-                  {[
-                    {
-                      title: "Continuous Learning",
-                      text: "Technology evolves rapidly. I embrace change and constantly update my skills to stay at the forefront of innovation.",
-                    },
-                    {
-                      title: "User-Centered Design",
-                      text: "Every line of code should serve a purpose. I build solutions that truly solve problems for real people.",
-                    },
-                    {
-                      title: "Quality Over Quantity",
-                      text: "I believe in writing clean, maintainable code. Taking time to do things right pays dividends in the long run.",
-                    },
-                    {
-                      title: "Collaboration",
-                      text: "The best solutions come from diverse perspectives. I value teamwork and open, transparent communication.",
-                    },
-                  ].map((item, index) => (
-                    <motion.div
-                      key={item.title}
-                      initial={{ opacity: 0, x: -50 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
-                      className="glass rounded-2xl p-6"
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="glass rounded-2xl p-8"
+                  >
+                    <p className="text-lg text-muted-foreground leading-relaxed mb-4"
+                      style={{ textAlign: "justify", textJustify: "inter-word" }}
                     >
-                      <h4 className="text-lg font-semibold text-foreground mb-2">{item.title}</h4>
-                      <p className="text-sm text-muted-foreground leading-relaxed text-justify">{item.text}</p>
-                    </motion.div>
-                  ))}
-                </div>
-              </section>
+                      <span className="text-foreground font-medium">Good engineering is not just about building software - its about creating systems that hold their shape under pressure.</span>{" "}
+                      With that belief, my work sits at the crossroads of product strategy, system architecture, and innovation. 
+                      I enjoy untangling ambiguous requirements, aligning teams around a clear direction, and shaping solutions that remain reliable long after version one. 
+                      Whether it's architecting scalable systems, leading cross-functional teams, or integrating cutting-edge AI technologies, I bring both strategic thinking and hands-on expertise to every project. 
+                      My approach emphasizes clarity in communication, simplicity in design, and predictable delivery of high-quality solutions.
+                      
+                      Over the years, I’ve contributed to platforms that power automation pipelines, access control systems, customer assistance tools, financial workflows, operational dashboards, and high-volume internal management systems. 
+                      These projects demanded a mix of architectural clarity, practical engineering, and steady leadership across design, development, DevOps, automation, and process execution.
+                      My approach is simple: create order, reduce noise, build scalable systems, and support the people who operate them.
+                    </p>
+                  </motion.div>
+                </section>
 
-              {/* Passions Section */}
-              <section id="hobbies">
-                <motion.div
-                  initial={{ opacity: 0, x: -60 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  className="flex items-center gap-3 mb-8"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                    <Sparkles className="text-primary" size={20} />
+                {/* Philosophy Section */}
+                <section id="philosophy">
+                  <motion.h3
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="text-2xl font-semibold text-foreground mb-12 flex items-center gap-3"
+                  >
+                    <Heart className="text-primary" size={24} />
+                    Philosophy & Values
+                  </motion.h3>
+
+                  <div className="grid md:grid-cols-2 gap-6">
+                    {[
+                      {
+                        title: "Continuous Learning",
+                        text: "Technology evolves rapidly. I embrace change and constantly update my skills to stay at the forefront of innovation.",
+                      },
+                      {
+                        title: "User-Centered Design",
+                        text: "Every line of code should serve a purpose. I build solutions that truly solve problems for real people.",
+                      },
+                      {
+                        title: "Quality Over Quantity",
+                        text: "I believe in writing clean, maintainable code. Taking time to do things right pays dividends in the long run.",
+                      },
+                      {
+                        title: "Collaboration",
+                        text: "The best solutions come from diverse perspectives. I value teamwork and open, transparent communication.",
+                      },
+                    ].map((item, index) => (
+                      <motion.div
+                        key={item.title}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.1 }}
+                        className="glass rounded-2xl p-6"
+                      >
+                        <h4 className="text-lg font-semibold text-foreground mb-2">{item.title}</h4>
+                        <p className="text-muted-foreground text-sm leading-relaxed">{item.text}</p>
+                      </motion.div>
+                    ))}
                   </div>
-                  <h3 className="text-2xl font-semibold text-foreground">
+                </section>
+
+                {/* Passions Section */}
+                <section id="hobbies">
+                  <motion.h3
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="text-2xl font-semibold text-foreground mb-8"
+                  >
                     Passions & Interests
-                  </h3>
-                </motion.div>
-                <motion.p
-                  initial={{ opacity: 0, x: -60 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  className="mb-8 text-muted-foreground leading-relaxed text-justify"
-                >
-                  One day, I dream of stepping into filmmaking as a director. Stories have always fascinated
-                  me-whether it's the narrative arc of a great war drama or the rhythm of classical music. Creating
-                  visual stories that move people is a goal I'm working towards.
-                </motion.p>
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {passions.map((passion, index) => (
-                    <motion.div
-                      key={passion.title}
-                      initial={{ opacity: 0, x: -60 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
-                      className="group glass rounded-2xl p-6 hover:bg-primary/5 hover:border-primary/20 transition-all"
-                    >
-                      <div className="text-2xl mb-4">{passion.icon}</div>
-                      <h4 className="font-semibold text-foreground mb-1">{passion.title}</h4>
-                      <p className="text-sm text-muted-foreground text-justify">{passion.description}</p>
-                    </motion.div>
-                  ))}
-                </div>
-              </section>
+                  </motion.h3>
+                  <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="mt-12 text-muted-foreground leading-relaxed"
+                  >
+                    One day, I dream of stepping into filmmaking as a director. Stories have always fascinated
+                    me—whether it's the narrative arc of a great war drama or the rhythm of classical music. Creating
+                    visual stories that move people is a goal I'm working towards.
+                  </motion.p>
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {passions.map((passion, index) => (
+                      <motion.div
+                        key={passion.title}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.1 }}
+                        className="group glass rounded-2xl p-6 hover:bg-primary/5 hover:border-primary/20 transition-all"
+                      >
+                        <div className="text-2xl mb-4">{passion.icon}</div>
+                        <h4 className="font-semibold text-foreground mb-1">{passion.title}</h4>
+                        <p className="text-sm text-muted-foreground">{passion.description}</p>
+                      </motion.div>
+                    ))}
+                  </div>
+                </section>
+              </div>
             </div>
           </div>
         </div>
       </PageTransition>
-    </main >
+    </main>
   )
 }
