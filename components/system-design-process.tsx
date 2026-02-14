@@ -558,6 +558,7 @@ function StepNode({
 /* ───────────────────── Main Component ───────────────────── */
 export function SystemDesignProcess() {
     const [modalStepId, setModalStepId] = useState<number | null>(null)
+    const [activePhase, setActivePhase] = useState<number | null>(null)
     const sectionRef = useRef<HTMLDivElement>(null)
     const isInView = useInView(sectionRef, { once: true, margin: "-80px" })
 
@@ -659,9 +660,21 @@ export function SystemDesignProcess() {
                                     description: "This stage governs the ongoing operation, security, and sustainability of systems in production. It establishes monitoring, incident management, compliance, and continuous improvement processes to maintain service quality."
                                 }
                             ].map((phase, idx) => (
-                                <div key={idx} className="group relative">
-                                    <div className="glass p-6 rounded-2xl border-2 border-border/50 hover:border-primary/60 transition-all duration-300 h-full flex flex-col justify-center items-center shadow-lg hover:shadow-primary/10 min-h-[120px] relative z-10">
-                                        <h4 className="font-bold text-foreground text-center group-hover:text-primary transition-colors text-base md:text-lg leading-tight">
+                                <div
+                                    key={idx}
+                                    className="group relative"
+                                    onClick={() => setActivePhase(activePhase === idx ? null : idx)}
+                                >
+                                    <div className={cn(
+                                        "glass p-6 rounded-2xl border-2 border-border/50 transition-all duration-300 h-full flex flex-col justify-center items-center shadow-lg min-h-[120px] relative z-10",
+                                        "hover:border-primary/60 hover:shadow-primary/10",
+                                        activePhase === idx ? "border-primary/60 shadow-primary/10" : "border-border/50"
+                                    )}>
+                                        <h4 className={cn(
+                                            "font-bold text-foreground text-center transition-colors text-base md:text-lg leading-tight",
+                                            "group-hover:text-primary",
+                                            activePhase === idx ? "text-primary" : "text-foreground"
+                                        )}>
                                             {phase.title}
                                         </h4>
                                     </div>
@@ -674,7 +687,12 @@ export function SystemDesignProcess() {
                                     )}
 
                                     {/* Toolbox style tooltip explaining the phase */}
-                                    <div className="absolute opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none z-[100] bottom-full left-1/2 -translate-x-1/2 mb-6 w-[280px] md:w-[320px] scale-95 group-hover:scale-100">
+                                    <div className={cn(
+                                        "absolute transition-all duration-300 pointer-events-none z-[100] bottom-full left-1/2 -translate-x-1/2 mb-6 w-[280px] md:w-[320px]",
+                                        activePhase === idx
+                                            ? "opacity-100 scale-100 translate-y-0"
+                                            : "opacity-0 group-hover:opacity-100 scale-95 group-hover:scale-100 translate-y-2 group-hover:translate-y-0"
+                                    )}>
                                         <div className="bg-background/98 p-5 rounded-2xl border border-primary/40 shadow-2xl shadow-primary/20 backdrop-blur-3xl">
                                             <div className="flex items-center gap-2 mb-3">
                                                 <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
@@ -725,64 +743,130 @@ export function SystemDesignProcess() {
 
                     {/* ── Algorithm Grid: 2 rows of 7 ── */}
                     <div>
-                        {/* Row 1: Steps 1–7 */}
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={isInView ? { opacity: 1 } : {}}
-                            transition={{ duration: 0.6, delay: 0.3 }}
-                            className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-3"
-                        >
-                            {row1.map((step, index) => (
-                                <div key={step.id} className="flex items-center">
-                                    <StepNode
-                                        step={step}
-                                        index={index}
-                                        isInView={isInView}
-                                        onClick={() => openModal(step.id)}
-                                    />
-                                    {/* Arrow between nodes (desktop) */}
-                                    {index < row1.length - 1 && (
-                                        <ArrowRight className="w-4 h-4 text-primary/20 flex-shrink-0 mx-0.5 hidden md:block" />
-                                    )}
-                                </div>
-                            ))}
-                        </motion.div>
+                        {/* Mobile view (Snake Layout with Arrows) */}
+                        <div className="md:hidden">
+                            <div className="space-y-2">
+                                {Array.from({ length: Math.ceil(steps.length / 2) }).map((_, rowIndex) => {
+                                    const isEvenRow = rowIndex % 2 === 0;
+                                    const startIdx = rowIndex * 2;
+                                    const rowSteps = isEvenRow
+                                        ? [steps[startIdx], steps[startIdx + 1]]
+                                        : [steps[startIdx + 1], steps[startIdx]];
 
-                        {/* Row connector: vertical arrow from step 7 → step 8 */}
-                        <motion.div
-                            initial={{ opacity: 0, scaleY: 0 }}
-                            animate={isInView ? { opacity: 1, scaleY: 1 } : {}}
-                            transition={{ duration: 0.5, delay: 0.7 }}
-                            className="flex justify-end md:pr-[calc((100%/7)/2+0.375rem)] py-3"
-                        >
-                            <div className="flex flex-col items-center gap-0.5">
-                                <div className="w-[2px] h-6 bg-gradient-to-b from-primary/30 to-primary/10" />
-                                <ArrowDown className="w-4 h-4 text-primary/30" />
+                                    return (
+                                        <div key={rowIndex} className="flex flex-col">
+                                            <div className="grid grid-cols-2 gap-4 relative">
+                                                {rowSteps.map((step, colIdx) => {
+                                                    const currentStepIdx = isEvenRow
+                                                        ? startIdx + colIdx
+                                                        : startIdx + (1 - colIdx);
+
+                                                    return (
+                                                        <div key={step.id} className="relative flex items-center">
+                                                            <StepNode
+                                                                step={step}
+                                                                index={currentStepIdx}
+                                                                isInView={isInView}
+                                                                onClick={() => openModal(step.id)}
+                                                            />
+                                                            {/* Horizontal Arrow between nodes */}
+                                                            {((isEvenRow && colIdx === 0) || (!isEvenRow && colIdx === 1)) && (
+                                                                <div className={cn(
+                                                                    "absolute z-10 w-full flex justify-center pointer-events-none",
+                                                                    isEvenRow ? "left-[50%]" : "right-[50%]"
+                                                                )}>
+                                                                    <ArrowRight className={cn(
+                                                                        "w-4 h-4 text-primary/40",
+                                                                        !isEvenRow && "rotate-180"
+                                                                    )} />
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    );
+                                                })}
+                                            </div>
+
+                                            {/* Vertical Arrow to next row */}
+                                            {rowIndex < Math.ceil(steps.length / 2) - 1 && (
+                                                <div className="grid grid-cols-2 w-full py-2">
+                                                    <div className={cn(
+                                                        "flex justify-center",
+                                                        isEvenRow ? "col-start-2" : "col-start-1"
+                                                    )}>
+                                                        <div className="flex flex-col items-center gap-0.5">
+                                                            <div className="w-[2px] h-4 bg-gradient-to-b from-primary/30 to-primary/10" />
+                                                            <ArrowDown className="w-4 h-4 text-primary/30" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>
+                                    );
+                                })}
                             </div>
-                        </motion.div>
+                        </div>
 
-                        {/* Row 2: Steps 14–8 (reversed array, LTR grid, left-pointing arrows) */}
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={isInView ? { opacity: 1 } : {}}
-                            transition={{ duration: 0.6, delay: 0.75 }}
-                            className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-7 gap-3"
-                        >
-                            {row2.map((step, index) => (
-                                <div key={step.id} className="flex items-center">
-                                    <StepNode
-                                        step={step}
-                                        index={index + 7}
-                                        isInView={isInView}
-                                        onClick={() => openModal(step.id)}
-                                    />
-                                    {/* Left-pointing arrow between nodes (desktop) */}
-                                    {index < row2.length - 1 && (
-                                        <ArrowRight className="w-4 h-4 text-primary/20 flex-shrink-0 mx-0.5 hidden md:block rotate-180" />
-                                    )}
+                        {/* Desktop view (Snake Layout) */}
+                        <div className="hidden md:block">
+                            {/* Row 1: Steps 1–7 */}
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={isInView ? { opacity: 1 } : {}}
+                                transition={{ duration: 0.6, delay: 0.3 }}
+                                className="grid md:grid-cols-7 gap-3"
+                            >
+                                {row1.map((step, index) => (
+                                    <div key={step.id} className="flex items-center">
+                                        <StepNode
+                                            step={step}
+                                            index={index}
+                                            isInView={isInView}
+                                            onClick={() => openModal(step.id)}
+                                        />
+                                        {/* Arrow between nodes (desktop) */}
+                                        {index < row1.length - 1 && (
+                                            <ArrowRight className="w-4 h-4 text-primary/20 flex-shrink-0 mx-0.5 hidden md:block" />
+                                        )}
+                                    </div>
+                                ))}
+                            </motion.div>
+
+                            {/* Row connector: vertical arrow from step 7 → step 8 */}
+                            <motion.div
+                                initial={{ opacity: 0, scaleY: 0 }}
+                                animate={isInView ? { opacity: 1, scaleY: 1 } : {}}
+                                transition={{ duration: 0.5, delay: 0.7 }}
+                                className="flex justify-end pr-[calc((100%/7)/2+0.375rem)] py-3"
+                            >
+                                <div className="flex flex-col items-center gap-0.5">
+                                    <div className="w-[2px] h-6 bg-gradient-to-b from-primary/30 to-primary/10" />
+                                    <ArrowDown className="w-4 h-4 text-primary/30" />
                                 </div>
-                            ))}
-                        </motion.div>
+                            </motion.div>
+
+                            {/* Row 2: Steps 14–8 (reversed array, LTR grid, left-pointing arrows) */}
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={isInView ? { opacity: 1 } : {}}
+                                transition={{ duration: 0.6, delay: 0.75 }}
+                                className="grid md:grid-cols-7 gap-3"
+                            >
+                                {row2.map((step, index) => (
+                                    <div key={step.id} className="flex items-center">
+                                        <StepNode
+                                            step={step}
+                                            index={index + 7}
+                                            isInView={isInView}
+                                            onClick={() => openModal(step.id)}
+                                        />
+                                        {/* Left-pointing arrow between nodes (desktop) */}
+                                        {index < row2.length - 1 && (
+                                            <ArrowRight className="w-4 h-4 text-primary/20 flex-shrink-0 mx-0.5 hidden md:block rotate-180" />
+                                        )}
+                                    </div>
+                                ))}
+                            </motion.div>
+                        </div>
                     </div>
 
 

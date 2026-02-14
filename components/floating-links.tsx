@@ -12,7 +12,7 @@ const links = [
     icon: <Briefcase size={24} />,
   },
   {
-    href: "https://blogs.dipchakraborty.com",
+    href: "https://writings.dipchakraborty.com",
     label: "Blogs",
     description: "Read my thoughts & articles",
     icon: <Rss size={24} />,
