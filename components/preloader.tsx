@@ -2,17 +2,66 @@
 
 import { motion, AnimatePresence } from "framer-motion"
 import { useEffect, useState } from "react"
+import { usePathname } from "next/navigation"
+import Image from "next/image"
 
 export function Preloader() {
   const [isLoading, setIsLoading] = useState(true)
+  const pathname = usePathname()
+
+  // Only show preloader on specific pages
+  const showPreloader = ["/", "/purpose", "/process"].includes(pathname)
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    if (!showPreloader) {
       setIsLoading(false)
-    }, 1200)
+      return
+    }
 
-    return () => clearTimeout(timer)
-  }, [])
+    let isMounted = true
+    const startTime = Date.now()
+    const minimumWait = 800 // Ensure at least some animation
+
+    const handleLoad = () => {
+      const checkImages = () => {
+        const images = Array.from(document.images)
+        const allLoaded = images.every((img) => img.complete)
+
+        if (allLoaded) {
+          const elapsedTime = Date.now() - startTime
+          const remainingWait = Math.max(0, minimumWait - elapsedTime)
+
+          setTimeout(() => {
+            if (isMounted) setIsLoading(false)
+          }, remainingWait)
+        } else {
+          // Check again in 100ms
+          setTimeout(checkImages, 100)
+        }
+      }
+
+      checkImages()
+    }
+
+    if (document.readyState === "complete") {
+      handleLoad()
+    } else {
+      window.addEventListener("load", handleLoad)
+    }
+
+    // Safety timeout after 5 seconds
+    const safetyTimeout = setTimeout(() => {
+      if (isMounted) setIsLoading(false)
+    }, 5000)
+
+    return () => {
+      isMounted = false
+      window.removeEventListener("load", handleLoad)
+      clearTimeout(safetyTimeout)
+    }
+  }, [showPreloader, pathname])
+
+  if (!showPreloader && !isLoading) return null
 
   return (
     <AnimatePresence>
@@ -57,17 +106,17 @@ export function Preloader() {
                 transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
               />
               <motion.div
-                className="absolute inset-2 w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center"
+                className="absolute inset-2 w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center overflow-hidden"
                 animate={{ scale: [1, 0.9, 1] }}
                 transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY }}
               >
-                <motion.span
-                  className="text-2xl font-bold text-primary"
-                  animate={{ opacity: [0.5, 1, 0.5] }}
-                  transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY }}
-                >
-                  DC
-                </motion.span>
+                <Image
+                  src="/dc-icon.png"
+                  alt="DC Icon"
+                  width={48}
+                  height={48}
+                  className="object-contain"
+                />
               </motion.div>
             </div>
 

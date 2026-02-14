@@ -17,18 +17,11 @@ const links = [
     description: "Read my thoughts & articles",
     icon: <Rss size={24} />,
   },
-  {
-    href: "/contact",
-    label: "Connect",
-    description: "Get in touch with me",
-    icon: <Users size={24} />,
-    internal: true,
-  },
 ]
 
 export function FloatingLinks() {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
       {links.map((link, index) => (
         <motion.div
           key={link.label}

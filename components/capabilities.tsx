@@ -3,6 +3,50 @@
 import { motion } from "framer-motion"
 import { Lightbulb, Users, Network, Brain, Code, Cloud, Cpu, BookOpen, ChevronDown } from "lucide-react"
 import { useState } from "react"
+import { cn } from "@/lib/utils"
+
+const technicalFocus = [
+  {
+    title: "Platform & Systems Architecture",
+    items: [
+      "Built automation-heavy internal platforms",
+      "Designed enterprise-grade API ecosystems",
+      "Developed workflow orchestration systems",
+      "Implemented access control and identity pipelines",
+      "Focused on scalability, reliability, and maintainability",
+    ],
+  },
+  {
+    title: "Product Engineering & Delivery",
+    items: [
+      "Developed large-scale staff management systems",
+      "Built integrated decision-support dashboards",
+      "Implemented chatbot and communication layers",
+      "Led products from concept to production",
+      "Balanced speed with engineering discipline",
+    ],
+  },
+  {
+    title: "Technical Leadership & Coordination",
+    items: [
+      "Coordinated across multiple engineering teams",
+      "Refined ambiguous and evolving requirements",
+      "Modeled systems before implementation",
+      "Guided engineers toward predictable delivery",
+      "Established structured development processes",
+    ],
+  },
+  {
+    title: "Architecture–Execution Bridge",
+    items: [
+      "Provided architectural guidance and hands-on engineering",
+      "Aligned business goals with technical systems",
+      "Translated non-technical needs into solutions",
+      "Set realistic technical expectations",
+      "Ensured sustainable long-term delivery",
+    ],
+  },
+]
 
 const capabilityGroups = [
   {
@@ -130,18 +174,30 @@ export function Capabilities() {
           viewport={{ once: true }}
           className="mb-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
-            Technical Product Engineering Capabilities
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+            Technical Focus
           </h2>
-          <p className="text-muted-foreground text-lg leading-relaxed"
-          style={{ textAlign: "justify", textJustify: "inter-word" }}
-          >
-          Across product engineering and system architecture, my work has focused on building platforms that support real business operations. I’ve been involved in developing automation-heavy internal systems, enterprise-grade API services, workflow orchestration tools, communication/chatbot layers, access control and identity pipelines, large-scale staff management systems, and integrated dashboards for organizational decision-making.
 
-          Many of these projects required multi-team coordination, requirement refinement, system modeling, and leading engineers toward predictable and sustainable delivery. My contributions typically combine architectural guidance, hands-on engineering, process structuring, and aligning non-technical stakeholders with technical realities.
-
-          The goal is always the same: make technology dependable, scalable, and operationally efficient while guiding teams toward clarity and high execution quality.
-          </p>
+          <div className="glass rounded-2xl border border-border/50 bg-muted/5">
+            <div className="p-8 grid md:grid-cols-2 gap-8">
+              {technicalFocus.map((group) => (
+                <div key={group.title} className="space-y-4">
+                  <h3 className="font-bold text-foreground flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                    {group.title}
+                  </h3>
+                  <ul className="space-y-2">
+                    {group.items.map((bullet, i) => (
+                      <li key={i} className="text-sm text-muted-foreground flex items-start gap-3">
+                        <span className="text-primary/40 flex-shrink-0 mt-1">/</span>
+                        {bullet}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
         </motion.div>
 
         <motion.div
@@ -171,9 +227,10 @@ export function Capabilities() {
                       </div>
                     </div>
                     <ChevronDown
-                      className={`w-5 h-5 text-muted-foreground flex-shrink-0 transition-transform duration-300 ${
+                      className={cn(
+                        "w-5 h-5 text-muted-foreground flex-shrink-0 transition-transform duration-300",
                         expandedIndex === index ? "rotate-180" : ""
-                      }`}
+                      )}
                     />
                   </div>
 

@@ -35,7 +35,7 @@ const experiences: ExperienceItem[] = [
         description: [
             "Building automation platforms and operational tools that streamline workflows and reduce manual overhead",
             "Designing architectures for workflow orchestration, physical access control, and identity pipelines",
-            "Operating as a product-minded engineer—shaping direction early, building core systems hands-on",
+            "Operating as a product-minded engineer-shaping direction early, building core systems hands-on",
             "Using clear documentation and visual thinking to align teams and ensure systems work beyond version one",
         ],
         impact: "Delivered production systems handling real-world operational complexity with focus on durability and edge case handling",
@@ -397,10 +397,10 @@ export default function ExperiencePage() {
                                         What Drives Me
                                     </h2>
                                     <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto text-justify">
-                                        I don't just build features—I build systems that last. I don't just lead teams—I create clarity that empowers people. I don't just solve problems—I ask why the problem exists in the first place. Every project is an opportunity to learn, every challenge is a chance to grow, and every collaboration is a step toward creating something meaningful.
+                                        I don't just build features-I build systems that last. I don't just lead teams-I create clarity that empowers people. I don't just solve problems-I ask why the problem exists in the first place. Every project is an opportunity to learn, every challenge is a chance to grow, and every collaboration is a step toward creating something meaningful.
                                     </p>
                                     <p className="text-base text-muted-foreground italic">
-                                        "Excellence is not a destination—it's a continuous journey of learning, building, and improving."
+                                        "Excellence is not a destination-it's a continuous journey of learning, building, and improving."
                                     </p>
                                 </motion.div>
                             </section>

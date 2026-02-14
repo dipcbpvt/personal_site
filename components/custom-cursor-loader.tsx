@@ -3,11 +3,11 @@
 import dynamic from 'next/dynamic'
 import { useEffect, useState } from 'react'
 
-// Client-side loader so we can keep the fancy cursor hydrated only in the browser
-const CustomCursor = dynamic(
+// Dynamic import so the robot cursor is only loaded client-side (no SSR)
+const RobotCursor = dynamic(
   () =>
-    import('./custom-cursor').then((mod) => ({
-      default: mod.CustomCursor,
+    import('./robot-cursor').then((mod) => ({
+      default: mod.RobotCursor,
     })),
   {
     ssr: false,
@@ -21,23 +21,27 @@ export default function CustomCursorLoader() {
   useEffect(() => {
     if (typeof window === 'undefined') return
 
+    // Respect reduced motion preferences
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
+
+    // Skip on touch devices
     const maxTouchPoints =
       navigator.maxTouchPoints ?? (navigator as Navigator & { msMaxTouchPoints?: number }).msMaxTouchPoints ?? 0
     const hasTouchSupport = 'ontouchstart' in window || maxTouchPoints > 0
+    const hasCoarsePointer = window.matchMedia('(pointer: coarse)').matches
 
-    if (prefersReducedMotion.matches || hasTouchSupport) {
+    if (prefersReducedMotion.matches || (hasTouchSupport && hasCoarsePointer)) {
       return
     }
 
     const activate = () => setShouldRender(true)
     let idleHandle: number | undefined
-    let timeoutHandle: number | undefined
+    let timeoutHandle: ReturnType<typeof setTimeout> | undefined
 
     if ('requestIdleCallback' in window) {
       idleHandle = window.requestIdleCallback(activate, { timeout: 900 })
     } else {
-      timeoutHandle = window.setTimeout(activate, 700)
+      timeoutHandle = setTimeout(activate, 700)
     }
 
     return () => {
@@ -45,7 +49,7 @@ export default function CustomCursorLoader() {
         window.cancelIdleCallback(idleHandle)
       }
       if (timeoutHandle !== undefined) {
-        window.clearTimeout(timeoutHandle)
+        clearTimeout(timeoutHandle)
       }
     }
   }, [])
@@ -54,5 +58,5 @@ export default function CustomCursorLoader() {
     return null
   }
 
-  return <CustomCursor />
+  return <RobotCursor />
 }

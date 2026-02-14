@@ -4,6 +4,7 @@ import { Inter, JetBrains_Mono } from "next/font/google"
 import "./globals.css"
 import { Preloader } from "@/components/preloader"
 import { ThemeProvider } from "@/components/theme-provider"
+import CustomCursorLoader from "@/components/custom-cursor-loader"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -16,26 +17,55 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "Dip Chakraborty | Software Engineer & Tech Enthusiast",
+  metadataBase: new URL("https://dipchakraborty.com"),
+  title: {
+    default: "Dip Chakraborty | Software Engineer & Systems Architect",
+    template: "%s | Dip Chakraborty",
+  },
   description:
-    "Dip Chakraborty is a Software Engineer, Content Creator, and Researcher from Bangladesh. Passionate about web technology, AI, and building innovative solutions.",
-  keywords: "dip chakraborty, software engineer, web developer, tech enthusiast, bangladesh",
+    "Software Engineer with 4 years of experience specializing in API development, PWA, and system architecture. Discover my process and purpose.",
+  keywords: [
+    "Dip Chakraborty",
+    "Software Engineer",
+    "Systems Architect",
+    "Full Stack Developer",
+    "PWA Development",
+    "Tech Enthusiast",
+    "Bangladesh",
+    "API Design",
+    "Product Engineering",
+  ],
   authors: [{ name: "Dip Chakraborty" }],
+  creator: "Dip Chakraborty",
   openGraph: {
-    title: "Dip Chakraborty",
-    description: "Software Engineer | Content Creator | Researcher",
-    type: "website",
+    title: "Dip Chakraborty | Software Engineer",
+    description: "Designing and developing sustainable systems through engineering and innovation.",
+    url: "https://dipchakraborty.com",
+    siteName: "Dip Chakraborty",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Dip Chakraborty - Software Engineer",
+      },
+    ],
     locale: "en_US",
+    type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dip Chakraborty",
-    description: "Software Engineer | Content Creator | Researcher",
+    title: "Dip Chakraborty | Software Engineer",
+    description: "Designing and developing sustainable systems through engineering and innovation.",
+    images: ["/og-image.png"],
+    creator: "@dipcb05",
   },
   icons: {
-    icon: "/dip-logo.svg",
+    icon: "/dc-icon.png",
+    shortcut: "/dc-icon.png",
+    apple: "/dc-icon.png",
   },
-  generator: "v0.app",
+  manifest: "/manifest.json",
 }
 
 export const viewport: Viewport = {
@@ -56,6 +86,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <div className="grain" />
           <Preloader />
+          <CustomCursorLoader />
           {children}
         </ThemeProvider>
       </body>

@@ -45,7 +45,7 @@ export function Hero() {
     setMounted(true);
   }, []);
 
-  const portraitSrc = resolvedTheme === "light" ? "/dip.png" : "/dip2.png";
+  const portraitSrc = resolvedTheme === "light" ? "/dip.png" : "/dip2.webp";
 
 
 
@@ -58,6 +58,27 @@ export function Hero() {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-20 items-center w-full">
           {/* Content */}
           <motion.div style={{ y, opacity }} className="order-2 lg:order-1">
+            {/* <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.05 }}
+              className="flex flex-wrap gap-2 mb-6"
+            >
+              {[
+                "Product Strategy",
+                "System Design",
+                "Engineering Leadership",
+                "Automation",
+              ].map((skill) => (
+                <div
+                  key={skill}
+                  className="px-3 py-1 rounded-full bg-primary/5 border border-primary/10 text-xs font-medium text-muted-foreground"
+                >
+                  {skill}
+                </div>
+              ))}
+            </motion.div> */}
+
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -75,7 +96,7 @@ export function Hero() {
               className="flex flex-wrap gap-3 mb-4"
             >
               {[
-                { icon: <Target className="w-4 h-4" />, text: "Collaborate" },
+                { icon: <Target className="w-4 h-4" />, text: "Think" },
                 { icon: <Sparkles className="w-4 h-4" />, text: "Create" },
                 { icon: <Zap className="w-4 h-4" />, text: "Innovate" },
               ].map((keyword, index) => (
@@ -98,24 +119,11 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-xl mb-6 leading-relaxed"
             >
-              Technical Product Engineer crafting digital experiences at the intersection of{" "}
-              <span className="text-primary font-medium">design</span>,{" "}
-              <span className="text-primary font-medium">technology</span>, and{" "}
-              <span className="text-primary font-medium">strategy</span>.
+              Engineer . Researcher . Writer<br />
+              <span className="text-primary font-medium">Building thoughtful digital systems</span>
             </motion.p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.25 }}
-              className="mb-6 p-4 rounded-xl bg-primary/5 border border-primary/10"
-            >
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                <span className="text-foreground font-medium">Product Strategy</span> • System Design •{" "}
-                <span className="text-foreground font-medium">Engineering Leadership</span> • AI & Automation
-              </p>
-            </motion.div>
-{/* 
+            {/* 
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -191,7 +199,7 @@ export function Hero() {
                   Design-Driven
                 </p>
                 <p className="text-[11px] font-semibold text-foreground">
-                  Precision & Craft
+                  Fast Learner
                 </p>
               </motion.div>
 
@@ -211,7 +219,7 @@ export function Hero() {
                   Solution-First
                 </p>
                 <p className="text-[11px] font-semibold text-foreground">
-                  Learn • Build • Ship
+                  Design • Build • Ship
                 </p>
               </motion.div>
 
@@ -231,7 +239,7 @@ export function Hero() {
                   Latency Enjoyer
                 </p>
                 <p className="text-[11px] font-semibold text-foreground">
-                  Optimizing Everything
+                  Passion in Optimizing
                 </p>
               </motion.div>
 
@@ -251,7 +259,7 @@ export function Hero() {
                   Experience
                 </p>
                 <p className="text-[11px] font-semibold text-foreground">
-                  3+ Years
+                  4+ Years
                 </p>
               </motion.div>
 

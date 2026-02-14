@@ -2,22 +2,31 @@
 
 import { useState, useEffect, useCallback } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { ThemeToggle } from "./theme-toggle"
+import { useTheme } from "next-themes"
 
 const navItems = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/career", label: "Career" },
-  { href: "/contact", label: "Contact" },
+  { href: "/purpose", label: "Purpose" },
+  { href: "/process", label: "Process" },
+  { href: "https://dev.dipchakraborty.com", label: "Works", isExternal: true },
+  { href: "https://writings.dipchakraborty.com", label: "Writings", isExternal: true },
 ]
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
   const pathname = usePathname()
+  const { theme, resolvedTheme } = useTheme()
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   // Optimized scroll handler with useCallback and debounced scroll detection
   const handleScroll = useCallback(() => {
@@ -53,13 +62,20 @@ export function Navigation() {
         )}
       >
         <div className="max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between">
-          <Link href="/" className="group">
-            <motion.span className="text-lg md:text-xl font-semibold tracking-tight" whileHover={{ scale: 1.02 }}>
-              <span className="text-primary">D</span>
-              <span className="text-foreground/90">ip</span>
-              <span className="text-primary ml-1">C</span>
-              <span className="text-foreground/90">hakraborty</span>
-            </motion.span>
+          <Link href="/" className="group flex items-center">
+            <motion.div whileHover={{ scale: 1.05 }} className="relative h-8 md:h-10 w-32 md:w-40">
+              {mounted ? (
+                <Image
+                  src={resolvedTheme === "dark" ? "/dc-logo-dark-v3_1.png" : "/dc-logo-transperant.png"}
+                  alt="Dip Chakraborty Logo"
+                  fill
+                  className="object-contain transition-opacity duration-300"
+                  priority
+                />
+              ) : (
+                <div className="h-full w-full bg-muted/20 animate-pulse rounded" />
+              )}
+            </motion.div>
           </Link>
 
           {/* Desktop Navigation */}
@@ -68,6 +84,8 @@ export function Navigation() {
               <Link
                 key={item.href}
                 href={item.href}
+                target={item.isExternal ? "_blank" : undefined}
+                rel={item.isExternal ? "noopener noreferrer" : undefined}
                 className="relative px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 {pathname === item.href && (
@@ -80,16 +98,22 @@ export function Navigation() {
                 <span className={cn("relative z-10", pathname === item.href && "text-primary")}>{item.label}</span>
               </Link>
             ))}
+            <div className="ml-2 pl-2 border-l border-border/50">
+              <ThemeToggle />
+            </div>
           </nav>
 
-          {/* Mobile Menu Toggle */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 text-foreground"
-            aria-label="Toggle menu"
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Mobile Menu Toggle & Theme Toggle */}
+          <div className="flex items-center gap-2 md:hidden">
+            <ThemeToggle />
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="p-2 text-foreground"
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </motion.header>
 
@@ -118,6 +142,8 @@ export function Navigation() {
                 >
                   <Link
                     href={item.href}
+                    target={item.isExternal ? "_blank" : undefined}
+                    rel={item.isExternal ? "noopener noreferrer" : undefined}
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={cn(
                       "text-3xl font-light transition-colors",
