@@ -115,6 +115,7 @@ export function Preloader() {
                   alt="DC Icon"
                   width={48}
                   height={48}
+                  loading="eager"
                   className="object-contain"
                 />
               </motion.div>
