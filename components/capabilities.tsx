@@ -168,15 +168,16 @@ export function Capabilities() {
 
   return (
     <section className="py-16 px-6">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-5xl mx-auto space-y-16">
+        {/* SECTION 1: Core Products & Platforms */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-12"
+          className="space-y-6"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-            Technical Focus
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+            Core Products & Platforms
           </h2>
 
           <div className="glass rounded-2xl border border-border/50 bg-muted/5">
@@ -220,72 +221,84 @@ export function Capabilities() {
           </div>
         </motion.div>
 
+        {/* SECTION 2: Engineering Foundations */}
         <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="grid md:grid-cols-2 gap-4"
+          className="space-y-6"
         >
-          {capabilityGroups.map((group, index) => (
-            <motion.div key={group.title} variants={item} className="group">
-              <button
-                onClick={() => setExpandedIndex(expandedIndex === index ? null : index)}
-                className="w-full text-left"
-              >
-                <motion.div
-                  className="p-5 rounded-xl glass hover:bg-primary/5 transition-all cursor-pointer border border-border/50 group-hover:border-primary/20"
-                  whileHover={{ y: -2 }}
-                >
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="flex items-start gap-3 flex-1">
-                      <div className="text-primary/70 group-hover:text-primary transition-colors mt-0.5 flex-shrink-0">
-                        {group.icon}
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="font-semibold text-foreground text-base">{group.title}</h3>
-                      </div>
-                    </div>
-                    <ChevronDown
-                      className={cn(
-                        "w-5 h-5 text-muted-foreground flex-shrink-0 transition-transform duration-300",
-                        expandedIndex === index ? "rotate-180" : ""
-                      )}
-                    />
-                  </div>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+            Engineering Foundations
+          </h2>
 
-                  {/* Expanded content */}
+          <motion.div
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="grid md:grid-cols-2 gap-4"
+          >
+            {capabilityGroups.map((group, index) => (
+              <motion.div key={group.title} variants={item} className="group">
+                <button
+                  onClick={() => setExpandedIndex(expandedIndex === index ? null : index)}
+                  className="w-full text-left"
+                >
                   <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{
-                      opacity: expandedIndex === index ? 1 : 0,
-                      height: expandedIndex === index ? "auto" : 0,
-                    }}
-                    transition={{ duration: 0.3 }}
-                    className="overflow-hidden"
+                    className="p-5 rounded-xl glass hover:bg-primary/5 transition-all cursor-pointer border border-border/50 group-hover:border-primary/20"
+                    whileHover={{ y: -2 }}
                   >
-                    <div className="pt-4 mt-4 border-t border-border/30 space-y-2">
-                      {group.items.map((item, i) => (
-                        <motion.div
-                          key={i}
-                          initial={{ opacity: 0, x: -10 }}
-                          animate={{
-                            opacity: expandedIndex === index ? 1 : 0,
-                            x: expandedIndex === index ? 0 : -10,
-                          }}
-                          transition={{ delay: i * 0.05 }}
-                          className="text-sm text-muted-foreground flex items-start gap-2"
-                        >
-                          <span className="text-primary/50 flex-shrink-0 mt-1">•</span>
-                          <span>{item}</span>
-                        </motion.div>
-                      ))}
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="flex items-start gap-3 flex-1">
+                        <div className="text-primary/70 group-hover:text-primary transition-colors mt-0.5 flex-shrink-0">
+                          {group.icon}
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="font-semibold text-foreground text-base">{group.title}</h3>
+                        </div>
+                      </div>
+                      <ChevronDown
+                        className={cn(
+                          "w-5 h-5 text-muted-foreground flex-shrink-0 transition-transform duration-300",
+                          expandedIndex === index ? "rotate-180" : ""
+                        )}
+                      />
                     </div>
+
+                    {/* Expanded content */}
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{
+                        opacity: expandedIndex === index ? 1 : 0,
+                        height: expandedIndex === index ? "auto" : 0,
+                      }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="pt-4 mt-4 border-t border-border/30 space-y-2">
+                        {group.items.map((item, i) => (
+                          <motion.div
+                            key={i}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{
+                              opacity: expandedIndex === index ? 1 : 0,
+                              x: expandedIndex === index ? 0 : -10,
+                            }}
+                            transition={{ delay: i * 0.05 }}
+                            className="text-sm text-muted-foreground flex items-start gap-2"
+                          >
+                            <span className="text-primary/50 flex-shrink-0 mt-1">•</span>
+                            <span>{item}</span>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </motion.div>
                   </motion.div>
-                </motion.div>
-              </button>
-            </motion.div>
-          ))}
+                </button>
+              </motion.div>
+            ))}
+          </motion.div>
         </motion.div>
       </div>
     </section>
