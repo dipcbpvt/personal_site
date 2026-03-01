@@ -2,21 +2,36 @@
 
 import { motion } from "framer-motion"
 import Link from "next/link"
-import { ArrowUpRight, Briefcase, Rss, Users } from "lucide-react"
+import { ArrowUpRight, Briefcase, Rss, Target, Zap } from "lucide-react"
 
 const links = [
   {
     href: "https://dev.dipchakraborty.com",
     label: "Works",
-    description: "View my portfolio & projects",
+    description: "Projects & Contributions",
     icon: <Briefcase size={24} />,
   },
   {
     href: "https://writings.dipchakraborty.com",
     label: "Blogs",
-    description: "Read my thoughts & articles",
+    description: "Thoughts & Learnings",
     icon: <Rss size={24} />,
   },
+  {
+    href: "/purpose",
+    label: "Purpose",
+    description: "Journey & Vision",
+    icon: <Target size={24} />,
+    internal: true,
+  },
+  {
+    href: "/process",
+    label: "Process",
+    description: "Working Method & System approach",
+    icon: <Zap size={24} />,
+    internal: true,
+  },
+
 ]
 
 export function FloatingLinks() {

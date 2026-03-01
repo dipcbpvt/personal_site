@@ -79,16 +79,6 @@ export function Hero() {
               ))}
             </motion.div> */}
 
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold tracking-tight mb-4 whitespace-nowrap"
-            >
-              <span className="text-foreground">Dip</span>
-              <span className="text-primary ml-2">Chakraborty</span>
-            </motion.h1>
-
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -113,15 +103,29 @@ export function Hero() {
               ))}
             </motion.div>
 
+
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold tracking-tight mb-4 whitespace-nowrap"
+            >
+              <span className="text-foreground">Dip</span>
+              <span className="text-primary ml-2">Chakraborty</span>
+            </motion.h1>
+
             <motion.p
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-xl mb-6 leading-relaxed"
-            >
-              Engineer . Researcher . Writer<br />
-              <span className="text-primary font-medium">Building thoughtful digital systems</span>
+            > Engineer . Researcher . Writer<br />
+              {/* <span className="text-primary font-medium">Building thoughtful digital systems</span> */}
             </motion.p>
+
+
+
+
 
             {/* 
             <motion.div
