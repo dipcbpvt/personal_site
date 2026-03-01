@@ -42,7 +42,7 @@ export function RobotCursor() {
     // ---- Draw the robot on canvas ----
     const drawRobot = useCallback((ctx: CanvasRenderingContext2D, x: number, y: number) => {
         const s = stateRef.current
-        const scale = 0.9
+        const scale = 0.65
         const size = 28 * scale // overall robot size reference
         const halfSize = size / 2
 
@@ -433,13 +433,13 @@ export function RobotCursor() {
             ctx.clearRect(0, 0, canvas.width / (window.devicePixelRatio || 1), canvas.height / (window.devicePixelRatio || 1))
 
             // Spring interpolation towards target
-            const ease = 0.18
+            const ease = 0.25
             s.currentX += (s.targetX - s.currentX) * ease
             s.currentY += (s.targetY - s.currentY) * ease
 
             // Smooth opacity fade in/out
             const targetOpacity = s.visible ? 1 : 0
-            s.opacity += (targetOpacity - s.opacity) * 0.12
+            s.opacity += (targetOpacity - s.opacity) * 0.15
 
             // Walk frame counter
             if (s.isScrolling) {
