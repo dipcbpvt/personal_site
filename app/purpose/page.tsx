@@ -100,41 +100,54 @@ export default function AboutPage() {
                     <p className="text-lg text-muted-foreground leading-relaxed"
                       style={{ textAlign: "justify", textJustify: "inter-word" }}
                     >
-                      Growing up in a home filled with song, where my family practiced music together and I happily joined in, I was always a bit of a dreamer. As a kid, I was obsessed with sports, chasing every game and match I could find. But movies? They hit differently. They made me pause, reflect, and see life from fresh angles.
-                      Science fascinated me, though not in the classic “become a doctor or engineer” way. Through SSC and HSC in the science group, I chased curiosity more than a fixed career path—what made things work, what hidden magic lay in the world around us?
-                    </p>
-
-                    <div className="py-4">
-                      <h4 className="text-2xl font-bold text-foreground">Then came Iron Man</h4>
-                    </div>
-
-                    <p className="text-lg text-muted-foreground leading-relaxed"
-                      style={{ textAlign: "justify", textJustify: "inter-word" }}
-                    >
-                      Watching Tony Stark on screen changed everything. His wit, his relentless problem solving, that sleek suit powered by ingenuity… but most of all, JARVIS. The idea of building my own intelligent companion one that understood me, anticipated needs, and turned ideas into reality, lit a fire. I wanted to create something like that. Not just a tool, but a partner. Tony wasn’t only a hero, he was a builder, an inventor who turned problems into solutions people would actually want. That mindset stuck.
+                      My curiosity about technology began in a place common to many tech enthusiasts - cinema. Growing up with films like The Matrix and Terminator introduced me to the idea that machines and intelligence could reshape the world. But it was Iron Man that made the idea feel personal. Tony Stark wasn’t just a superhero - he was a builder. Constantly tweaking, upgrading, talking to his suit like it was his best friend. I was like… yeah, I wanna be that kind of person.
                     </p>
 
                     <p className="text-lg text-muted-foreground leading-relaxed"
                       style={{ textAlign: "justify", textJustify: "inter-word" }}
                     >
-                      At around 12th grade, I dipped my toes into programming as a hobby. My first lines of Python printed a simple welcome message that felt like magic on the screen. From there, I experimented trying to automate a basic water meter with robotics ideas, tinkering with whatever small project excited me.
+                      I was never the perfect student, but I have always been curious. Toward the end of high school, I began experimenting with programming. A dumb little Python thing that said “Yo what’s good today” every time I booted my laptop. Nothing fancy, but seeing my own words pop up on screen felt straight-up magical. From there it was just non-stop tinkering: random automation hacks, some janky robotics attempts, whatever problem looked fun enough to poke at.
                     </p>
 
                     <p className="text-lg text-muted-foreground leading-relaxed"
                       style={{ textAlign: "justify", textJustify: "inter-word" }}
                     >
-                      Over time, I started seeing software differently, not as cold code, but as art. Like painting or music, programming lets you connect deeply with people. The more creative you are in solving real human needs, the more beautiful and valuable the result becomes.
-                      I approach every challenge with the same lens: What problem does this solve? Why would someone choose this solution? I think of systems the way I think of life—interconnected, evolving, full of potential.
+                      Over time I stopped seeing software as just code. To me, building systems feels closer to architecture or art. The best stuff isn’t about who can write the tightest algorithm - it’s about who actually gets what people need and why they’d ever trust the thing you made. The real question behind every system is simple: What human problem does this solve, and why would someone trust this solution?
                     </p>
 
                     <p className="text-lg text-muted-foreground leading-relaxed"
                       style={{ textAlign: "justify", textJustify: "inter-word" }}
                     >
-                      Alongside code, I stay hungry for history, art, sports, and stories. I love turning what I learn into lessons for others—whether teaching, writing, or simply sharing ideas that spark something in someone else. Today, I’m still that curious kid who got hooked on a movie, but now I channel it into building meaningful things.
+                      Like many engineers, my path hasn’t been smooth. There have been moments of frustration, underestimation, and professional struggles that forced me to ask uncomfortable questions about myself: What skills am I missing? What mindset separates builders from spectators? What does it truly mean to think like an engineer?
+                    </p>
+
+                    <p className="text-lg text-muted-foreground leading-relaxed"
+                      style={{ textAlign: "justify", textJustify: "inter-word" }}
+                    >
+                      Those questions continue to shape how I learn and work. I may learn slowly and in small steps, but I prefer learning deeply - understanding why something works, how it works, and what its strengths and limitations are.
+                    </p>
+
+                    <p className="text-lg text-muted-foreground leading-relaxed"
+                      style={{ textAlign: "justify", textJustify: "inter-word" }}
+                    >
+                      Tech moves insane fast. When I was little, a flip phone felt futuristic. Now we’ve got Generative and Agentic AIs that roast you, reason with you, write your emails, make applications. Wild!
+                      While AI is advancing rapidly, fields like Human–Computer Interaction, AR/VR, robotics, and intelligent systems are redefining how humans and machines collaborate. For these technologies to truly transform everyday life, when the hardware gets cheaper, lighter, and reaches way more people. That’s the part that keeps me up at night.
+                    </p>
+
+                    <p className="text-lg text-muted-foreground leading-relaxed"
+                      style={{ textAlign: "justify", textJustify: "inter-word" }}
+                    >
+                      My goal is simple: build thoughtful tech that fixes real problems and makes the world feel a little more capable, enhance productivity, a little more connected. Even tiny wins count.
+                    </p>
+
+                    <p className="text-lg text-muted-foreground leading-relaxed"
+                      style={{ textAlign: "justify", textJustify: "inter-word" }}
+                    >
+                      Outside of screens I’m still that guy geeking out over history docs, rewatching old movies, yelling at good cricket matches, blasting music way too loud.
                     </p>
 
                     <p className="text-lg text-foreground font-medium leading-relaxed mt-8">
-                      If you’re reading this, maybe we share that same spark. I’d love to connect, collaborate, or just chat about ideas. Thanks for taking the time to read my story. Let’s create something great together.
+                      If any of this vibes with you, hit me up. Would be cool to chat.
                     </p>
                   </motion.div>
                 </section>
