@@ -10,12 +10,7 @@ import { cn } from "@/lib/utils"
 import { ThemeToggle } from "./theme-toggle"
 import { useTheme } from "next-themes"
 
-const navItems = [
-  { href: "/purpose", label: "Purpose" },
-  { href: "/process", label: "Process" },
-  { href: "https://dev.dipchakraborty.com", label: "Works", isExternal: true },
-  { href: "https://writings.dipchakraborty.com", label: "Writings", isExternal: true },
-]
+const navItems: { href: string; label: string; isExternal?: boolean }[] = []
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
