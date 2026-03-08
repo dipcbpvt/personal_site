@@ -68,7 +68,7 @@ export default function HomePage() {
 
           <div className="flex-1 min-w-0 pb-32 lg:pb-20">
             {/* 1. The Story So Far */}
-            <div className="max-w-5xl mx-auto px-6 py-20">
+            <div className="max-w-5xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
               <section id="intro">
                 <SectionHeader
                   label="Purpose"

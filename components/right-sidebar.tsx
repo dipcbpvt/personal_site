@@ -44,32 +44,9 @@ const socialLinks = [
 export function RightSidebar() {
     const isMobile = useIsMobile()
 
-    // Mobile version - horizontal links above bottom navigation
+    // Mobile version - hide on mobile (moved to hamburger menu)
     if (isMobile) {
-        return (
-            <aside className="lg:hidden fixed top-20 right-2 z-40 flex gap-2 text-sm text-muted-foreground">
-                {/* Social Icons Grid */}
-                <div className="flex gap-2 glass rounded-xl p-2 backdrop-blur-xl border border-border/50">
-                    {socialLinks.map((social) => (
-                        <motion.div
-                            key={social.name}
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.95 }}
-                        >
-                            <Link
-                                href={social.href}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center justify-center p-2 rounded-lg hover:bg-muted/50 transition-colors"
-                                aria-label={social.name}
-                            >
-                                <social.icon className="w-5 h-5 text-muted-foreground hover:text-foreground transition-colors" />
-                            </Link>
-                        </motion.div>
-                    ))}
-                </div>
-            </aside>
-        )
+        return null
     }
 
     // Desktop version
