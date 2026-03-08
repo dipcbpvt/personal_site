@@ -1,9 +1,10 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { cn } from "@/lib/utils"
 import { useIsMobile } from "@/hooks/use-mobile"
+import { ChevronDown } from "lucide-react"
 
 const sections = [
   { id: "intro", label: "My Purpose" },
@@ -13,6 +14,8 @@ const sections = [
 
 export function PurposeSidebar() {
   const [activeSection, setActiveSection] = useState("intro")
+  const [isTabsVisible, setIsTabsVisible] = useState(false)
+  const isMobile = useIsMobile()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -48,30 +51,59 @@ export function PurposeSidebar() {
     }
   }
 
-  const isMobile = useIsMobile()
-
-  // Mobile version - horizontal tabs
+  // Mobile version - collapsible tabs
   if (isMobile) {
     return (
-      <nav className="flex gap-2 overflow-x-auto pb-2 mb-6 -mx-6 px-6 scrollbar-hide">
-        {sections.map((section, index) => (
-          <motion.button
-            key={section.id}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.05 }}
-            onClick={() => scrollToSection(section.id)}
-            className={cn(
-              "flex-shrink-0 py-2 px-4 rounded-lg transition-all text-sm font-medium whitespace-nowrap",
-              activeSection === section.id
-                ? "text-primary bg-primary/10 border border-primary/30"
-                : "text-muted-foreground hover:text-foreground hover:bg-secondary/50 border border-border/30",
-            )}
+      <>
+        <motion.button
+          onClick={() => setIsTabsVisible(!isTabsVisible)}
+          className="w-full mb-6 flex items-center justify-between p-4 rounded-lg glass border border-border/50 hover:border-primary/30 transition-all"
+          whileHover={{ backgroundColor: "rgba(59, 130, 246, 0.05)" }}
+        >
+          <span className="text-sm font-medium text-foreground">
+            {sections.find(s => s.id === activeSection)?.label || "Sections"}
+          </span>
+          <motion.div
+            animate={{ rotate: isTabsVisible ? 180 : 0 }}
+            transition={{ duration: 0.3 }}
           >
-            {section.label}
-          </motion.button>
-        ))}
-      </nav>
+            <ChevronDown size={18} className="text-muted-foreground" />
+          </motion.div>
+        </motion.button>
+
+        <AnimatePresence>
+          {isTabsVisible && (
+            <motion.nav
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              className="flex gap-2 overflow-x-auto pb-2 mb-6 -mx-6 px-6 scrollbar-hide"
+            >
+              {sections.map((section, index) => (
+                <motion.button
+                  key={section.id}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: index * 0.05 }}
+                  onClick={() => {
+                    scrollToSection(section.id)
+                    setIsTabsVisible(false)
+                  }}
+                  className={cn(
+                    "flex-shrink-0 py-2 px-4 rounded-lg transition-all text-sm font-medium whitespace-nowrap",
+                    activeSection === section.id
+                      ? "text-primary bg-primary/10 border border-primary/30"
+                      : "text-muted-foreground hover:text-foreground hover:bg-secondary/50 border border-border/30",
+                  )}
+                >
+                  {section.label}
+                </motion.button>
+              ))}
+            </motion.nav>
+          )}
+        </AnimatePresence>
+      </>
     )
   }
 

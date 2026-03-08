@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { ArrowUpRight, Briefcase, Rss, Target, Zap } from "lucide-react"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 const links = [
   {
@@ -35,6 +36,13 @@ const links = [
 ]
 
 export function FloatingLinks() {
+  const isMobile = useIsMobile()
+
+  // Hide on mobile - too cramped
+  if (isMobile) {
+    return null
+  }
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
       {links.map((link, index) => (

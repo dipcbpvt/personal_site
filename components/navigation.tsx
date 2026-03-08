@@ -138,18 +138,50 @@ export function Navigation() {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 50, opacity: 0 }}
               transition={{ delay: 0.1 }}
-              className="flex flex-col items-start justify-start h-full overflow-y-auto px-6 py-8 gap-12"
+              className="flex flex-col items-center justify-start h-full overflow-y-auto px-6 py-8 max-w-sm mx-auto w-full"
             >
+              {/* Social Links Grid */}
+              <div className="w-full">
+                <div className="grid grid-cols-2 gap-3 mb-12">
+                  {socialLinks.map((social, index) => (
+                    <motion.div
+                      key={social.name}
+                      initial={{ scale: 0.8, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      transition={{ delay: 0.15 + index * 0.05, type: "spring", bounce: 0.5 }}
+                    >
+                      <Link
+                        href={social.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex flex-col items-center justify-center gap-2 p-4 rounded-xl glass hover:bg-primary/20 border border-border/50 transition-all duration-300 group"
+                        aria-label={social.name}
+                      >
+                        <social.icon className="w-6 h-6 text-primary group-hover:scale-110 transition-transform" />
+                        <span className="text-xs font-medium text-muted-foreground group-hover:text-foreground">{social.name}</span>
+                      </Link>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Divider */}
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.35 }}
+                className="w-12 h-px bg-border/50 mb-12"
+              />
+
               {/* Navigation Items */}
               {navItems.length > 0 && (
-                <nav className="w-full flex flex-col gap-4">
-                  <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Navigation</h3>
+                <nav className="w-full flex flex-col gap-3 mb-8">
                   {navItems.map((item, index) => (
                     <motion.div
                       key={item.href}
-                      initial={{ y: 20, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ delay: 0.1 + index * 0.05 }}
+                      initial={{ x: -20, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      transition={{ delay: 0.4 + index * 0.06 }}
                     >
                       <Link
                         href={item.href}
@@ -157,8 +189,8 @@ export function Navigation() {
                         rel={item.isExternal ? "noopener noreferrer" : undefined}
                         onClick={() => setIsMobileMenuOpen(false)}
                         className={cn(
-                          "text-lg font-light transition-colors flex items-center gap-2",
-                          pathname === item.href ? "text-primary" : "text-muted-foreground hover:text-foreground",
+                          "text-base font-light transition-colors block px-1 py-2",
+                          pathname === item.href ? "text-primary font-medium" : "text-muted-foreground hover:text-foreground",
                         )}
                       >
                         {item.label}
@@ -167,56 +199,6 @@ export function Navigation() {
                   ))}
                 </nav>
               )}
-
-              {/* External Links */}
-              <nav className="w-full flex flex-col gap-4 border-t border-border/50 pt-8">
-                <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Resources</h3>
-                {externalLinks.map((link, index) => (
-                  <motion.div
-                    key={link.href}
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.15 + index * 0.05 }}
-                  >
-                    <Link
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                      className="text-lg font-light text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2"
-                    >
-                      {link.title}
-                      <link.icon className="w-4 h-4" />
-                    </Link>
-                  </motion.div>
-                ))}
-              </nav>
-
-              {/* Social Links */}
-              <div className="w-full flex flex-col gap-4 border-t border-border/50 pt-8">
-                <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Connect</h3>
-                <div className="flex flex-wrap gap-4">
-                  {socialLinks.map((social, index) => (
-                    <motion.div
-                      key={social.name}
-                      initial={{ y: 20, opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
-                      transition={{ delay: 0.2 + index * 0.05 }}
-                    >
-                      <Link
-                        href={social.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 p-3 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary transition-colors"
-                        aria-label={social.name}
-                      >
-                        <social.icon className="w-5 h-5" />
-                        <span className="text-sm font-medium">{social.name}</span>
-                      </Link>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
             </motion.div>
           </motion.div>
         )}

@@ -95,20 +95,35 @@ export default function HomePage() {
                   <div className="absolute -bottom-4 -right-4 w-32 h-32 glass rounded-xl -z-10 opacity-50" />
                 </motion.div>
 
-                <div className="glass rounded-3xl p-6 md:p-10 border border-border/50 bg-card/10">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="glass rounded-3xl p-4 sm:p-6 md:p-10 border border-border/50 bg-card/10">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
                     {/* Part 1 */}
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
-                      className="glass rounded-2xl p-8 border border-border/50 bg-background/50 h-full"
+                      className="glass rounded-2xl p-4 sm:p-6 md:p-8 border border-border/50 bg-background/50 h-full"
                     >
-                      <h3 id="initiation" className="text-xl font-bold text-foreground mb-4">
+                      <h3 id="initiation" className="text-lg sm:text-xl font-bold text-foreground mb-4">
                         The Initiation of the path
                       </h3>
-                      <p className="text-lg text-muted-foreground leading-relaxed" style={{ textAlign: "justify", textJustify: "inter-word" }}>
-                        My curiosity about technology began in a place common to many tech enthusiasts - cinema. Growing up with films like The Matrix and Terminator introduced me to the idea that machines and intelligence could reshape the world. But it was Iron Man that made the idea feel personal. <span className="font-serif italic text-foreground">Tony Stark wasn’t just a superhero - he was a builder. Constantly tweaking, upgrading, talking to his suit like it was his best friend. I was like… yeah, I wanna be that kind of person.</span> I was never the perfect student, but I have always been curious. Toward the end of high school, I began experimenting with programming. <span className="font-serif italic text-foreground">A dumb little Python thing that said “Yo what’s good today” every time I booted my laptop. Nothing fancy, but seeing my own words pop up on screen felt straight-up magical.</span> From there it was just non-stop tinkering: random automation hacks, some janky robotics attempts, whatever problem looked fun enough to poke at. Over time I stopped seeing software as just code. To me, building systems feels closer to architecture or art. The best stuff isn’t about who can write the tightest algorithm - it’s about who actually gets what people need and why they’d ever trust the thing you made. The real question behind every system is simple: <span className="font-serif italic text-foreground">What human problem does this solve, and why would someone trust this solution?</span>
+                      <p className="text-base sm:text-lg text-muted-foreground leading-relaxed text-left">
+                        My curiosity about technology began in a place common to many tech enthusiasts - cinema. Growing up with films like The Matrix and Terminator introduced me to the idea that machines and intelligence could reshape the world. But it was Iron Man that made the idea feel personal. <span className="font-serif italic text-foreground">Tony Stark wasn't just a superhero - he was a builder. Constantly tweaking, upgrading, talking to his suit like it was his best friend. I was like… yeah, I wanna be that kind of person.</span> I was never the perfect student, but I have always been curious. Toward the end of high school, I began experimenting with programming. <span className="font-serif italic text-foreground">A dumb little Python thing that said "Yo what's good today" every time I booted my laptop. Nothing fancy, but seeing my own words pop up on screen felt straight-up magical.</span> From there it was just non-stop tinkering: random automation hacks, some janky robotics attempts, whatever problem looked fun enough to poke at. Over time I stopped seeing software as just code. To me, building systems feels closer to architecture or art. The best stuff isn't about who can write the tightest algorithm - it's about who actually gets what people need and why they'd ever trust the thing you made. The real question behind every system is simple: <span className="font-serif italic text-foreground">What human problem does this solve, and why would someone trust this solution?</span>
+                      </p>
+                    </motion.div>
+
+                    {/* Part 2 */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      className="glass rounded-2xl p-4 sm:p-6 md:p-8 border border-border/50 bg-background/50 h-full"
+                    >
+                      <h3 id="setbacks" className="text-lg sm:text-xl font-bold text-foreground mb-4">
+                        Setbacks and Expansions
+                      </h3>
+                      <p className="text-base sm:text-lg text-muted-foreground leading-relaxed text-left">
+                        Like many engineers, there have been moments of frustration, underestimation, and professional struggles that forced me to ask uncomfortable questions about myself: <span className="font-serif italic text-foreground">What skills am I missing? What mindset separates builders from spectators? What does it truly mean to think like an engineer? Those questions shape how I learn and work.</span> I may learn slowly but deeply - understanding why something works, how it works. Tech moves insane fast. When I was little, a flip phone felt futuristic. Now we've got Generative and Agentic AIs that roast you, reason with you, write your emails, make applications. Wild! While AI is advancing rapidly, fields like Human–Computer Interaction, AR/VR, robotics, and intelligent systems are redefining how humans and machines collaborate. <span className="font-serif italic text-foreground">For these technologies to truly transform everyday life, when the hardware gets cheaper, lighter, and reaches way more people.</span> That's the part that keeps me up at night. My goal is simple: build thoughtful tech that fixes real problems and makes the world feel a little more capable, enhance productivity, a little more connected. Even tiny wins count. Outside of screens I'm still that guy geeking out over history docs, rewatching old movies, yelling at good cricket matches, blasting music way too loud.
                       </p>
                     </motion.div>
 
