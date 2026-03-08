@@ -73,6 +73,9 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   colorScheme: "light dark",
+  maximumScale: 5,
+  userScalable: true,
+  viewportFit: "cover",
 }
 
 export default function RootLayout({
@@ -80,9 +83,48 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  // Structured data (JSON-LD) for SEO
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Dip Chakraborty",
+    url: "https://dipchakraborty.com",
+    jobTitle: "Software Engineer & Systems Architect",
+    email: "hello@dipchakraborty.com",
+    image: "https://dipchakraborty.com/og-image.png",
+    sameAs: [
+      "https://github.com/dipbhai",
+      "https://twitter.com/dipchakraborty_",
+      "https://linkedin.com/in/dip-chakraborty/",
+    ],
+    worksFor: {
+      "@type": "Organization",
+      name: "Independent",
+    },
+    knowsAbout: [
+      "Full-Stack Development",
+      "System Design",
+      "API Development",
+      "PWA Development",
+      "DevOps",
+      "AI & Automation",
+    ],
+  }
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+        />
+        
+        {/* Performance Optimizations */}
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        
+        {/* Google Analytics - Optional, add your tracking ID */}
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5313950468897502"

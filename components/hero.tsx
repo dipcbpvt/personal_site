@@ -1,13 +1,15 @@
 "use client"
 
-import { motion, useScroll, useTransform } from "framer-motion"
-import { useRef, useState } from "react"
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
+import { useRef, useState, useEffect } from "react"
 import Image from "next/image"
 import { SocialBar } from "./social-bar"
 import { FloatingLinks } from "./floating-links"
 import { Target, Sparkles, Zap } from "lucide-react"
-import { useTheme } from "next-themes";
-import { useEffect } from "react";
+import { useTheme } from "next-themes"
+import { useParallax } from "@/hooks/use-parallax"
+import { useIsMobile } from "@/hooks/use-mobile"
+import { fadeInUpVariants, containerVariants } from "@/lib/animation-variants"
 
 const floatingTerms = [
   { text: "Full-Stack", delay: 0, x: 120, y: -80 },
@@ -31,33 +33,48 @@ const floatingTerms = [
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null)
   const [isImageHovered, setIsImageHovered] = useState(false)
+  const isMobile = useIsMobile()
+  
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
   })
 
-  const y = useTransform(scrollYProgress, [0, 1], [0, 200])
+  // Parallax effect for text
+  const y = useTransform(scrollYProgress, [0, 1], [0, isMobile ? 100 : 200])
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0])
-  const { resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, isMobile ? 0.98 : 0.95])
+
+  const { resolvedTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    setMounted(true)
+  }, [])
 
-  const portraitSrc = resolvedTheme === "light" ? "/dip.png" : "/dip2.webp";
+  const portraitSrc = resolvedTheme === "light" ? "/dip.png" : "/dip2.webp"
+
+  // Mobile optimized animation - disable expensive 3D on mobile
+  const prefersReducedMotion = usePrefersReducedMotion()
 
 
 
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen flex flex-col justify-between py-12 md:py-16 pt-16 md:pt-20"
+      className="relative min-h-screen flex flex-col justify-between py-12 md:py-16 pt-16 md:pt-20 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 md:px-6 w-full flex-1 flex items-center">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-20 items-center w-full">
           {/* Content */}
-          <motion.div style={{ y, opacity }} className="order-2 lg:order-1">
+          <motion.div 
+            style={{ y, opacity, scale }} 
+            className="order-2 lg:order-1"
+            variants={!isMobile && !prefersReducedMotion ? containerVariants : undefined}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+          >
             {/* <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -290,4 +307,23 @@ export function Hero() {
       </motion.div>
     </section>
   )
+}
+
+// Hook to check for prefers-reduced-motion
+function usePrefersReducedMotion() {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
+    setPrefersReducedMotion(mediaQuery.matches)
+
+    const handleChange = (e: MediaQueryListEvent) => {
+      setPrefersReducedMotion(e.matches)
+    }
+
+    mediaQuery.addEventListener("change", handleChange)
+    return () => mediaQuery.removeEventListener("change", handleChange)
+  }, [])
+
+  return prefersReducedMotion
 }

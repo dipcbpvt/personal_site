@@ -66,7 +66,7 @@ export default function HomePage() {
         <div className="max-w-[1400px] mx-auto w-full flex flex-col lg:flex-row relative items-start gap-4 xl:gap-8">
           <LeftSidebar />
 
-          <div className="flex-1 min-w-0 pb-20">
+          <div className="flex-1 min-w-0 pb-32 lg:pb-20">
             {/* 1. The Story So Far */}
             <div className="max-w-5xl mx-auto px-6 py-20">
               <section id="intro">
