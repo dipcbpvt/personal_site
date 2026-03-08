@@ -65,7 +65,7 @@ const followChannels = [
 
 export function CTASection() {
   return (
-    <section className="relative py-8 px-6 md:py-12">
+    <section className="relative py-12 px-4 md:px-6 md:py-16 lg:py-20">
       <div className="max-w-5xl mx-auto space-y-12">
         {/* First Row - Heading */}
         <motion.div
@@ -74,29 +74,29 @@ export function CTASection() {
           viewport={{ once: true }}
           className="text-center"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-2">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 leading-tight">
             Let's <span className="text-primary">Connect!</span>
           </h2>
-          <p className="text-base md:text-lg text-foreground/70">Open to thoughtful conversations</p>
+          <p className="text-sm sm:text-base md:text-lg text-foreground/70">Open to thoughtful conversations</p>
         </motion.div>
 
         {/* Second Row - Two Equal Sized Cards */}
-        <div className="grid md:grid-cols-2 gap-8 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 auto-rows-fr">
           {/* Action Card */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="rounded-2xl bg-primary/5 border border-primary/20 p-8 flex flex-col items-center justify-center space-y-6"
+            className="rounded-2xl bg-primary/5 border border-primary/20 p-6 sm:p-8 flex flex-col items-center justify-center space-y-4 sm:space-y-6 h-full min-h-[300px] sm:min-h-[280px]"
           >
             <Button
               asChild
               size="lg"
-              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl h-14 text-base font-medium max-w-xs"
+              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl h-12 sm:h-14 text-sm sm:text-base font-medium"
             >
               <a href="mailto:connect@dipchakraborty.com">
-                <Mail className="mr-2 h-5 w-5" />
+                <Mail className="mr-2 h-4 sm:h-5 w-4 sm:w-5" />
                 Email
               </a>
             </Button>
@@ -105,10 +105,10 @@ export function CTASection() {
               asChild
               variant="outline"
               size="lg"
-              className="w-full rounded-xl h-14 text-base font-medium border-primary/30 hover:bg-primary/10 hover:border-primary max-w-xs"
+              className="w-full rounded-xl h-12 sm:h-14 text-sm sm:text-base font-medium border-primary/30 hover:bg-primary/10 hover:border-primary"
             >
               <a href="https://calendly.com/dipcb05" target="_blank" rel="noopener noreferrer">
-                <Calendar className="mr-2 h-5 w-5" />
+                <Calendar className="mr-2 h-4 sm:h-5 w-4 sm:w-5" />
                 Schedule a Call
               </a>
             </Button>
@@ -120,20 +120,21 @@ export function CTASection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="rounded-2xl bg-primary/5 border border-primary/20 p-8 flex flex-col items-center justify-center space-y-8"
+            className="rounded-2xl bg-primary/5 border border-primary/20 p-6 sm:p-8 flex flex-col items-center justify-center space-y-8 h-full min-h-[300px] sm:min-h-[280px]"
           >
             {/* DM Here Section */}
             <div className="w-full text-center">
-              <h4 className="text-sm font-semibold mb-4 text-foreground/80">DM Me</h4>
-              <div className="flex gap-4 justify-center">
-                {dmChannels.map((channel, index) => (
+              <h4 className="text-xs sm:text-sm font-semibold mb-4 text-foreground/80 uppercase tracking-wide">DM Me</h4>
+              <div className="flex gap-3 sm:gap-4 justify-center flex-wrap">
+                {dmChannels.map((channel) => (
                   <motion.a
                     key={channel.label}
                     href={channel.href}
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.15 }}
-                    className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary border border-primary/20 hover:border-primary/40 transition-colors"
+                    whileTap={{ scale: 0.95 }}
+                    className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-primary/10 flex items-center justify-center text-primary border border-primary/20 hover:border-primary/40 transition-colors active:scale-95"
                     title={channel.label}
                   >
                     {channel.icon}
@@ -142,18 +143,22 @@ export function CTASection() {
               </div>
             </div>
 
+            {/* Divider */}
+            <div className="w-12 h-px bg-primary/20" />
+
             {/* Follow Me Section */}
             <div className="w-full text-center">
-              <h4 className="text-sm font-semibold mb-4 text-foreground/80">Follow Me</h4>
-              <div className="flex gap-4 justify-center flex-wrap">
-                {followChannels.map((channel, index) => (
+              <h4 className="text-xs sm:text-sm font-semibold mb-4 text-foreground/80 uppercase tracking-wide">Follow Me</h4>
+              <div className="flex gap-3 sm:gap-4 justify-center flex-wrap">
+                {followChannels.map((channel) => (
                   <motion.a
                     key={channel.label}
                     href={channel.href}
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.15 }}
-                    className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary border border-primary/20 hover:border-primary/40 transition-colors"
+                    whileTap={{ scale: 0.95 }}
+                    className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-primary/10 flex items-center justify-center text-primary border border-primary/20 hover:border-primary/40 transition-colors active:scale-95"
                     title={channel.label}
                   >
                     {channel.icon}
