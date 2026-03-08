@@ -55,7 +55,7 @@ const passions = [
 
 export default function HomePage() {
   return (
-    <main className="relative min-h-screen bg-background overflow-x-clip">
+    <main className="relative min-h-screen bg-background overflow-x-clip w-full">
       <SpotlightBg />
       <ThreeBackground />
       <Navigation />

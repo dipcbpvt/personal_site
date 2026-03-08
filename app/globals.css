@@ -126,11 +126,15 @@
 
 /* optimized animations to use transform and opacity only for 60fps performance */
 @layer base {
+  html {
+    position: relative;
+  }
   * {
     @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
+    position: relative;
   }
   ::selection {
     background: rgba(59, 130, 246, 0.3);

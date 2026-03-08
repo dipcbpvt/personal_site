@@ -27,5 +27,5 @@ export function useScrollAnimation(
   const opacity = useTransform(scrollYProgress, [fadeStart, fadeEnd], [1, 0])
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.98])
 
-  return { ref, scrollProgress, y, opacity, scale }
+  return { ref, scrollProgress: scrollYProgress, y, opacity, scale }
 }
