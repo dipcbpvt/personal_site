@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { ExternalLink, Github, Linkedin, Mail, Twitter } from "lucide-react"
 import Link from "next/link"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 const links = [
     {
@@ -41,6 +42,14 @@ const socialLinks = [
 ]
 
 export function RightSidebar() {
+    const isMobile = useIsMobile()
+
+    // Mobile version - hide on mobile (moved to hamburger menu)
+    if (isMobile) {
+        return null
+    }
+
+    // Desktop version
     return (
         <aside className="hidden lg:flex flex-col w-[160px] sticky top-32 h-fit pt-4 gap-8 text-sm text-muted-foreground mr-6">
 

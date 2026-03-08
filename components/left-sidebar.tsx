@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import { motion } from "framer-motion"
 import { cn } from "@/lib/utils"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 const sections = [
     { id: "intro", label: "The Story So Far" },
@@ -15,6 +16,7 @@ const sections = [
 export function LeftSidebar() {
     const [activeSection, setActiveSection] = useState("intro")
     const prevScrollY = useRef(0)
+    const isMobile = useIsMobile()
 
     useEffect(() => {
         let currentActiveId = activeSection
@@ -55,6 +57,35 @@ export function LeftSidebar() {
         }
     }
 
+    // Mobile version - horizontal scrollable tabs
+    if (isMobile) {
+        return (
+            <aside className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-t border-border/50 glass">
+                <nav className="flex gap-0 overflow-x-auto overflow-y-hidden py-2 px-2 scrollbar-hide">
+                    {sections.map(({ id, label }) => {
+                        const isActive = activeSection === id
+                        return (
+                            <a
+                                key={id}
+                                href={`#${id}`}
+                                onClick={(e) => handleClick(e, id)}
+                                className={cn(
+                                    "flex-shrink-0 px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-300 whitespace-nowrap",
+                                    isActive
+                                        ? "bg-primary text-primary-foreground shadow-lg"
+                                        : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                                )}
+                            >
+                                {label}
+                            </a>
+                        )
+                    })}
+                </nav>
+            </aside>
+        )
+    }
+
+    // Desktop version - vertical sidebar
     return (
         <aside className="hidden lg:block w-[240px] sticky top-32 h-[calc(100vh-8rem)] overflow-y-auto overflow-x-hidden p-4">
             <nav className="flex flex-col gap-2">
