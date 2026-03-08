@@ -16,6 +16,34 @@ const jetbrainsMono = JetBrains_Mono({
   variable: "--font-mono",
 })
 
+// Structured data (JSON-LD) for SEO - move outside component to avoid hydration mismatch
+const SCHEMA_DATA = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Dip Chakraborty",
+  url: "https://dipchakraborty.com",
+  jobTitle: "Software Engineer & Systems Architect",
+  email: "hello@dipchakraborty.com",
+  image: "https://dipchakraborty.com/og-image.png",
+  sameAs: [
+    "https://github.com/dipbhai",
+    "https://twitter.com/dipchakraborty_",
+    "https://linkedin.com/in/dip-chakraborty/",
+  ],
+  worksFor: {
+    "@type": "Organization",
+    name: "Independent",
+  },
+  knowsAbout: [
+    "Full-Stack Development",
+    "System Design",
+    "API Development",
+    "PWA Development",
+    "DevOps",
+    "AI & Automation",
+  ],
+}
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://dipchakraborty.com"),
   title: {
@@ -83,41 +111,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  // Structured data (JSON-LD) for SEO
-  const schemaData = {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    name: "Dip Chakraborty",
-    url: "https://dipchakraborty.com",
-    jobTitle: "Software Engineer & Systems Architect",
-    email: "hello@dipchakraborty.com",
-    image: "https://dipchakraborty.com/og-image.png",
-    sameAs: [
-      "https://github.com/dipbhai",
-      "https://twitter.com/dipchakraborty_",
-      "https://linkedin.com/in/dip-chakraborty/",
-    ],
-    worksFor: {
-      "@type": "Organization",
-      name: "Independent",
-    },
-    knowsAbout: [
-      "Full-Stack Development",
-      "System Design",
-      "API Development",
-      "PWA Development",
-      "DevOps",
-      "AI & Automation",
-    ],
-  }
-
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
         {/* Structured Data */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(SCHEMA_DATA) }}
         />
         
         {/* Performance Optimizations */}
