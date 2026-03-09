@@ -49,9 +49,8 @@ export function ThreeBackground() {
             <Canvas
                 camera={{ position: [0, 0, 1] }}
                 dpr={[1, 2]} // Support high-res displays
-                gl={{ antialias: false, powerPreference: "high-performance" }}
+                gl={{ antialias: false, powerPreference: "high-performance", alpha: true }}
             >
-                <color attach="background" args={["transparent" as any]} />
                 <ParticleField />
             </Canvas>
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background pointer-events-none" />

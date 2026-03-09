@@ -22,7 +22,7 @@ export function SpotlightBg() {
   }, [])
 
   return (
-    <div ref={containerRef} className="fixed inset-0 spotlight pointer-events-none z-0">
+    <div ref={containerRef} className="fixed inset-0 spotlight pointer-events-none z-0 relative">
       <motion.div
         className="absolute top-1/4 -left-32 w-96 h-96 rounded-full opacity-20 color-flash"
         style={{
