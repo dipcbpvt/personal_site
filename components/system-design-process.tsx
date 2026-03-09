@@ -583,9 +583,9 @@ export function SystemDesignProcess() {
     const modalStep = modalStepId ? steps.find((s) => s.id === modalStepId) : null
 
     return (
-        <section ref={sectionRef} className="py-20 px-0 overflow-hidden">
+        <section ref={sectionRef} className="py-0 px-0 overflow-hidden">
             {/* ── Narrative Intro ── */}
-            <div className="max-w-5xl mx-auto px-6 mb-14">
+            <div className="max-w-5xl mx-auto px-6 mb-8">
                 <motion.div
                     initial={{ opacity: 0, y: 24 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}

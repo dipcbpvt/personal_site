@@ -152,51 +152,7 @@ export default function AboutPage() {
                   </motion.div>
                 </section>
 
-                {/* Philosophy Section */}
-                <section id="philosophy">
-                  <motion.h3
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-2xl font-semibold text-foreground mb-12 flex items-center gap-3"
-                  >
-                    <Heart className="text-primary" size={24} />
-                    Philosophy & Values
-                  </motion.h3>
 
-                  <div className="grid md:grid-cols-2 gap-6">
-                    {[
-                      {
-                        title: "Continuous Learning",
-                        text: "I treat every project as a learning system. Post-mortems, documentation, and reflection are part of my workflow.",
-                      },
-                      {
-                        title: "User-Centered Design",
-                        text: "I spend time with real users before designing abstractions.",
-                      },
-                      {
-                        title: "Quality Over Quantity",
-                        text: "I prioritize maintainability over speed when systems will live for years.",
-                      },
-                      {
-                        title: "Collaboration",
-                        text: "I invest in communication before optimization.",
-                      },
-                    ].map((item, index) => (
-                      <motion.div
-                        key={item.title}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: index * 0.1 }}
-                        className="glass rounded-2xl p-6"
-                      >
-                        <h4 className="text-lg font-semibold text-foreground mb-2">{item.title}</h4>
-                        <p className="text-muted-foreground text-sm leading-relaxed">{item.text}</p>
-                      </motion.div>
-                    ))}
-                  </div>
-                </section>
 
                 {/* Passions Section */}
                 <section id="hobbies">

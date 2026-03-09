@@ -3,7 +3,7 @@
 import { motion } from "framer-motion"
 
 interface SectionHeaderProps {
-  label: string
+  label?: string
   title: string
   description?: string
 }
@@ -17,7 +17,7 @@ export function SectionHeader({ label, title, description }: SectionHeaderProps)
       transition={{ duration: 0.6 }}
       className="mb-16"
     >
-      <span className="text-xs font-medium tracking-[0.2em] text-primary uppercase mb-4 block">{label}</span>
+      {label && <span className="text-xs font-medium tracking-[0.2em] text-primary uppercase mb-4 block">{label}</span>}
       <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">{title}</h2>
       {description && <p className="text-lg text-muted-foreground max-w-2xl">{description}</p>}
     </motion.div>

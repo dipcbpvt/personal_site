@@ -55,14 +55,14 @@ export default function HomePage() {
         <Hero />
 
         {/* Purpose Section */}
-        <div ref={containerRef} className="py-28 md:py-32">
+        <div ref={containerRef} className="py-16 md:py-24">
           <div className="max-w-7xl mx-auto px-6">
             <SectionHeader
               title="The Story So Far"
               description="A journey from childhood curiosity and Iron Man dreams to building meaningful systems that connect people."
             />
 
-            <div className="mt-16 space-y-24 md:space-y-32">
+            <div className="mt-16 space-y-16 md:space-y-24">
               {/* Story Section with Subsections */}
               <section id="story">
                 <motion.div
@@ -209,59 +209,15 @@ export default function HomePage() {
                 </motion.div>
               </section>
 
-              {/* Philosophy Section */}
-              <section id="philosophy">
-                <motion.h3
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  className="text-2xl md:text-3xl font-semibold text-foreground mb-12 flex items-center gap-3"
-                >
-                  <Heart className="text-primary" size={24} />
-                  Philosophy & Values
-                </motion.h3>
 
-                <div className="grid md:grid-cols-2 gap-6">
-                  {[
-                    {
-                      title: "Continuous Learning",
-                      text: "I treat every project as a learning system. Post-mortems, documentation, and reflection are part of my workflow.",
-                    },
-                    {
-                      title: "User-Centered Design",
-                      text: "I spend time with real users before designing abstractions.",
-                    },
-                    {
-                      title: "Quality Over Quantity",
-                      text: "I prioritize maintainability over speed when systems will live for years.",
-                    },
-                    {
-                      title: "Collaboration",
-                      text: "I invest in communication before optimization.",
-                    },
-                  ].map((item, index) => (
-                    <motion.div
-                      key={item.title}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
-                      className="glass rounded-2xl p-6"
-                    >
-                      <h4 className="text-lg font-semibold text-foreground mb-2">{item.title}</h4>
-                      <p className="text-muted-foreground text-sm leading-relaxed">{item.text}</p>
-                    </motion.div>
-                  ))}
-                </div>
-              </section>
 
               {/* Career Timeline - After Story So Far */}
-              <div className="mt-24 md:mt-32 pt-24 md:pt-32 border-t border-border/50">
+              <div className="pt-16 md:pt-24 border-t border-border/50">
                 <CareerTimeline />
               </div>
 
-              {/* Capabilities Section - Core Products & Engineering Foundations */}
-              <div className="mt-24 md:mt-32 pt-24 md:pt-32 border-t border-border/50">
+              {/* Capabilities Section - Engineering Foundations */}
+              <div className="pt-16 md:pt-24 border-t border-border/50">
                 <Capabilities />
               </div>
             </div>
@@ -269,7 +225,7 @@ export default function HomePage() {
         </div>
 
         {/* Process/Trajectory Section */}
-        <div className="py-28 md:py-32">
+        <div className="py-16 md:py-24">
           <div className="max-w-7xl mx-auto px-6">
             <SectionHeader
               title="Trajectory"
@@ -281,7 +237,7 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="relative mb-24 mt-16"
+              className="relative mb-12 mt-8"
             >
               <div className="relative aspect-[21/9] rounded-2xl overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-primary/10 z-10" />
@@ -297,32 +253,35 @@ export default function HomePage() {
             </motion.div>
 
             {/* System Design Process - Flowchart Algorithm */}
-            <div className="mb-24">
+            <div className="mb-12">
               <SystemDesignProcess />
             </div>
           </div>
         </div>
 
         {/* Passions & Interests Section - Last Section */}
-        <div className="py-28 md:py-32">
-          <div className="max-w-7xl mx-auto px-6">
-            <SectionHeader
-              title="Passions & Interests"
-              description=""
-            />
-            
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
+        <div className="py-16 md:py-24" id="hobbies">
+          <div className="max-w-5xl mx-auto px-6">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="mt-12 text-base md:text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto text-justify"
-              style={{ textJustify: "inter-word" }}
+              transition={{ duration: 0.7 }}
             >
-              One day, I dream of stepping into filmmaking as a director. Stories have always fascinated me—whether it's the narrative arc of a great war drama or the rhythm of classical music. Creating visual stories that move people is a goal I'm working towards.
-            </motion.p>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                Passions & Interests
+              </h2>
 
-            <div className="mt-16">
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div
+                className="text-muted-foreground text-base md:text-lg leading-relaxed space-y-4 mb-14"
+                style={{ textAlign: "justify", textJustify: "inter-word" }}
+              >
+                <p>
+                  One day, I dream of stepping into filmmaking as a director. Stories have always fascinated me—whether it's the narrative arc of a great war drama or the rhythm of classical music. Creating visual stories that move people is a goal I'm working towards.
+                </p>
+              </div>
+
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {passions.map((passion, index) => (
                   <motion.div
                     key={passion.title}
@@ -330,14 +289,14 @@ export default function HomePage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
-                    className="group glass rounded-2xl p-6 hover:bg-primary/5 hover:border-primary/20 transition-all"
+                    className="group glass rounded-2xl p-6 hover:bg-primary/5 hover:border-primary/20 transition-all border border-border/50"
                   >
-                    <h4 className="font-semibold text-foreground mb-2">{passion.title}</h4>
-                    <p className="text-sm text-muted-foreground">{passion.description}</p>
+                    <h4 className="font-semibold text-foreground mb-2 text-base md:text-lg">{passion.title}</h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{passion.description}</p>
                   </motion.div>
                 ))}
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
 

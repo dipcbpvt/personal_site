@@ -6,7 +6,6 @@ import { cn } from "@/lib/utils"
 
 const sections = [
   { id: "intro", label: "My Purpose" },
-  { id: "philosophy", label: "Philosophy & Values" },
   { id: "hobbies", label: "Passions" },
 ]
 

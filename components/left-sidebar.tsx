@@ -7,7 +7,6 @@ import { useIsMobile } from "@/hooks/use-mobile"
 
 const sections = [
     { id: "intro", label: "The Story So Far" },
-    { id: "philosophy", label: "Philosophy & Values" },
     { id: "career", label: "Career Chapters" },
     { id: "execution", label: "Execution Model" },
     { id: "hobbies", label: "Passions & Interests" },
