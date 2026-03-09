@@ -6,7 +6,7 @@ import { Points, PointMaterial } from "@react-three/drei"
 import * as THREE from "three"
 import { useTheme } from "next-themes"
 
-function ParticleField({ count = 5000 }) {
+function ParticleField({ count = 2500 }) {
     const pointsRef = useRef<THREE.Points>(null!)
     const { resolvedTheme } = useTheme()
 

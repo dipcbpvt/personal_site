@@ -7,31 +7,16 @@ import { ArrowUpRight, Briefcase, Rss, Target, Zap } from "lucide-react"
 const links = [
   {
     href: "https://dev.dipchakraborty.com",
-    label: "Works",
-    description: "Projects & Contributions",
+    label: "Dev Works",
+    description: "Engineering Portfolio",
     icon: <Briefcase size={24} />,
   },
   {
     href: "https://writings.dipchakraborty.com",
-    label: "Blogs",
-    description: "Thoughts & Learnings",
+    label: "Writings",
+    description: "Engineering Magazine",
     icon: <Rss size={24} />,
   },
-  {
-    href: "/purpose",
-    label: "Purpose",
-    description: "Journey & Vision",
-    icon: <Target size={24} />,
-    internal: true,
-  },
-  {
-    href: "/process",
-    label: "Process",
-    description: "Working Method & System approach",
-    icon: <Zap size={24} />,
-    internal: true,
-  },
-
 ]
 
 export function FloatingLinks() {
