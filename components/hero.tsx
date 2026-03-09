@@ -31,18 +31,21 @@ const floatingTerms = [
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null)
   const [isImageHovered, setIsImageHovered] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
   })
 
-  const y = useTransform(scrollYProgress, [0, 1], [0, 200])
+  // Reduced parallax on mobile
+  const y = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 100] : [0, 200])
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0])
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+    setIsMobile(window.innerWidth < 768)
   }, []);
 
   const portraitSrc = resolvedTheme === "light" ? "/dip.png" : "/dip2.webp";

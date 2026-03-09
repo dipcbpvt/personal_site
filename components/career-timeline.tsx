@@ -179,10 +179,15 @@ const themeFlow = [
 export function CareerTimeline() {
     const [expandedIndex, setExpandedIndex] = useState<number | null>(null)
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+    const [isMobile, setIsMobile] = useState(false)
     const scrollRef = useRef<HTMLDivElement>(null)
     const sectionRef = useRef<HTMLDivElement>(null)
     const storyCardRef = useRef<HTMLDivElement>(null)
     const isInView = useInView(sectionRef, { once: true, margin: "-100px" })
+
+    useEffect(() => {
+        setIsMobile(window.innerWidth < 768)
+    }, [])
 
     const scrollTimeline = (direction: "left" | "right") => {
         if (scrollRef.current) {
@@ -294,15 +299,15 @@ export function CareerTimeline() {
                                         animate={isInView ? { opacity: 1, y: 0 } : {}}
                                         transition={{ delay: 0.3 + index * 0.08, duration: 0.5 }}
                                     >
-                                        {/* Hover Tooltip */}
+                                        {/* Hover Tooltip - Only on desktop */}
                                         <AnimatePresence>
-                                            {isHovered && !isExpanded && (
+                                            {isHovered && !isExpanded && !isMobile && (
                                                 <motion.div
                                                     initial={{ opacity: 0, y: 10, scale: 0.9 }}
                                                     animate={{ opacity: 1, y: 0, scale: 1 }}
                                                     exit={{ opacity: 0, y: 10, scale: 0.9 }}
-                                                    transition={{ duration: 0.2 }}
-                                                    className="absolute -top-20 z-30 glass rounded-xl px-4 py-3 min-w-[180px] text-center shadow-2xl pointer-events-none"
+                                                    transition={{ duration: 0.15 }}
+                                                    className="absolute -top-20 z-30 glass rounded-xl px-4 py-3 min-w-[180px] text-center shadow-lg pointer-events-none"
                                                 >
                                                     <p className="text-xs font-semibold text-primary uppercase tracking-wider">
                                                         {chapter.theme}

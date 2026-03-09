@@ -78,25 +78,7 @@ export function Preloader() {
           transition={{ duration: 0.5, ease: "easeInOut" }}
           className="fixed inset-0 z-[9999] flex items-center justify-center bg-background"
         >
-          {/* Animated background flashes */}
-          <div className="absolute inset-0 overflow-hidden">
-            <motion.div
-              className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full bg-primary/10 blur-3xl"
-              animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.1, 0.3, 0.1],
-              }}
-              transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-            />
-            <motion.div
-              className="absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full bg-blue-400/10 blur-3xl"
-              animate={{
-                scale: [1.2, 1, 1.2],
-                opacity: [0.15, 0.25, 0.15],
-              }}
-              transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, delay: 0.5 }}
-            />
-          </div>
+          {/* Minimal static background for performance */}
 
           <div className="relative flex flex-col items-center">
             {/* Loading text - simple and clean */}

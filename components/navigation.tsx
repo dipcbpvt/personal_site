@@ -4,8 +4,7 @@ import { useState, useEffect, useCallback } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
-import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X } from "lucide-react"
+import { motion } from "framer-motion"
 import { cn } from "@/lib/utils"
 import { ThemeToggle } from "./theme-toggle"
 import { useTheme } from "next-themes"
@@ -14,9 +13,7 @@ const navItems: any[] = []
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
-  const pathname = usePathname()
   const { theme, resolvedTheme } = useTheme()
 
   useEffect(() => {
@@ -40,10 +37,6 @@ export function Navigation() {
       clearTimeout(scrollTimeout)
     }
   }, [handleScroll])
-
-  useEffect(() => {
-    setIsMobileMenuOpen(false)
-  }, [pathname])
 
   return (
     <>
@@ -78,16 +71,9 @@ export function Navigation() {
             <ThemeToggle />
           </div>
 
-          {/* Mobile Menu Toggle & Theme Toggle */}
-          <div className="flex items-center gap-2 md:hidden">
+          {/* Mobile Theme Toggle */}
+          <div className="md:hidden">
             <ThemeToggle />
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 text-foreground"
-              aria-label="Toggle menu"
-            >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
           </div>
         </div>
       </motion.header>
