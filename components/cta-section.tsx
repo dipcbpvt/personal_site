@@ -133,6 +133,7 @@ export function CTASection() {
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.15 }}
+                    whileTap={{ scale: 0.9 }}
                     className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary border border-primary/20 hover:border-primary/40 transition-colors"
                     title={channel.label}
                   >
@@ -153,6 +154,7 @@ export function CTASection() {
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.15 }}
+                    whileTap={{ scale: 0.9 }}
                     className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary border border-primary/20 hover:border-primary/40 transition-colors"
                     title={channel.label}
                   >

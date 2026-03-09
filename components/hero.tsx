@@ -195,19 +195,21 @@ export function Hero() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.5 }}
-                whileHover={{ scale: 1.05, x: 3 }}
-                className="hidden sm:block absolute -left-15 top-[18%]
-                          rounded-lg px-3 py-1.5
-                          bg-white/10 backdrop-blur-xl border border-white/20
-                          shadow-md hover:shadow-lg
-                          transition-all duration-300 w-max"
+                className="hidden sm:block absolute -left-15 top-[18%] z-10 w-max"
               >
-                <p className="text-[10px] text-muted-foreground leading-none">
-                  Design-Driven
-                </p>
-                <p className="text-[11px] font-semibold text-foreground">
-                  Fast Learner
-                </p>
+                <motion.div
+                  animate={{ y: [0, -5, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
+                  whileHover={{ scale: 1.05, x: 3 }}
+                  className="rounded-lg px-3 py-1.5 bg-white/10 backdrop-blur-xl border border-white/20 shadow-md hover:shadow-lg transition-shadow duration-300 w-full"
+                >
+                  <p className="text-[10px] text-muted-foreground leading-none">
+                    Design-Driven
+                  </p>
+                  <p className="text-[11px] font-semibold text-foreground">
+                    Fast Learner
+                  </p>
+                </motion.div>
               </motion.div>
 
               {/* 2. Solution First - Hidden on mobile, shown on sm+ */}
@@ -215,19 +217,21 @@ export function Hero() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.5 }}
-                whileHover={{ scale: 1.05, x: 3 }}
-                className="hidden sm:block absolute -left-15 top-[42%]
-                          rounded-lg px-3 py-1.5
-                          bg-white/10 backdrop-blur-xl border border-white/20
-                          shadow-md hover:shadow-lg
-                          transition-all duration-300 w-max"
+                className="hidden sm:block absolute -left-15 top-[42%] z-10 w-max"
               >
-                <p className="text-[10px] text-muted-foreground leading-none">
-                  Solution-First
-                </p>
-                <p className="text-[11px] font-semibold text-foreground">
-                  Design • Build • Ship
-                </p>
+                <motion.div
+                  animate={{ y: [0, 5, 0] }}
+                  transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+                  whileHover={{ scale: 1.05, x: 3 }}
+                  className="rounded-lg px-3 py-1.5 bg-white/10 backdrop-blur-xl border border-white/20 shadow-md hover:shadow-lg transition-shadow duration-300 w-full"
+                >
+                  <p className="text-[10px] text-muted-foreground leading-none">
+                    Solution-First
+                  </p>
+                  <p className="text-[11px] font-semibold text-foreground">
+                    Design • Build • Ship
+                  </p>
+                </motion.div>
               </motion.div>
 
               {/* 3. Latency Enjoyer - Hidden on mobile, shown on sm+ */}
@@ -235,19 +239,21 @@ export function Hero() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6, duration: 0.5 }}
-                whileHover={{ scale: 1.05, x: -3 }}
-                className="hidden sm:block absolute -right-20 top-[30%]
-                          rounded-lg px-3 py-1.5
-                          bg-white/10 backdrop-blur-xl border border-white/20
-                          shadow-md hover:shadow-lg
-                          transition-all duration-300 w-max"
+                className="hidden sm:block absolute -right-20 top-[30%] z-10 w-max"
               >
-                <p className="text-[10px] text-muted-foreground leading-none">
-                  Latency Enjoyer
-                </p>
-                <p className="text-[11px] font-semibold text-foreground">
-                  Passion in Optimizing
-                </p>
+                <motion.div
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.8 }}
+                  whileHover={{ scale: 1.05, x: -3 }}
+                  className="rounded-lg px-3 py-1.5 bg-white/10 backdrop-blur-xl border border-white/20 shadow-md hover:shadow-lg transition-shadow duration-300 w-full"
+                >
+                  <p className="text-[10px] text-muted-foreground leading-none">
+                    Latency Enjoyer
+                  </p>
+                  <p className="text-[11px] font-semibold text-foreground">
+                    Passion in Optimizing
+                  </p>
+                </motion.div>
               </motion.div>
 
               {/* 4. Experience */}
@@ -255,19 +261,21 @@ export function Hero() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7, duration: 0.5 }}
-                whileHover={{ scale: 1.05, y: -2 }}
-                className="absolute left-1/2 -translate-x-1/2 bottom-[-1%] sm:bottom-[-3%]
-                          rounded-lg px-2.5 sm:px-3 py-1 sm:py-1.5
-                          bg-white/10 backdrop-blur-xl border border-white/20
-                          shadow-md hover:shadow-lg
-                          transition-all duration-300 w-max"
+                className="absolute left-1/2 -translate-x-1/2 bottom-[-1%] sm:bottom-[-3%] z-10 w-max"
               >
-                <p className="text-[9px] sm:text-[10px] text-muted-foreground leading-none">
-                  Experience
-                </p>
-                <p className="text-[9px] sm:text-[11px] font-semibold text-foreground">
-                  4+ Years
-                </p>
+                <motion.div
+                  animate={{ y: [0, 4, 0] }}
+                  transition={{ duration: 4.2, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  className="rounded-lg px-2.5 sm:px-3 py-1 sm:py-1.5 bg-white/10 backdrop-blur-xl border border-white/20 shadow-md hover:shadow-lg transition-shadow duration-300 w-full"
+                >
+                  <p className="text-[9px] sm:text-[10px] text-muted-foreground leading-none">
+                    Experience
+                  </p>
+                  <p className="text-[9px] sm:text-[11px] font-semibold text-foreground">
+                    4+ Years
+                  </p>
+                </motion.div>
               </motion.div>
 
 

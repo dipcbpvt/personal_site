@@ -13,6 +13,7 @@ import { SectionHeader } from "@/components/section-header"
 import { Capabilities } from "@/components/capabilities"
 import { SystemDesignProcess } from "@/components/system-design-process"
 import { CareerTimeline } from "@/components/career-timeline"
+import { ParallaxImage } from "@/components/parallax-image"
 import { Heart } from "lucide-react"
 
 const passions = [
@@ -72,14 +73,14 @@ export default function HomePage() {
                   className="relative mb-12"
                 >
                   <div className="relative aspect-[16/12] sm:aspect-[16/10] md:aspect-[16/7] rounded-2xl overflow-hidden shadow-2xl">
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent z-10" />
-                    <Image
+                    <ParallaxImage
                       src="/dip_looking.png"
                       alt="Dip Chakraborty"
-                      fill
-                      className="object-cover brightness-105"
+                      containerClassName="absolute inset-0 w-full h-full"
+                      className="brightness-105"
                       priority
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent z-10 pointer-events-none" />
                   </div>
                   {/* Decorative reflection element */}
                   <div className="absolute -bottom-2 -right-2 sm:-bottom-4 sm:-right-4 w-16 sm:w-32 h-16 sm:h-32 glass rounded-xl -z-10 opacity-50" />
@@ -212,12 +213,16 @@ export default function HomePage() {
 
 
               {/* Career Timeline - After Story So Far */}
-              <div className="pt-16 md:pt-24 border-t border-border/50">
+              <div className="relative pt-16 md:pt-24 mt-16 md:mt-24">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[1px] bg-gradient-to-r from-transparent via-border to-transparent" />
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/4 h-[4px] bg-primary/20 blur-[6px] rounded-full" />
                 <CareerTimeline />
               </div>
 
               {/* Capabilities Section - Engineering Foundations */}
-              <div className="pt-16 md:pt-24 border-t border-border/50">
+              <div className="relative pt-16 md:pt-24 mt-16 md:mt-24">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[1px] bg-gradient-to-r from-transparent via-border to-transparent" />
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/4 h-[4px] bg-primary/20 blur-[6px] rounded-full" />
                 <Capabilities />
               </div>
             </div>
@@ -240,13 +245,13 @@ export default function HomePage() {
               className="relative mb-12 mt-8"
             >
               <div className="relative aspect-[21/9] rounded-2xl overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-primary/10 z-10" />
-                <Image
+                <ParallaxImage
                   src="/dip_working.png"
                   alt="Dip Chakraborty at work"
-                  fill
-                  className="object-cover brightness-110"
+                  containerClassName="absolute inset-0 w-full h-full"
+                  className="brightness-110"
                 />
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-primary/10 z-10 pointer-events-none" />
               </div>
               {/* Offset decorative element */}
               <div className="absolute -bottom-6 -right-6 w-32 h-32 glass rounded-xl -z-10" />

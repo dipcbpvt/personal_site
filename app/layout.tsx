@@ -5,6 +5,7 @@ import "./globals.css"
 import { Preloader } from "@/components/preloader"
 import { ThemeProvider } from "@/components/theme-provider"
 import CustomCursorLoader from "@/components/custom-cursor-loader"
+import { CursorGlow } from "@/components/cursor-glow"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -81,7 +82,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className="scroll-smooth">
       <head>
         <script
           async
@@ -93,6 +94,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <div className="grain" />
           <Preloader />
+          <CursorGlow />
           <CustomCursorLoader />
           {children}
         </ThemeProvider>

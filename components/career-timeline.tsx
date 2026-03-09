@@ -178,16 +178,10 @@ const themeFlow = [
 
 export function CareerTimeline() {
     const [expandedIndex, setExpandedIndex] = useState<number | null>(null)
-    const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
-    const [isMobile, setIsMobile] = useState(false)
     const scrollRef = useRef<HTMLDivElement>(null)
     const sectionRef = useRef<HTMLDivElement>(null)
     const storyCardRef = useRef<HTMLDivElement>(null)
     const isInView = useInView(sectionRef, { once: true, margin: "-100px" })
-
-    useEffect(() => {
-        setIsMobile(window.innerWidth < 768)
-    }, [])
 
     const scrollTimeline = (direction: "left" | "right") => {
         if (scrollRef.current) {
@@ -260,22 +254,6 @@ export function CareerTimeline() {
                     transition={{ duration: 0.6, delay: 0.25 }}
                     className="relative"
                 >
-                    {/* Scroll Arrows (desktop) */}
-                    <button
-                        onClick={() => scrollTimeline("left")}
-                        className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full glass items-center justify-center text-muted-foreground hover:text-foreground hover:bg-primary/10 transition-all"
-                        aria-label="Scroll left"
-                    >
-                        <ChevronLeft className="w-5 h-5" />
-                    </button>
-                    <button
-                        onClick={() => scrollTimeline("right")}
-                        className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full glass items-center justify-center text-muted-foreground hover:text-foreground hover:bg-primary/10 transition-all"
-                        aria-label="Scroll right"
-                    >
-                        <ChevronRight className="w-5 h-5" />
-                    </button>
-
                     {/* Scrollable Row */}
                     <div
                         ref={scrollRef}
@@ -284,11 +262,16 @@ export function CareerTimeline() {
                     >
                         <div className="flex items-start gap-0 min-w-max relative pt-28 pb-2">
                             {/* Connecting Line */}
-                            <div className="absolute top-[calc(7rem+18px)] left-8 right-8 h-[2px] bg-gradient-to-r from-primary/10 via-primary/40 to-primary/10 z-0" />
+                            <motion.div
+                                initial={{ scaleX: 0 }}
+                                animate={isInView ? { scaleX: 1 } : {}}
+                                transition={{ duration: 1.5, ease: "easeInOut" }}
+                                style={{ transformOrigin: "left center" }}
+                                className="absolute top-[calc(7rem+18px)] left-8 right-8 h-[2px] bg-gradient-to-r from-primary/10 via-primary/40 to-primary/10 z-0"
+                            />
 
                             {chapters.map((chapter, index) => {
                                 const isExpanded = expandedIndex === index
-                                const isHovered = hoveredIndex === index
 
                                 return (
                                     <motion.div
@@ -299,47 +282,19 @@ export function CareerTimeline() {
                                         animate={isInView ? { opacity: 1, y: 0 } : {}}
                                         transition={{ delay: 0.3 + index * 0.08, duration: 0.5 }}
                                     >
-                                        {/* Hover Tooltip - Only on desktop */}
-                                        <AnimatePresence>
-                                            {isHovered && !isExpanded && !isMobile && (
-                                                <motion.div
-                                                    initial={{ opacity: 0, y: 10, scale: 0.9 }}
-                                                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                                                    exit={{ opacity: 0, y: 10, scale: 0.9 }}
-                                                    transition={{ duration: 0.15 }}
-                                                    className="absolute -top-20 z-30 glass rounded-xl px-4 py-3 min-w-[180px] text-center shadow-lg pointer-events-none"
-                                                >
-                                                    <p className="text-xs font-semibold text-primary uppercase tracking-wider">
-                                                        {chapter.theme}
-                                                    </p>
-                                                    <p className="text-sm font-bold text-foreground mt-1">
-                                                        {chapter.label}
-                                                    </p>
-                                                    <p className="text-[11px] text-muted-foreground mt-0.5">
-                                                        {chapter.subtitle}
-                                                    </p>
-                                                </motion.div>
-                                            )}
-                                        </AnimatePresence>
-
                                         {/* Node */}
-                                        <motion.button
+                                        <button
                                             onClick={() => handleNodeClick(index)}
-                                            onMouseEnter={() => setHoveredIndex(index)}
-                                            onMouseLeave={() => setHoveredIndex(null)}
                                             className={cn(
                                                 "relative z-10 w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-300 cursor-pointer",
                                                 isExpanded
                                                     ? "bg-primary border-primary text-primary-foreground scale-125 shadow-lg shadow-primary/40"
-                                                    : isHovered
-                                                        ? "bg-primary/20 border-primary/60 text-primary scale-110"
-                                                        : "bg-background border-border text-muted-foreground hover:border-primary/40 hover:text-primary/70"
+                                                    : "bg-background border-border text-muted-foreground hover:border-primary/40 hover:text-primary/70"
                                             )}
-                                            whileTap={{ scale: 0.9 }}
                                             aria-label={`View ${chapter.year} - ${chapter.label}`}
                                         >
                                             {chapter.icon}
-                                        </motion.button>
+                                        </button>
 
                                         {/* Year Label */}
                                         <span

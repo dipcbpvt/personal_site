@@ -46,7 +46,7 @@ export function Navigation() {
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-          isScrolled ? "py-3 md:py-4 glass" : "py-4 md:py-6",
+          isScrolled ? "py-3 md:py-4 glass shadow-sm" : "py-4 md:py-6 bg-transparent",
         )}
       >
         <div className="max-w-7xl mx-auto px-4 md:px-6 flex items-center justify-between">

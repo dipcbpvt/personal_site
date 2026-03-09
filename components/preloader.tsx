@@ -18,8 +18,15 @@ export function Preloader() {
     }
 
     let isMounted = true
+
+    // Check caching to skip preloader if already seen in this session
+    if (sessionStorage.getItem("preloader_seen")) {
+      setIsLoading(false)
+      return
+    }
+
     const startTime = Date.now()
-    const minimumWait = 800 // Ensure at least some animation
+    const minimumWait = 200 // Substantially reduced wait time
 
     const handleLoad = () => {
       const checkResources = () => {
@@ -35,7 +42,10 @@ export function Preloader() {
           const remainingWait = Math.max(0, minimumWait - elapsedTime)
 
           setTimeout(() => {
-            if (isMounted) setIsLoading(false)
+            if (isMounted) {
+              setIsLoading(false)
+              sessionStorage.setItem("preloader_seen", "true")
+            }
           }, remainingWait)
         } else {
           // Check again in 100ms
@@ -56,8 +66,11 @@ export function Preloader() {
 
     // Safety timeout after 5 seconds
     const safetyTimeout = setTimeout(() => {
-      if (isMounted) setIsLoading(false)
-    }, 5000)
+      if (isMounted) {
+        setIsLoading(false)
+        sessionStorage.setItem("preloader_seen", "true")
+      }
+    }, 2000) // Reduced safety timeout from 5000 to 2000
 
     return () => {
       isMounted = false
@@ -75,8 +88,9 @@ export function Preloader() {
         <motion.div
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
           className="fixed inset-0 z-[9999] flex items-center justify-center bg-background"
+          aria-hidden="true" // SEO optimization to hide from screen readers
         >
           {/* Minimal static background for performance */}
 

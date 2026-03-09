@@ -17,18 +17,11 @@ const links = [
     description: "Engineering Magazine",
     icon: <Rss size={24} />,
   },
-  {
-    href: "/Dip_Chakraborty_Software_Engineer_4_Years_Experience.pdf",
-    label: "Resume",
-    description: "Download CV",
-    icon: <Download size={24} />,
-    external: true,
-  },
 ]
 
 export function FloatingLinks() {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <div className="flex flex-col sm:flex-row gap-4 -ml-4 md:-ml-6 mt-4 md:mt-6">
       {links.map((link, index) => (
         <motion.div
           key={link.label}
@@ -38,11 +31,11 @@ export function FloatingLinks() {
         >
           <Link
             href={link.href}
-            target={link.external || !link.internal ? "_blank" : undefined}
-            rel={link.external || !link.internal ? "noopener noreferrer" : undefined}
-            className="group block p-6 glass rounded-2xl hover:bg-primary/5 hover:border-primary/20 transition-all duration-300"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group block p-4 md:p-6 w-full sm:w-64 glass glass-card rounded-2xl hover:bg-primary/5 hover:border-primary/20 transition-all duration-300"
           >
-            <div className="flex items-start justify-between mb-4">
+            <div className="flex items-start justify-between mb-2 md:mb-4">
               <span className="text-primary/60 group-hover:text-primary transition-colors">{link.icon}</span>
               <ArrowUpRight
                 size={20}

@@ -129,13 +129,48 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+
   ::selection {
     background: rgba(59, 130, 246, 0.3);
     color: inherit;
   }
+
+  /* Button press feedback */
+  button,
+  a.btn,
+  .button-press {
+    transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1) !important;
+  }
+
+  button:active,
+  a.btn:active,
+  .button-press:active {
+    transform: scale(0.96) !important;
+  }
+}
+
+/* Utilities for animations */
+@keyframes gradient-x {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient-x {
+  animation: gradient-x 8s ease infinite;
+  background-size: 200% 200%;
 }
 
 /* Custom scrollbar - theme aware */
@@ -177,6 +212,29 @@ html {
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+/* Glass reflection highlight overlay for cards */
+.glass-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 40%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 10;
+}
+
+.glass-card:hover::after {
+  opacity: 1;
+}
+
 .dark .glass {
   background: rgba(59, 130, 246, 0.05);
   border: 1px solid rgba(59, 130, 246, 0.1);
@@ -204,11 +262,9 @@ html {
 }
 
 .spotlight {
-  background: radial-gradient(
-    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(59, 130, 246, 0.06),
-    transparent 40%
-  );
+  background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(59, 130, 246, 0.06),
+      transparent 40%);
 }
 
 /* Grain texture overlay */
@@ -246,10 +302,12 @@ html {
 }
 
 @keyframes colorFlash {
+
   0%,
   100% {
     opacity: 0.1;
   }
+
   50% {
     opacity: 0.3;
   }
@@ -261,6 +319,7 @@ html {
 
 /* Responsive typography & spacing adjustments */
 @media (max-width: 640px) {
+
   h1,
   h2,
   h3 {
@@ -274,6 +333,7 @@ html {
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
