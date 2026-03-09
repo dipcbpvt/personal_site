@@ -63,14 +63,14 @@ export default function HomePage() {
         <Hero />
 
         {/* Purpose Section */}
-        <div ref={containerRef} className="py-20 md:py-24">
+        <div ref={containerRef} className="py-28 md:py-32">
           <div className="max-w-7xl mx-auto px-6">
             <SectionHeader
               title="The Story So Far"
               description="A journey from childhood curiosity and Iron Man dreams to building meaningful systems that connect people."
             />
 
-            <div className="mt-16 space-y-20 md:space-y-24">
+            <div className="mt-16 space-y-24 md:space-y-32">
               {/* Story Section with Subsections */}
               <section id="story">
                 <motion.div
@@ -268,7 +268,7 @@ export default function HomePage() {
         </div>
 
         {/* Process Section */}
-        <div className="py-20 md:py-24">
+        <div className="py-28 md:py-32">
           <div className="max-w-7xl mx-auto px-6">
             <SectionHeader
               title="Trajectory"
@@ -350,12 +350,22 @@ export default function HomePage() {
         </div>
 
         {/* Passions & Interests Section - Last Section */}
-        <div className="py-20 md:py-24">
+        <div className="py-28 md:py-32">
           <div className="max-w-7xl mx-auto px-6">
             <SectionHeader
               title="Passions & Interests"
-              description="One day, I dream of stepping into filmmaking as a director. Stories have always fascinated me—whether it's the narrative arc of a great war drama or the rhythm of classical music. Creating visual stories that move people is a goal I'm working towards."
+              description=""
             />
+            
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="mt-12 text-base md:text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto text-justify"
+              style={{ textJustify: "inter-word" }}
+            >
+              One day, I dream of stepping into filmmaking as a director. Stories have always fascinated me—whether it's the narrative arc of a great war drama or the rhythm of classical music. Creating visual stories that move people is a goal I'm working towards.
+            </motion.p>
 
             <div className="mt-16">
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">

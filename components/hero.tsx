@@ -148,7 +148,7 @@ export function Hero() {
             animate={{ opacity: 1.5, scale: 1 }}
             transition={{ duration: 1.8, delay: 0.5 }}
             style={{ opacity }}
-            className="order-1 lg:order-2 relative"
+            className="order-1 lg:order-2 relative px-4 sm:px-0"
           >
             <div className="relative aspect-[9/14] sm:aspect-[3/4] max-w-xs sm:max-w-sm md:max-w-md mx-auto lg:ml-auto">
               {/* Hologram-style background effect */}
@@ -190,62 +190,62 @@ export function Hero() {
 
               {/* === BADGES (balanced outside positioning) === */}
 
-              {/* 1. Design-Driven */}
+              {/* 1. Design-Driven - Hidden on mobile, shown on sm+ */}
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.5 }}
                 whileHover={{ scale: 1.05, x: 3 }}
-                className="absolute -left-12 sm:-left-15 top-[12%] sm:top-[18%]
-                          rounded-lg px-2.5 sm:px-3 py-1 sm:py-1.5
+                className="hidden sm:block absolute -left-15 top-[18%]
+                          rounded-lg px-3 py-1.5
                           bg-white/10 backdrop-blur-xl border border-white/20
                           shadow-md hover:shadow-lg
                           transition-all duration-300 w-max"
               >
-                <p className="text-[9px] sm:text-[10px] text-muted-foreground leading-none">
+                <p className="text-[10px] text-muted-foreground leading-none">
                   Design-Driven
                 </p>
-                <p className="text-[9px] sm:text-[11px] font-semibold text-foreground">
+                <p className="text-[11px] font-semibold text-foreground">
                   Fast Learner
                 </p>
               </motion.div>
 
-              {/* 2. Solution First */}
+              {/* 2. Solution First - Hidden on mobile, shown on sm+ */}
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.5 }}
                 whileHover={{ scale: 1.05, x: 3 }}
-                className="absolute -left-12 sm:-left-15 top-[36%] sm:top-[42%]
-                          rounded-lg px-2.5 sm:px-3 py-1 sm:py-1.5
+                className="hidden sm:block absolute -left-15 top-[42%]
+                          rounded-lg px-3 py-1.5
                           bg-white/10 backdrop-blur-xl border border-white/20
                           shadow-md hover:shadow-lg
                           transition-all duration-300 w-max"
               >
-                <p className="text-[9px] sm:text-[10px] text-muted-foreground leading-none">
+                <p className="text-[10px] text-muted-foreground leading-none">
                   Solution-First
                 </p>
-                <p className="text-[9px] sm:text-[11px] font-semibold text-foreground">
+                <p className="text-[11px] font-semibold text-foreground">
                   Design • Build • Ship
                 </p>
               </motion.div>
 
-              {/* 3. Latency Enjoyer */}
+              {/* 3. Latency Enjoyer - Hidden on mobile, shown on sm+ */}
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6, duration: 0.5 }}
                 whileHover={{ scale: 1.05, x: -3 }}
-                className="absolute -right-12 sm:-right-20 top-[24%] sm:top-[30%]
-                          rounded-lg px-2.5 sm:px-3 py-1 sm:py-1.5
+                className="hidden sm:block absolute -right-20 top-[30%]
+                          rounded-lg px-3 py-1.5
                           bg-white/10 backdrop-blur-xl border border-white/20
                           shadow-md hover:shadow-lg
                           transition-all duration-300 w-max"
               >
-                <p className="text-[9px] sm:text-[10px] text-muted-foreground leading-none">
+                <p className="text-[10px] text-muted-foreground leading-none">
                   Latency Enjoyer
                 </p>
-                <p className="text-[9px] sm:text-[11px] font-semibold text-foreground">
+                <p className="text-[11px] font-semibold text-foreground">
                   Passion in Optimizing
                 </p>
               </motion.div>
