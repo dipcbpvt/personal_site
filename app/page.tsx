@@ -66,21 +66,20 @@ export default function HomePage() {
         <div ref={containerRef} className="py-20 md:py-24">
           <div className="max-w-7xl mx-auto px-6">
             <SectionHeader
-              label="Purpose"
               title="The Story So Far"
               description="A journey from childhood curiosity and Iron Man dreams to building meaningful systems that connect people."
             />
 
             <div className="mt-16 space-y-20 md:space-y-24">
-              {/* Introduction Section */}
-              <section id="intro">
+              {/* Story Section */}
+              <section id="story">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   className="relative mb-12"
                 >
-                  <div className="relative aspect-[16/10] md:aspect-[16/7] rounded-2xl overflow-hidden shadow-2xl">
+                  <div className="relative aspect-[16/12] sm:aspect-[16/10] md:aspect-[16/7] rounded-2xl overflow-hidden shadow-2xl">
                     <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent z-10" />
                     <Image
                       src="/dip_looking.png"
@@ -91,7 +90,7 @@ export default function HomePage() {
                     />
                   </div>
                   {/* Decorative reflection element */}
-                  <div className="absolute -bottom-4 -right-4 w-32 h-32 glass rounded-xl -z-10 opacity-50" />
+                  <div className="absolute -bottom-2 -right-2 sm:-bottom-4 sm:-right-4 w-16 sm:w-32 h-16 sm:h-32 glass rounded-xl -z-10 opacity-50" />
                 </motion.div>
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -154,6 +153,29 @@ export default function HomePage() {
                 </motion.div>
               </section>
 
+              {/* From Robotics to Software Section */}
+              <section id="robotics">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="glass rounded-2xl p-6 md:p-8 space-y-6"
+                >
+                  <h3 className="text-2xl md:text-3xl font-semibold text-foreground">From Robotics to Software</h3>
+                  <div className="space-y-6 text-muted-foreground leading-relaxed text-justify" style={{ textJustify: "inter-word" }}>
+                    <p>
+                      My early technical journey was deeply rooted in robotics and hardware-intensive systems. However, in my country, the practical scope of large-scale robotics development remains limited due to high hardware costs, expensive semiconductor components, and relatively low mass adoption of automation technologies. These constraints make sustained innovation and commercialization in robotics challenging.
+                    </p>
+                    <p>
+                      In contrast, software engineering and artificial intelligence present immediate and scalable opportunities, as computers and mobile devices are widely accessible to the general population. AI represents the current technological revolution, enabling intelligent systems to be deployed at scale with minimal hardware dependency. Looking ahead, augmented and virtual reality are expected to become mainstream as devices become more affordable, allowing users to experience immersive digital environments.
+                    </p>
+                    <p>
+                      This evolution will eventually accelerate the next major phase of robotics, driven by increasing demand for large-scale manual labor automation and continuous advances in computing, sensing, and control technologies. My transition to professional software development reflects a strategic alignment with this technological trajectory and long-term innovation potential.
+                    </p>
+                  </div>
+                </motion.div>
+              </section>
+
               {/* Philosophy Section */}
               <section id="philosophy">
                 <motion.h3
@@ -200,43 +222,6 @@ export default function HomePage() {
                 </div>
               </section>
 
-              {/* Passions Section */}
-              <section id="hobbies">
-                <motion.h3
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  className="text-2xl md:text-3xl font-semibold text-foreground mb-8"
-                >
-                  Passions & Interests
-                </motion.h3>
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  className="mt-8 md:mt-12 text-muted-foreground leading-relaxed max-w-3xl"
-                >
-                  One day, I dream of stepping into filmmaking as a director. Stories have always fascinated
-                  me-whether it's the narrative arc of a great war drama or the rhythm of classical music. Creating
-                  visual stories that move people is a goal I'm working towards.
-                </motion.p>
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
-                  {passions.map((passion, index) => (
-                    <motion.div
-                      key={passion.title}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
-                      className="group glass rounded-2xl p-6 hover:bg-primary/5 hover:border-primary/20 transition-all"
-                    >
-                      <div className="text-2xl mb-4">{passion.icon}</div>
-                      <h4 className="font-semibold text-foreground mb-1">{passion.title}</h4>
-                      <p className="text-sm text-muted-foreground">{passion.description}</p>
-                    </motion.div>
-                  ))}
-                </div>
-              </section>
             </div>
           </div>
         </div>
@@ -245,7 +230,6 @@ export default function HomePage() {
         <div className="py-20 md:py-24">
           <div className="max-w-7xl mx-auto px-6">
             <SectionHeader
-              label="Process"
               title="Trajectory"
               description="Building sustainable systems through engineering, experimentation, and discipline"
             />
@@ -322,29 +306,35 @@ export default function HomePage() {
 
           {/* Career Timeline - after System Design Process */}
           <CareerTimeline />
+        </div>
 
-          {/* Narrative Trajectory */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="max-w-5xl mx-auto px-6 mt-8 pb-32"
-          >
-            <div className="space-y-6">
-              <h3 className="text-2xl font-bold text-foreground">From Robotics to Software.</h3>
-              <div className="space-y-6 text-muted-foreground leading-relaxed text-justify" style={{ textJustify: "inter-word" }}>
-                <p>
-                  My early technical journey was deeply rooted in robotics and hardware-intensive systems. However, in my country, the practical scope of large-scale robotics development remains limited due to high hardware costs, expensive semiconductor components, and relatively low mass adoption of automation technologies. These constraints make sustained innovation and commercialization in robotics challenging.
-                </p>
-                <p>
-                  In contrast, software engineering and artificial intelligence present immediate and scalable opportunities, as computers and mobile devices are widely accessible to the general population. AI represents the current technological revolution, enabling intelligent systems to be deployed at scale with minimal hardware dependency. Looking ahead, augmented and virtual reality are expected to become mainstream as devices become more affordable, allowing users to experience immersive digital environments.
-                </p>
-                <p>
-                  This evolution will eventually accelerate the next major phase of robotics, driven by increasing demand for large-scale manual labor automation and continuous advances in computing, sensing, and control technologies. My transition to professional software development reflects a strategic alignment with this technological trajectory and long-term innovation potential.
-                </p>
+        {/* Passions & Interests Section - Last Section */}
+        <div className="py-20 md:py-24">
+          <div className="max-w-7xl mx-auto px-6">
+            <SectionHeader
+              title="Passions & Interests"
+              description="One day, I dream of stepping into filmmaking as a director. Stories have always fascinated me—whether it's the narrative arc of a great war drama or the rhythm of classical music. Creating visual stories that move people is a goal I'm working towards."
+            />
+
+            <div className="mt-16">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {passions.map((passion, index) => (
+                  <motion.div
+                    key={passion.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    className="group glass rounded-2xl p-6 hover:bg-primary/5 hover:border-primary/20 transition-all"
+                  >
+                    <div className="text-2xl mb-4">{passion.icon}</div>
+                    <h4 className="font-semibold text-foreground mb-1">{passion.title}</h4>
+                    <p className="text-sm text-muted-foreground">{passion.description}</p>
+                  </motion.div>
+                ))}
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
 
         <CTASection />
