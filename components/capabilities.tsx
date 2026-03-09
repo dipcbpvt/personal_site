@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { Lightbulb, Users, Network, Brain, Code, Cloud, Cpu, BookOpen, ChevronDown } from "lucide-react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { cn } from "@/lib/utils"
 
 const technicalFocus = [
@@ -152,19 +152,25 @@ const container = {
   show: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.05,
+      staggerChildren: 0.02,
+      delayChildren: 0.1,
     },
   },
 }
 
 const item = {
-  hidden: { opacity: 0, y: 10 },
-  show: { opacity: 1, y: 0 },
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { duration: 0.3 } },
 }
 
 export function Capabilities() {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null)
   const [expandedTechnicalIndex, setExpandedTechnicalIndex] = useState<number | null>(null)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768)
+  }, [])
 
   return (
     <section className="py-16 px-6">

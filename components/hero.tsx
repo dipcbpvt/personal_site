@@ -31,18 +31,21 @@ const floatingTerms = [
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null)
   const [isImageHovered, setIsImageHovered] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
   })
 
-  const y = useTransform(scrollYProgress, [0, 1], [0, 200])
+  // Reduced parallax on mobile
+  const y = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 100] : [0, 200])
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0])
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+    setIsMobile(window.innerWidth < 768)
   }, []);
 
   const portraitSrc = resolvedTheme === "light" ? "/dip.png" : "/dip2.webp";
@@ -145,9 +148,9 @@ export function Hero() {
             animate={{ opacity: 1.5, scale: 1 }}
             transition={{ duration: 1.8, delay: 0.5 }}
             style={{ opacity }}
-            className="order-1 lg:order-2 relative"
+            className="order-1 lg:order-2 relative px-4 sm:px-0"
           >
-            <div className="relative aspect-[3/4] max-w-sm md:max-w-md mx-auto lg:ml-auto">
+            <div className="relative aspect-[9/14] sm:aspect-[3/4] max-w-xs sm:max-w-sm md:max-w-md mx-auto lg:ml-auto">
               {/* Hologram-style background effect */}
               <motion.div
                 className="absolute inset-0 bg-gradient-to-br from-primary/40 via-blue-400/30 to-primary/30 rounded-3xl blur-3xl"
@@ -187,13 +190,13 @@ export function Hero() {
 
               {/* === BADGES (balanced outside positioning) === */}
 
-              {/* 1. Design-Driven */}
+              {/* 1. Design-Driven - Hidden on mobile, shown on sm+ */}
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.5 }}
                 whileHover={{ scale: 1.05, x: 3 }}
-                className="absolute -left-15 top-[18%]
+                className="hidden sm:block absolute -left-15 top-[18%]
                           rounded-lg px-3 py-1.5
                           bg-white/10 backdrop-blur-xl border border-white/20
                           shadow-md hover:shadow-lg
@@ -207,13 +210,13 @@ export function Hero() {
                 </p>
               </motion.div>
 
-              {/* 2. Solution First */}
+              {/* 2. Solution First - Hidden on mobile, shown on sm+ */}
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.5 }}
                 whileHover={{ scale: 1.05, x: 3 }}
-                className="absolute -left-15 top-[42%]
+                className="hidden sm:block absolute -left-15 top-[42%]
                           rounded-lg px-3 py-1.5
                           bg-white/10 backdrop-blur-xl border border-white/20
                           shadow-md hover:shadow-lg
@@ -227,13 +230,13 @@ export function Hero() {
                 </p>
               </motion.div>
 
-              {/* 3. Latency Enjoyer */}
+              {/* 3. Latency Enjoyer - Hidden on mobile, shown on sm+ */}
               <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6, duration: 0.5 }}
                 whileHover={{ scale: 1.05, x: -3 }}
-                className="absolute -right-20 top-[30%]
+                className="hidden sm:block absolute -right-20 top-[30%]
                           rounded-lg px-3 py-1.5
                           bg-white/10 backdrop-blur-xl border border-white/20
                           shadow-md hover:shadow-lg
@@ -253,16 +256,16 @@ export function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7, duration: 0.5 }}
                 whileHover={{ scale: 1.05, y: -2 }}
-                className="absolute left-1/2 -translate-x-1/2 bottom-[-3%]
-                          rounded-lg px-3 py-1.5
+                className="absolute left-1/2 -translate-x-1/2 bottom-[-1%] sm:bottom-[-3%]
+                          rounded-lg px-2.5 sm:px-3 py-1 sm:py-1.5
                           bg-white/10 backdrop-blur-xl border border-white/20
                           shadow-md hover:shadow-lg
                           transition-all duration-300 w-max"
               >
-                <p className="text-[10px] text-muted-foreground leading-none">
+                <p className="text-[9px] sm:text-[10px] text-muted-foreground leading-none">
                   Experience
                 </p>
-                <p className="text-[11px] font-semibold text-foreground">
+                <p className="text-[9px] sm:text-[11px] font-semibold text-foreground">
                   4+ Years
                 </p>
               </motion.div>
