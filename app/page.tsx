@@ -13,38 +13,30 @@ import { SectionHeader } from "@/components/section-header"
 import { Capabilities } from "@/components/capabilities"
 import { SystemDesignProcess } from "@/components/system-design-process"
 import { CareerTimeline } from "@/components/career-timeline"
-import { Heart, ExternalLink, Download } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
+import { Heart } from "lucide-react"
 
 const passions = [
   {
-    icon: "🎬",
     title: "Filmmaking",
     description: "Aspiring director passionate about storytelling and visual narratives",
   },
   {
-    icon: "🎵",
     title: "Music",
     description: "Deep appreciation for Indian classical and world music traditions",
   },
   {
-    icon: "🏏",
     title: "Cricket",
     description: "Passionate follower and player of the sport",
   },
   {
-    icon: "📚",
     title: "Reading",
     description: "Enjoys suspense, historical fiction, and strategic thinking",
   },
   {
-    icon: "✍️",
     title: "Writing",
     description: "Blogging about technology, culture, and personal insights",
   },
   {
-    icon: "🎮",
     title: "Gaming",
     description: "Enjoys strategy and story-driven narrative games",
   },
@@ -263,11 +255,20 @@ export default function HomePage() {
                 </div>
               </section>
 
+              {/* Career Timeline - After Story So Far */}
+              <div className="mt-24 md:mt-32 pt-24 md:pt-32 border-t border-border/50">
+                <CareerTimeline />
+              </div>
+
+              {/* Capabilities Section - Core Products & Engineering Foundations */}
+              <div className="mt-24 md:mt-32 pt-24 md:pt-32 border-t border-border/50">
+                <Capabilities />
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Process Section */}
+        {/* Process/Trajectory Section */}
         <div className="py-28 md:py-32">
           <div className="max-w-7xl mx-auto px-6">
             <SectionHeader
@@ -275,46 +276,12 @@ export default function HomePage() {
               description="Building sustainable systems through engineering, experimentation, and discipline"
             />
 
-            {/* Summary Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="glass rounded-2xl p-6 md:p-8 mb-24 mt-16"
-            >
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                <div>
-                  <h3 className="text-xl font-semibold text-foreground mb-3">Dip Chakraborty</h3>
-                  <p className="text-muted-foreground leading-relaxed max-w-2xl text-justify" style={{ textJustify: "inter-word" }}>
-                    Innovative and deadline-driven Software Engineer with 3+ years of experience designing and
-                    developing user-centered software solutions. Specializing in API and Progressive Web App
-                    Development, adept in software design patterns with a focus on system-level architecture.
-                  </p>
-                </div>
-                <div className="flex gap-3 flex-shrink-0">
-                  <Button variant="outline" asChild className="gap-2 bg-transparent">
-                    <Link href="https://dev.dipchakraborty.com" target="_blank">
-                      <ExternalLink size={16} />
-                      Portfolio
-                    </Link>
-                  </Button>
-                  <Button className="gap-2 bg-primary text-primary-foreground hover:bg-primary/90" asChild>
-                    <a href="/Dip_Chakraborty_Software_Engineer_4_Years_Experience.pdf" target="_blank" rel="noopener noreferrer">
-                      <Download size={16} />
-                      Resume
-                    </a>
-                  </Button>
-                </div>
-              </div>
-            </motion.div>
-
             {/* Hero Image - from Process page */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="relative mb-24"
+              className="relative mb-24 mt-16"
             >
               <div className="relative aspect-[21/9] rounded-2xl overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-primary/10 z-10" />
@@ -329,24 +296,11 @@ export default function HomePage() {
               <div className="absolute -bottom-6 -right-6 w-32 h-32 glass rounded-xl -z-10" />
             </motion.div>
 
-            {/* Capabilities Section */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className="mb-24"
-            >
-              <Capabilities />
-            </motion.div>
+            {/* System Design Process - Flowchart Algorithm */}
+            <div className="mb-24">
+              <SystemDesignProcess />
+            </div>
           </div>
-
-          {/* System Design Process - Flowchart Algorithm */}
-          <div className="mb-24">
-            <SystemDesignProcess />
-          </div>
-
-          {/* Career Timeline - after System Design Process */}
-          <CareerTimeline />
         </div>
 
         {/* Passions & Interests Section - Last Section */}
@@ -378,8 +332,7 @@ export default function HomePage() {
                     transition={{ delay: index * 0.1 }}
                     className="group glass rounded-2xl p-6 hover:bg-primary/5 hover:border-primary/20 transition-all"
                   >
-                    <div className="text-2xl mb-4">{passion.icon}</div>
-                    <h4 className="font-semibold text-foreground mb-1">{passion.title}</h4>
+                    <h4 className="font-semibold text-foreground mb-2">{passion.title}</h4>
                     <p className="text-sm text-muted-foreground">{passion.description}</p>
                   </motion.div>
                 ))}

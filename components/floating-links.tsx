@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import Link from "next/link"
-import { ArrowUpRight, Briefcase, Rss, Target, Zap } from "lucide-react"
+import { ArrowUpRight, Briefcase, Rss, Target, Zap, Download } from "lucide-react"
 
 const links = [
   {
@@ -16,6 +16,13 @@ const links = [
     label: "Writings",
     description: "Engineering Magazine",
     icon: <Rss size={24} />,
+  },
+  {
+    href: "/Dip_Chakraborty_Software_Engineer_4_Years_Experience.pdf",
+    label: "Resume",
+    description: "Download CV",
+    icon: <Download size={24} />,
+    external: true,
   },
 ]
 
@@ -31,8 +38,8 @@ export function FloatingLinks() {
         >
           <Link
             href={link.href}
-            target={link.internal ? undefined : "_blank"}
-            rel={link.internal ? undefined : "noopener noreferrer"}
+            target={link.external || !link.internal ? "_blank" : undefined}
+            rel={link.external || !link.internal ? "noopener noreferrer" : undefined}
             className="group block p-6 glass rounded-2xl hover:bg-primary/5 hover:border-primary/20 transition-all duration-300"
           >
             <div className="flex items-start justify-between mb-4">
