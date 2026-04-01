@@ -70,7 +70,7 @@ function PassionCard({ passion, index }: { passion: typeof passions[0]; index: n
     >
       <motion.div
         whileHover={{ scale: 1.02 }}
-        className={`h-full rounded-2xl p-8 backdrop-blur-xl border-2 ${passion.borderColor} bg-gradient-to-br ${passion.color} relative overflow-hidden group`}
+        className={`h-full rounded-2xl p-8 backdrop-blur-2xl border border-white/20 ${passion.borderColor} bg-gradient-to-br ${passion.color} relative overflow-hidden group shadow-lg hover:shadow-2xl transition-shadow duration-300`}
       >
         {/* Animated gradient background on hover */}
         <motion.div
@@ -116,24 +116,6 @@ export function PassionsSection() {
   return (
     <div className="py-16 md:py-24" id="hobbies">
       <div className="max-w-6xl mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-            Passions & <span className="bg-gradient-to-r from-red-400 via-purple-400 to-blue-400 bg-clip-text text-transparent">Interests</span>
-          </h2>
-
-          <div className="text-foreground/70 text-base md:text-lg leading-relaxed max-w-3xl">
-            <p>
-              Stories have always fascinated me—whether it's the narrative arc of a great war drama, the rhythm of classical music, or the craft of creating visual narratives. Creating visual stories that move people is a goal I'm working towards. My passions fuel my creativity and shape how I approach every project.
-            </p>
-          </div>
-        </motion.div>
-
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {passions.map((passion, index) => (
             <PassionCard key={passion.title} passion={passion} index={index} />
