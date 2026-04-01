@@ -123,9 +123,9 @@ export function PassionsSection() {
           transition={{ duration: 0.7 }}
           className="mb-16"
         >
-          <div className="text-foreground/70 text-base md:text-lg leading-relaxed max-w-3xl">
+          <div className="text-foreground/70 text-base md:text-lg leading-relaxed w-full">
             <p>
-              Stories have always fascinated me—whether it&apos;s the narrative arc of a great war drama, the rhythm of classical music, or the craft of creating visual narratives. Creating visual stories that move people is a goal I&apos;m working towards. My passions fuel my creativity and shape how I approach every project.
+              Stories have always fascinated me, whether it&apos;s the narrative arc of a great war drama, the rhythm of classical music, or the craft of creating visual narratives. Creating visual stories that move people is a goal I&apos;m working towards. My passions fuel my creativity and shape how I approach every project.
             </p>
           </div>
         </motion.div>
