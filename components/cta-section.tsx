@@ -80,91 +80,64 @@ export function CTASection() {
           <p className="text-base md:text-lg text-foreground/70">Open to thoughtful conversations</p>
         </motion.div>
 
-        {/* Second Row - Two Equal Sized Cards */}
-        <div className="grid md:grid-cols-2 gap-8 items-stretch">
-          {/* Action Card */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="rounded-2xl bg-primary/5 border border-primary/20 p-8 flex flex-col items-center justify-center space-y-6"
-          >
-            <Button
-              asChild
-              size="lg"
-              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl h-14 text-base font-medium max-w-xs"
-            >
-              <a href="mailto:connect@dipchakraborty.com">
-                <Mail className="mr-2 h-5 w-5" />
-                Email
-              </a>
-            </Button>
-
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="w-full rounded-xl h-14 text-base font-medium border-primary/30 hover:bg-primary/10 hover:border-primary max-w-xs"
-            >
-              <a href="https://calendly.com/dipcb05" target="_blank" rel="noopener noreferrer">
-                <Calendar className="mr-2 h-5 w-5" />
-                Schedule a Call
-              </a>
-            </Button>
-          </motion.div>
-
-          {/* Connect Card */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="rounded-2xl bg-primary/5 border border-primary/20 p-8 flex flex-col items-center justify-center space-y-8"
-          >
-            {/* DM Here Section */}
-            <div className="w-full text-center">
-              <h4 className="text-sm font-semibold mb-4 text-foreground/80">DM Me</h4>
-              <div className="flex gap-4 justify-center">
-                {dmChannels.map((channel, index) => (
-                  <motion.a
-                    key={channel.label}
-                    href={channel.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.15 }}
-                    whileTap={{ scale: 0.9 }}
-                    className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary border border-primary/20 hover:border-primary/40 transition-colors"
-                    title={channel.label}
-                  >
-                    {channel.icon}
-                  </motion.a>
-                ))}
-              </div>
+        {/* Second Row - DM Card */}
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1 }}
+          className="rounded-2xl bg-primary/5 border border-primary/20 p-8 flex flex-col items-center justify-center space-y-6"
+        >
+          {/* DM Here Section */}
+          <div className="w-full text-center">
+            <h4 className="text-sm font-semibold mb-4 text-foreground/80">DM Me</h4>
+            <div className="flex gap-4 justify-center">
+              {dmChannels.map((channel, index) => (
+                <motion.a
+                  key={channel.label}
+                  href={channel.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.15 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary border border-primary/20 hover:border-primary/40 transition-colors"
+                  title={channel.label}
+                >
+                  {channel.icon}
+                </motion.a>
+              ))}
             </div>
+          </div>
+        </motion.div>
 
-            {/* Follow Me Section */}
-            <div className="w-full text-center">
-              <h4 className="text-sm font-semibold mb-4 text-foreground/80">Follow Me</h4>
-              <div className="flex gap-4 justify-center flex-wrap">
-                {followChannels.map((channel, index) => (
-                  <motion.a
-                    key={channel.label}
-                    href={channel.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.15 }}
-                    whileTap={{ scale: 0.9 }}
-                    className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary border border-primary/20 hover:border-primary/40 transition-colors"
-                    title={channel.label}
-                  >
-                    {channel.icon}
-                  </motion.a>
-                ))}
-              </div>
+        {/* Third Row - Follow Me Full Row */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+          className="rounded-2xl bg-primary/5 border border-primary/20 p-8 w-full"
+        >
+          <div className="w-full text-center">
+            <h4 className="text-sm font-semibold mb-6 text-foreground/80">Follow Me</h4>
+            <div className="flex gap-4 justify-center flex-wrap">
+              {followChannels.map((channel, index) => (
+                <motion.a
+                  key={channel.label}
+                  href={channel.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.15 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary border border-primary/20 hover:border-primary/40 transition-colors"
+                  title={channel.label}
+                >
+                  {channel.icon}
+                </motion.a>
+              ))}
             </div>
-          </motion.div>
-        </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   )
