@@ -5,9 +5,10 @@ import { useRef, useState } from "react"
 import Image from "next/image"
 import { SocialBar } from "./social-bar"
 import { FloatingLinks } from "./floating-links"
-import { Target, Sparkles, Zap } from "lucide-react"
+import { Target, Sparkles, Zap, Mail, Calendar } from "lucide-react"
 import { useTheme } from "next-themes";
 import { useEffect } from "react";
+import { Button } from "@/components/ui/button";
 
 const floatingTerms = [
   { text: "Full-Stack", delay: 0, x: 120, y: -80 },
@@ -140,6 +141,36 @@ export function Hero() {
             </motion.div> */}
 
             <FloatingLinks />
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 1 }}
+              className="flex flex-col sm:flex-row gap-4 mt-10 md:mt-12 max-w-md"
+            >
+              <Button
+                asChild
+                size="lg"
+                className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground rounded-xl h-12 text-base font-medium"
+              >
+                <a href="mailto:connect@dipchakraborty.com">
+                  <Mail className="mr-2 h-5 w-5" />
+                  Email
+                </a>
+              </Button>
+
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="flex-1 rounded-xl h-12 text-base font-medium border-primary/30 hover:bg-primary/10 hover:border-primary"
+              >
+                <a href="https://calendly.com/dipcb05" target="_blank" rel="noopener noreferrer">
+                  <Calendar className="mr-2 h-5 w-5" />
+                  Schedule a Call
+                </a>
+              </Button>
+            </motion.div>
           </motion.div>
 
           {/* Portrait with floating capability terms */}

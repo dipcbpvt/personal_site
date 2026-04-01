@@ -116,6 +116,20 @@ export function PassionsSection() {
   return (
     <div className="py-16 md:py-24" id="hobbies">
       <div className="max-w-6xl mx-auto px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="mb-16"
+        >
+          <div className="text-foreground/70 text-base md:text-lg leading-relaxed max-w-3xl">
+            <p>
+              Stories have always fascinated me—whether it&apos;s the narrative arc of a great war drama, the rhythm of classical music, or the craft of creating visual narratives. Creating visual stories that move people is a goal I&apos;m working towards. My passions fuel my creativity and shape how I approach every project.
+            </p>
+          </div>
+        </motion.div>
+
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {passions.map((passion, index) => (
             <PassionCard key={passion.title} passion={passion} index={index} />
