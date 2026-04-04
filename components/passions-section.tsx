@@ -1,26 +1,10 @@
 "use client"
 
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion"
-import { Film, Music, BookOpen, Brain } from "lucide-react"
+import { Music } from "lucide-react"
 import { useRef } from "react"
 
 const passions = [
-  {
-    title: "Filmmaking",
-    description: "Aspiring director passionate about storytelling and visual narratives. One day, stepping into filmmaking as a director is my dream.",
-    icon: <Film className="w-8 h-8" />,
-    color: "from-red-500/20 to-orange-500/20",
-    borderColor: "border-red-500/30",
-    textColor: "text-red-400"
-  },
-  {
-    title: "Writing",
-    description: "Crafting stories through words. Blogging about technology, culture, and personal insights.",
-    icon: <BookOpen className="w-8 h-8" />,
-    color: "from-blue-500/20 to-cyan-500/20",
-    borderColor: "border-blue-500/30",
-    textColor: "text-blue-400"
-  },
   {
     title: "Music",
     description: "Deep appreciation for Indian classical and world music traditions. The rhythm of classical music fascinates me.",
@@ -116,20 +100,6 @@ export function PassionsSection() {
   return (
     <div className="py-16 md:py-24" id="hobbies">
       <div className="max-w-6xl mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="mb-16"
-        >
-          <div className="text-foreground/70 text-base md:text-lg leading-relaxed w-full">
-            <p>
-              Stories have always fascinated me, whether it&apos;s the narrative arc of a great war drama, the rhythm of classical music, or the craft of creating visual narratives. Creating visual stories that move people is a goal I&apos;m working towards. My passions fuel my creativity and shape how I approach every project.
-            </p>
-          </div>
-        </motion.div>
-
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {passions.map((passion, index) => (
             <PassionCard key={passion.title} passion={passion} index={index} />
