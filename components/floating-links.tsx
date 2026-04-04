@@ -1,95 +1,82 @@
 "use client"
 
 import { motion } from "framer-motion"
-import Link from "next/link"
 import { ArrowUpRight, Code2, Sparkles, Lightbulb } from "lucide-react"
+import { useState, useEffect } from "react"
 
 const links = [
   {
     href: "https://dev.dipchakraborty.com",
-    label: "Explore my Dev Works",
-    description: "Dive into my engineering portfolio → dev.dipchakraborty.com",
-    icon: <Code2 size={24} />,
-    accentColor: "from-blue-500 to-cyan-500",
+    label: "SDE Portfolio",
+    description: "Explore Dev Works",
+    icon: <Code2 size={22} />,
+    accentColor: "from-blue-500/10 to-cyan-500/10",
   },
   {
     href: "https://writings.dipchakraborty.com",
-    label: "Read and follow the trend",
-    description: "Writings and insights → writings.dipchakraborty.com",
-    icon: <Sparkles size={24} />,
-    accentColor: "from-purple-500 to-pink-500",
+    label: "Read & Follow",
+    description: "Writings and insights",
+    icon: <Sparkles size={22} />,
+    accentColor: "from-purple-500/10 to-pink-500/10",
   },
   {
     href: "https://thoughts.dipchakraborty.com",
-    label: "Unfiltered thoughts & creations",
-    description: "Raw ideas and creations → thoughts.dipchakraborty.com",
-    icon: <Lightbulb size={24} />,
-    accentColor: "from-orange-500 to-red-500",
+    label: "Musings & Creations",
+    description: "Explore raw thoughts",
+    icon: <Lightbulb size={22} />,
+    accentColor: "from-orange-500/10 to-red-500/10",
   },
 ]
 
 export function FloatingLinks() {
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    setIsDesktop(window.innerWidth >= 1024);
+    const handleResize = () => setIsDesktop(window.innerWidth >= 1024);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
-    <div className="flex flex-col gap-4 mt-8 md:mt-10 max-w-2xl">
+    <div className="flex flex-col gap-4 w-full max-w-sm">
       {links.map((link, index) => (
-        <motion.div
+        <motion.a
           key={link.label}
-          initial={{ opacity: 0, x: -20 }}
+          href={link.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          initial={isDesktop ? { opacity: 0, x: -25 } : { opacity: 1 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.6 + index * 0.12, duration: 0.5 }}
-          className="group"
+          transition={{ duration: 0.4, delay: 0.4 + index * 0.05, ease: "easeOut" }}
+          className="group relative block rounded-2xl overflow-hidden glass p-4 md:p-5 transition-all duration-300 hover:bg-background/60 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1"
         >
-          <Link
-            href={link.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="relative block overflow-hidden p-4 md:p-5 rounded-xl transition-all duration-300 group"
-          >
-            {/* Animated gradient background */}
-            <motion.div
-              className={`absolute inset-0 bg-gradient-to-r ${link.accentColor} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}
-            />
+          {/* Internal Glow */}
+          <div className={`absolute inset-0 bg-gradient-to-r ${link.accentColor} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
 
-            {/* Border glow effect */}
-            <div className="absolute inset-0 rounded-xl border border-white/10 group-hover:border-white/20 transition-colors" />
+          {/* Border Animation */}
+          <div className="absolute inset-0 border border-primary/10 dark:border-white/5 group-hover:border-primary/30 dark:group-hover:border-white/20 transition-colors duration-500 rounded-2xl" />
 
-            {/* Content */}
-            <div className="relative z-10 flex items-start justify-between">
-              <div className="flex items-start gap-4 flex-1">
-                <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  className={`mt-0.5 text-white/60 group-hover:text-white transition-colors`}
-                >
-                  {link.icon}
-                </motion.div>
-
-                <div className="flex-1">
-                  <h3 className="text-base md:text-lg font-semibold text-foreground mb-1.5 group-hover:text-white transition-colors">
-                    {link.label}
-                  </h3>
-                  <p className="text-xs md:text-sm text-foreground/60 group-hover:text-foreground/80 transition-colors leading-relaxed">
-                    {link.description}
-                  </p>
-                </div>
+          <div className="relative z-10 flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <div className="p-2.5 rounded-xl bg-primary/10 text-primary group-hover:scale-110 transition-transform duration-500 shadow-sm">
+                {link.icon}
               </div>
-
-              <motion.div
-                whileHover={{ x: 4, y: -4 }}
-                className="ml-4 flex-shrink-0 text-white/40 group-hover:text-white transition-colors"
-              >
-                <ArrowUpRight size={18} />
-              </motion.div>
+              <div className="flex flex-col gap-1 text-left">
+                <h3 className="text-sm md:text-base font-bold text-foreground group-hover:text-primary dark:group-hover:text-white transition-colors leading-tight">
+                  {link.label}
+                </h3>
+                <p className="text-[10px] md:text-xs text-muted-foreground group-hover:text-foreground/70 transition-colors font-medium opacity-70">
+                  {link.description}
+                </p>
+              </div>
             </div>
 
-            {/* Bottom accent line */}
-            <motion.div
-              className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r ${link.accentColor}`}
-              initial={{ width: 0 }}
-              whileHover={{ width: "100%" }}
-              transition={{ duration: 0.3 }}
-            />
-          </Link>
-        </motion.div>
+            <div className="text-foreground/40 dark:text-white/40 group-hover:text-primary dark:group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-500">
+              <ArrowUpRight size={20} />
+            </div>
+          </div>
+        </motion.a>
       ))}
     </div>
   )

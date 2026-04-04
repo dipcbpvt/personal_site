@@ -5,7 +5,7 @@ import { Mail, Send, Linkedin, Github, Facebook, Instagram, Calendar } from "luc
 import { Button } from "@/components/ui/button"
 
 // DM channels
-const dmChannels = [
+export const dmChannels = [
   {
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
@@ -32,7 +32,7 @@ const dmChannels = [
 ]
 
 // Follow channels
-const followChannels = [
+export const followChannels = [
   {
     icon: <Github size={20} />,
     label: "GitHub",
