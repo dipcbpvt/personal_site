@@ -12,11 +12,6 @@ import { Heart } from "lucide-react"
 
 const passions = [
   {
-    icon: "🎵",
-    title: "Music",
-    description: "Deep appreciation for Indian classical and world music traditions",
-  },
-  {
     icon: "🏏",
     title: "Cricket",
     description: "Passionate follower and player of the sport",
