@@ -39,9 +39,9 @@ export default function CustomCursorLoader() {
     let timeoutHandle: ReturnType<typeof setTimeout> | undefined
 
     if ('requestIdleCallback' in window) {
-      idleHandle = window.requestIdleCallback(activate, { timeout: 900 })
+      idleHandle = window.requestIdleCallback(activate, { timeout: 3000 })
     } else {
-      timeoutHandle = setTimeout(activate, 700)
+      timeoutHandle = setTimeout(activate, 2500)
     }
 
     return () => {

@@ -55,7 +55,7 @@ export function FloatingLinks() {
           <div className={`absolute inset-0 bg-gradient-to-r ${link.accentColor} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
 
           {/* Border Animation */}
-          <div className="absolute inset-0 border border-primary/10 dark:border-white/5 group-hover:border-primary/30 dark:group-hover:border-white/20 transition-colors duration-500 rounded-2xl" />
+          <div className="absolute inset-0 border border-primary/20 dark:border-primary/25 group-hover:border-primary/40 dark:group-hover:border-primary/50 transition-colors duration-500 rounded-2xl" />
 
           <div className="relative z-10 flex items-center justify-between">
             <div className="flex items-center gap-4">

@@ -1,99 +1,56 @@
 "use client"
 
 import { useEffect, useRef } from "react"
-import { motion } from "framer-motion"
 
 export function SpotlightBg() {
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    // Only track mouse if it is not a mobile device
+    if (window.innerWidth < 768) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       if (containerRef.current) {
-        const rect = containerRef.current.getBoundingClientRect()
-        const x = ((e.clientX - rect.left) / rect.width) * 100
-        const y = ((e.clientY - rect.top) / rect.height) * 100
+        // Use window sizes directly since it is fixed inset-0
+        const x = (e.clientX / window.innerWidth) * 100
+        const y = (e.clientY / window.innerHeight) * 100
         containerRef.current.style.setProperty("--mouse-x", `${x}%`)
         containerRef.current.style.setProperty("--mouse-y", `${y}%`)
       }
     }
 
-    window.addEventListener("mousemove", handleMouseMove)
+    // Passive listener for better scroll/touch performance
+    window.addEventListener("mousemove", handleMouseMove, { passive: true })
     return () => window.removeEventListener("mousemove", handleMouseMove)
   }, [])
 
   return (
-    <div ref={containerRef} className="fixed inset-0 spotlight pointer-events-none z-0 relative">
-      <motion.div
-        className="absolute top-1/4 -left-32 w-96 h-96 rounded-full opacity-20 color-flash"
+    <div ref={containerRef} className="fixed inset-0 spotlight pointer-events-none z-0 overflow-hidden">
+      {/* Primary Blob - Using CSS for performance */}
+      <div
+        className="absolute top-1/4 -left-32 w-64 md:w-96 h-64 md:h-96 rounded-full opacity-10 md:opacity-20 color-flash animate-float-slow"
         style={{
           background: "radial-gradient(circle, rgba(59,130,246,0.3) 0%, transparent 70%)",
         }}
-        animate={{
-          x: [0, 50, 0],
-          y: [0, 30, 0],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Number.POSITIVE_INFINITY,
-          ease: "linear",
-        }}
       />
-      <motion.div
-        className="absolute bottom-1/4 -right-32 w-[500px] h-[500px] rounded-full opacity-10 color-flash"
+      
+      {/* Secondary Blob */}
+      <div
+        className="absolute bottom-1/4 -right-32 w-80 md:w-[500px] h-80 md:h-[500px] rounded-full opacity-5 md:opacity-10 color-flash animate-float-reverse"
         style={{
           background: "radial-gradient(circle, rgba(59,130,246,0.4) 0%, transparent 70%)",
-          animationDelay: "1s",
-        }}
-        animate={{
-          x: [0, -30, 0],
-          y: [0, -50, 0],
-        }}
-        transition={{
-          duration: 25,
-          repeat: Number.POSITIVE_INFINITY,
-          ease: "linear",
-        }}
-      />
-      <motion.div
-        className="absolute top-1/2 left-1/2 w-[600px] h-[600px] rounded-full opacity-5"
-        style={{
-          background: "radial-gradient(circle, rgba(96,165,250,0.3) 0%, transparent 60%)",
-        }}
-        animate={{
-          scale: [1, 1.3, 1],
-          opacity: [0.05, 0.15, 0.05],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Number.POSITIVE_INFINITY,
-          ease: "easeInOut",
-        }}
-      />
-      <motion.div
-        className="absolute top-3/4 left-1/4 w-72 h-72 rounded-full opacity-10"
-        style={{
-          background: "radial-gradient(circle, rgba(147,197,253,0.3) 0%, transparent 70%)",
-        }}
-        animate={{
-          x: [0, 40, 0],
-          y: [0, -20, 0],
-          opacity: [0.1, 0.2, 0.1],
-        }}
-        transition={{
-          duration: 6,
-          repeat: Number.POSITIVE_INFINITY,
-          ease: "easeInOut",
         }}
       />
 
+      {/* Grid Pattern - Simplified */}
       <div
-        className="absolute inset-0 opacity-[0.02] dark:opacity-[0.02]"
+        className="absolute inset-0 opacity-[0.015] dark:opacity-[0.02]"
         style={{
           backgroundImage: `
-            linear-gradient(rgba(128,128,128,0.3) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(128,128,128,0.3) 1px, transparent 1px)
+            linear-gradient(rgba(128,128,128,0.2) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(128,128,128,0.2) 1px, transparent 1px)
           `,
-          backgroundSize: "100px 100px",
+          backgroundSize: "80px 80px",
         }}
       />
     </div>

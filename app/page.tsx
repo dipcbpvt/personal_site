@@ -9,8 +9,6 @@ export default function HomePage() {
     <main className="relative min-h-screen bg-background overflow-hidden flex flex-col justify-center">
       <SpotlightBg />
       <ThreeBackground />
-      <SpotlightBg />
-      <ThreeBackground />
       <Hero />
     </main>
   )

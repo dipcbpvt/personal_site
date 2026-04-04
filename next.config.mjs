@@ -13,7 +13,8 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    unoptimized: true,
+    // Enable image optimization for production performance
+    remotePatterns: [],
   },
   turbopack: {},
 }

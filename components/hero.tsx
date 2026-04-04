@@ -18,31 +18,30 @@ export function Hero() {
 
   useEffect(() => {
     setMounted(true);
-    setIsDesktop(window.innerWidth >= 1024);
-    const handleResize = () => setIsDesktop(window.innerWidth >= 1024);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Use a stable portraitSrc calculation to avoid hydration mismatch if possible
+  // Default to a specific theme for the first paint to catch LCP
   const portraitSrc = resolvedTheme === "light" ? "/dip.png" : "/dip2.webp";
 
   // Light-weight & Fast Transitions
-  const slideLeft = isDesktop ? {
-    initial: { opacity: 0, x: -30 },
+  const slideLeft = {
+    initial: { opacity: 0, x: -20 },
     animate: { opacity: 1, x: 0 },
-    transition: { duration: 0.5, delay: 0.4 }
-  } : { initial: { opacity: 1 }, animate: { opacity: 1 } };
+    transition: { duration: 0.4, delay: 0.3 }
+  };
 
-  const slideRight = isDesktop ? {
-    initial: { opacity: 0, x: 30 },
+  const slideRight = {
+    initial: { opacity: 0, x: 20 },
     animate: { opacity: 1, x: 0 },
-    transition: { duration: 0.5, delay: 0.4 }
-  } : { initial: { opacity: 1 }, animate: { opacity: 1 } };
+    transition: { duration: 0.4, delay: 0.3 }
+  };
 
-  if (!mounted) return null;
+  // Do not return null to allow LCP element to be identified ASAP by pre-renderer
+  // but keep it subtle before mounting.
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center py-6 sm:py-12 px-4 md:px-6 overflow-hidden select-none">
+    <section className="relative min-h-screen flex flex-col items-center justify-center py-2 sm:py-4 px-4 md:px-6 overflow-hidden select-none">
       {/* Theme Toggle - Top Left */}
       <div className="absolute top-6 left-6 z-50">
         <ThemeToggle />
@@ -50,12 +49,12 @@ export function Hero() {
 
       <div className="max-w-7xl mx-auto w-full flex flex-col items-center relative z-10">
         {/* Header Section */}
-        <div className="text-center mb-8 lg:mb-16 mt-8 lg:mt-0">
+        <div className="text-center mb-4 lg:mb-8 mt-2 lg:mt-0">
           <motion.h1 
             initial={isDesktop ? { opacity: 0, y: 15 } : { opacity: 1 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
-            className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tighter mb-3 text-foreground"
+            className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tighter mb-1 text-foreground"
           >
             Dip Chakraborty
           </motion.h1>
@@ -70,7 +69,7 @@ export function Hero() {
         </div>
 
         {/* 3-Column Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-20 items-start w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-12 items-start w-full">
           
           {/* Left Column */}
           <motion.div 
@@ -84,19 +83,14 @@ export function Hero() {
             </div>
           </motion.div>
 
-          {/* Center Column */}
-          <motion.div 
-            initial={isDesktop ? { opacity: 0, scale: 0.98 } : { opacity: 1 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="order-1 lg:order-2 flex justify-center"
-          >
-            <div className="relative w-full max-w-[260px] sm:max-w-sm md:max-w-md aspect-[3/4]">
+          {/* Center Column - Optimized for LCP */}
+          <div className="order-1 lg:order-2 flex justify-center">
+            <div className="relative w-full max-w-[220px] sm:max-w-[280px] md:max-w-[320px] aspect-[5/6]">
               {/* Glow */}
               <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-blue-400/10 to-primary/10 rounded-[2.5rem] blur-3xl opacity-20" />
 
               <div
-                className="relative h-full rounded-[2.5rem] overflow-hidden glass p-1.5 transition-all duration-500 hover:scale-[1.01] hover:shadow-2xl hover:shadow-primary/5"
+                className="relative h-full rounded-[2.5rem] overflow-hidden glass p-1 transition-all duration-500"
                 onMouseEnter={() => setIsImageHovered(true)}
                 onMouseLeave={() => setIsImageHovered(false)}
               >
@@ -106,29 +100,30 @@ export function Hero() {
                     alt="Dip Chakraborty"
                     fill
                     priority
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover contrast-[1.05] brightness-[1.02]"
+                    fetchPriority="high"
+                    sizes="(max-width: 640px) 240px, (max-width: 1024px) 300px, 340px"
+                    className={`object-cover contrast-[1.05] brightness-[1.02] transition-opacity duration-300 ${mounted ? 'opacity-100' : 'opacity-0'}`}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent opacity-60" />
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Right Column */}
           <motion.div 
             initial={slideRight.initial}
             animate={slideRight.animate}
             transition={slideRight.transition}
-            className="order-3 flex flex-col gap-5 lg:gap-6 items-center lg:items-end w-full"
+            className="order-3 flex flex-col gap-3 lg:gap-4 items-center lg:items-end w-full"
           >
             {/* Action Buttons */}
-            <div className="flex flex-col gap-4 w-full max-w-xs">
+            <div className="flex flex-col gap-2 w-full max-w-xs">
               <Button
                 asChild
                 variant="outline"
                 size="lg"
-                className="rounded-2xl h-14 text-base font-bold border-primary/20 hover:bg-primary/5 hover:border-primary/40 text-foreground hover:text-primary dark:hover:text-white transition-all duration-300 hover:scale-[1.02] bg-background/30 backdrop-blur-xl shadow-sm relative overflow-hidden group/btn"
+                className="rounded-2xl h-11 text-base font-bold border-primary/30 dark:border-primary/40 hover:bg-primary/5 hover:border-primary/60 text-foreground hover:text-primary dark:hover:text-white transition-all duration-300 hover:scale-[1.02] bg-background/30 backdrop-blur-xl shadow-sm relative overflow-hidden group/btn"
               >
                 <a href="mailto:connect@dipchakraborty.com">
                   <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity" />
@@ -141,7 +136,7 @@ export function Hero() {
                 asChild
                 variant="outline"
                 size="lg"
-                className="rounded-2xl h-14 text-base font-bold border-primary/20 hover:bg-primary/5 hover:border-primary/40 text-foreground hover:text-primary dark:hover:text-white transition-all duration-300 hover:scale-[1.02] bg-background/30 backdrop-blur-xl shadow-sm relative overflow-hidden group/btn"
+                className="rounded-2xl h-11 text-base font-bold border-primary/30 dark:border-primary/40 hover:bg-primary/5 hover:border-primary/60 text-foreground hover:text-primary dark:hover:text-white transition-all duration-300 hover:scale-[1.02] bg-background/30 backdrop-blur-xl shadow-sm relative overflow-hidden group/btn"
               >
                 <a href="https://calendly.com/dipcb05" target="_blank" rel="noopener noreferrer">
                   <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent opacity-0 group-hover/btn:opacity-100 transition-opacity" />
@@ -152,42 +147,44 @@ export function Hero() {
             </div>
 
             {/* DM Me Section */}
-            <div className="w-full max-w-xs glass rounded-3xl p-6 flex flex-col gap-4 items-center group/card transition-all duration-300 hover:bg-background/60">
-              <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-muted-foreground/40 group-hover/card:text-primary transition-colors">DM Me</span>
-              <div className="flex gap-4">
+            <div className="w-full max-w-xs glass rounded-2xl p-3 flex flex-col gap-2 items-center group/card transition-all duration-300 hover:bg-background/60 relative overflow-hidden">
+              <div className="absolute inset-0 border border-primary/20 dark:border-primary/25 group-hover/card:border-primary/40 dark:group-hover/card:border-primary/50 transition-colors duration-500 rounded-2xl pointer-events-none" />
+              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground/40 group-hover/card:text-primary transition-colors relative z-10">DM Me</span>
+              <div className="flex gap-3">
                 {dmChannels.map((channel) => (
                   <motion.a
                     key={channel.label}
                     href={channel.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1, y: -2 }}
+                    whileHover={{ scale: 1.1, y: -1 }}
                     whileTap={{ scale: 0.95 }}
-                    className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center text-primary border border-primary/20 hover:border-primary/50 transition-all duration-300"
+                    className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary border border-primary/30 dark:border-primary/40 hover:border-primary/60 transition-all duration-300"
                     title={channel.label}
                   >
-                    <div className="scale-95">{channel.icon}</div>
+                    <div className="scale-90">{channel.icon}</div>
                   </motion.a>
                 ))}
               </div>
             </div>
 
             {/* Follow Me Section */}
-            <div className="w-full max-w-xs glass rounded-3xl p-6 flex flex-col gap-4 items-center group/card transition-all duration-300 hover:bg-background/60">
-              <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-muted-foreground/40 group-hover/card:text-primary transition-colors">Follow Me</span>
-              <div className="flex gap-4 flex-wrap justify-center">
+            <div className="w-full max-w-xs glass rounded-2xl p-3 flex flex-col gap-2 items-center group/card transition-all duration-300 hover:bg-background/60 relative overflow-hidden">
+              <div className="absolute inset-0 border border-primary/20 dark:border-primary/25 group-hover/card:border-primary/40 dark:group-hover/card:border-primary/50 transition-colors duration-500 rounded-2xl pointer-events-none" />
+              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground/40 group-hover/card:text-primary transition-colors relative z-10">Follow Me</span>
+              <div className="flex gap-3 flex-wrap justify-center">
                 {followChannels.map((channel) => (
                   <motion.a
                     key={channel.label}
                     href={channel.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1, y: -2 }}
+                    whileHover={{ scale: 1.1, y: -1 }}
                     whileTap={{ scale: 0.95 }}
-                    className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center text-primary border border-primary/20 hover:border-primary/50 transition-all duration-300"
+                    className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary border border-primary/30 dark:border-primary/40 hover:border-primary/60 transition-all duration-300"
                     title={channel.label}
                   >
-                    <div className="scale-95">{channel.icon}</div>
+                    <div className="scale-90">{channel.icon}</div>
                   </motion.a>
                 ))}
               </div>
