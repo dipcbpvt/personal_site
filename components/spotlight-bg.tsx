@@ -1,17 +1,22 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 
 export function SpotlightBg() {
   const containerRef = useRef<HTMLDivElement>(null)
+  const [enabled, setEnabled] = useState(false)
 
   useEffect(() => {
-    // Only track mouse if it is not a mobile device
-    if (window.innerWidth < 768) return;
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    const isMobile = window.innerWidth < 768
+    const saveData = "connection" in navigator && (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData
+
+    const allowEffects = !reduceMotion && !isMobile && !saveData
+    setEnabled(allowEffects)
+    if (!allowEffects) return
 
     const handleMouseMove = (e: MouseEvent) => {
       if (containerRef.current) {
-        // Use window sizes directly since it is fixed inset-0
         const x = (e.clientX / window.innerWidth) * 100
         const y = (e.clientY / window.innerHeight) * 100
         containerRef.current.style.setProperty("--mouse-x", `${x}%`)
@@ -19,30 +24,22 @@ export function SpotlightBg() {
       }
     }
 
-    // Passive listener for better scroll/touch performance
     window.addEventListener("mousemove", handleMouseMove, { passive: true })
     return () => window.removeEventListener("mousemove", handleMouseMove)
   }, [])
 
+  if (!enabled) return null
+
   return (
     <div ref={containerRef} className="fixed inset-0 spotlight pointer-events-none z-0 overflow-hidden">
-      {/* Primary Blob - Using CSS for performance */}
       <div
-        className="absolute top-1/4 -left-32 w-64 md:w-96 h-64 md:h-96 rounded-full opacity-10 md:opacity-20 color-flash animate-float-slow"
-        style={{
-          background: "radial-gradient(circle, rgba(59,130,246,0.3) 0%, transparent 70%)",
-        }}
+        className="absolute top-1/4 -left-32 w-96 h-96 rounded-full opacity-20 color-flash animate-float-slow"
+        style={{ background: "radial-gradient(circle, rgba(59,130,246,0.3) 0%, transparent 70%)" }}
       />
-      
-      {/* Secondary Blob */}
       <div
-        className="absolute bottom-1/4 -right-32 w-80 md:w-[500px] h-80 md:h-[500px] rounded-full opacity-5 md:opacity-10 color-flash animate-float-reverse"
-        style={{
-          background: "radial-gradient(circle, rgba(59,130,246,0.4) 0%, transparent 70%)",
-        }}
+        className="absolute bottom-1/4 -right-32 w-[500px] h-[500px] rounded-full opacity-10 color-flash animate-float-reverse"
+        style={{ background: "radial-gradient(circle, rgba(59,130,246,0.4) 0%, transparent 70%)" }}
       />
-
-      {/* Grid Pattern - Simplified */}
       <div
         className="absolute inset-0 opacity-[0.015] dark:opacity-[0.02]"
         style={{

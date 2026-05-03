@@ -1,6 +1,5 @@
 "use client"
 
-import { motion } from "framer-motion"
 import { useState, useEffect } from "react"
 import Image from "next/image"
 import { FloatingLinks } from "./floating-links"
@@ -11,9 +10,7 @@ import { dmChannels, followChannels } from "./cta-section"
 import { ThemeToggle } from "./theme-toggle"
 
 export function Hero() {
-  const [isImageHovered, setIsImageHovered] = useState(false)
   const [mounted, setMounted] = useState(false);
-  const [isDesktop, setIsDesktop] = useState(false);
   const { resolvedTheme } = useTheme();
 
   useEffect(() => {
@@ -24,18 +21,6 @@ export function Hero() {
   // Default to a specific theme for the first paint to catch LCP
   const portraitSrc = resolvedTheme === "light" ? "/dip.png" : "/dip2.webp";
 
-  // Light-weight & Fast Transitions
-  const slideLeft = {
-    initial: { opacity: 0, x: -20 },
-    animate: { opacity: 1, x: 0 },
-    transition: { duration: 0.4, delay: 0.3 }
-  };
-
-  const slideRight = {
-    initial: { opacity: 0, x: 20 },
-    animate: { opacity: 1, x: 0 },
-    transition: { duration: 0.4, delay: 0.3 }
-  };
 
   // Do not return null to allow LCP element to be identified ASAP by pre-renderer
   // but keep it subtle before mounting.
@@ -50,38 +35,29 @@ export function Hero() {
       <div className="max-w-7xl mx-auto w-full flex flex-col items-center relative z-10">
         {/* Header Section */}
         <div className="text-center mb-4 lg:mb-8 mt-2 lg:mt-0">
-          <motion.h1 
-            initial={isDesktop ? { opacity: 0, y: 15 } : { opacity: 1 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
+          <h1 
             className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tighter mb-1 text-foreground"
           >
             Dip Chakraborty
-          </motion.h1>
-          <motion.p 
-            initial={isDesktop ? { opacity: 0 } : { opacity: 1 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.4, delay: 0.1 }}
+          </h1>
+          <p 
             className="text-base sm:text-lg md:text-2xl text-muted-foreground font-medium tracking-wide opacity-80"
           >
             Engineer . Researcher . Writer
-          </motion.p>
+          </p>
         </div>
 
         {/* 3-Column Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-12 items-start w-full">
           
           {/* Left Column */}
-          <motion.div 
-            initial={slideLeft.initial}
-            animate={slideLeft.animate}
-            transition={slideLeft.transition}
+          <div 
             className="order-2 lg:order-1 flex justify-center lg:justify-start"
           >
             <div className="w-full max-w-sm lg:max-w-none">
               <FloatingLinks />
             </div>
-          </motion.div>
+          </div>
 
           {/* Center Column - Optimized for LCP */}
           <div className="order-1 lg:order-2 flex justify-center">
@@ -91,8 +67,6 @@ export function Hero() {
 
               <div
                 className="relative h-full rounded-[2.5rem] overflow-hidden glass p-1 transition-all duration-500"
-                onMouseEnter={() => setIsImageHovered(true)}
-                onMouseLeave={() => setIsImageHovered(false)}
               >
                 <div className="relative h-full rounded-[2rem] overflow-hidden w-full">
                   <Image
@@ -111,10 +85,7 @@ export function Hero() {
           </div>
 
           {/* Right Column */}
-          <motion.div 
-            initial={slideRight.initial}
-            animate={slideRight.animate}
-            transition={slideRight.transition}
+          <div 
             className="order-3 flex flex-col gap-3 lg:gap-4 items-center lg:items-end w-full"
           >
             {/* Action Buttons */}
@@ -152,18 +123,16 @@ export function Hero() {
               <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground/40 group-hover/card:text-primary transition-colors relative z-10">DM Me</span>
               <div className="flex gap-3">
                 {dmChannels.map((channel) => (
-                  <motion.a
+                  <a
                     key={channel.label}
                     href={channel.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1, y: -1 }}
-                    whileTap={{ scale: 0.95 }}
                     className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary border border-primary/30 dark:border-primary/40 hover:border-primary/60 transition-all duration-300"
                     title={channel.label}
                   >
                     <div className="scale-90">{channel.icon}</div>
-                  </motion.a>
+                  </a>
                 ))}
               </div>
             </div>
@@ -174,22 +143,20 @@ export function Hero() {
               <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground/40 group-hover/card:text-primary transition-colors relative z-10">Follow Me</span>
               <div className="flex gap-3 flex-wrap justify-center">
                 {followChannels.map((channel) => (
-                  <motion.a
+                  <a
                     key={channel.label}
                     href={channel.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1, y: -1 }}
-                    whileTap={{ scale: 0.95 }}
                     className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary border border-primary/30 dark:border-primary/40 hover:border-primary/60 transition-all duration-300"
                     title={channel.label}
                   >
                     <div className="scale-90">{channel.icon}</div>
-                  </motion.a>
+                  </a>
                 ))}
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
