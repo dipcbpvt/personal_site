@@ -1,8 +1,12 @@
 "use client"
 
-import { SpotlightBg } from "@/components/spotlight-bg"
-import { ThreeBackground } from "@/components/three-background"
-import { Hero } from "@/components/hero"
+import dynamic from "next/dynamic"
+
+const SpotlightBg = dynamic(() => import("@/components/spotlight-bg").then((m) => m.SpotlightBg))
+const ThreeBackground = dynamic(() => import("@/components/three-background").then((m) => m.ThreeBackground))
+const Hero = dynamic(() => import("@/components/hero").then((m) => m.Hero), {
+  loading: () => <div className="min-h-screen" aria-hidden="true" />,
+})
 
 export default function HomePage() {
   return (
